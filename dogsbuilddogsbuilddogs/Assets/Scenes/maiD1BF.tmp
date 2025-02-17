@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://wbrr1g2bb72e"]
+
+[ext_resource type="PackedScene" uid="uid://c8y7pb11q5txt" path="res://Assets/Scenes/city_building_grid.tscn" id="1_36eib"]
+[ext_resource type="Script" path="res://Assets/Code/main.gd" id="1_75quv"]
+
+[node name="Node2D" type="Node2D"]
+script = ExtResource("1_75quv")
+
+[node name="city_grid" parent="." instance=ExtResource("1_36eib")]
+
+[node name="Camera2D" type="Camera2D" parent="."]
