@@ -184,7 +184,7 @@ _data = {
 script = ExtResource("1_qeawe")
 
 [node name="highlight areas" type="Node2D" parent="."]
-z_index = 1
+z_index = 2
 
 [node name="Sprite2DProxBonus" type="Sprite2D" parent="highlight areas"]
 modulate = Color(1, 1, 1, 0.439216)
@@ -192,7 +192,7 @@ scale = Vector2(1.55, 1.55)
 texture = ExtResource("2_6nyao")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-z_index = 2
+z_index = 3
 texture = ExtResource("1_dv67g")
 
 [node name="ProximityBonusArea2D" type="Area2D" parent="."]

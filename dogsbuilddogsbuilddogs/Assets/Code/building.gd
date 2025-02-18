@@ -21,6 +21,7 @@ func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("mouse_primary") && mouse_hovered && get_parent().get_parent().placement == null:
 		var tween = get_tree().create_tween()
 		tween.tween_property($"highlight areas", "modulate", Color(1,1,1,1), 0.3)
+		$Sprite2D.z_index = 3
 		print(prox_bonus_amount)
 
 func _on_area_2d_building_mouse_entered() -> void:
@@ -28,6 +29,7 @@ func _on_area_2d_building_mouse_entered() -> void:
 
 func place() -> void:
 	$Sprite2D.self_modulate = Color(1,1,1,1)
+	$Sprite2D.z_index = 1
 	prox_bonus_amount = [0,0,0]
 	for building in buildings_touched:
 		building.get_node("Sprite2D").self_modulate = Color(1,1,1,1)
@@ -42,6 +44,7 @@ func remove() -> void:
 func _on_area_2d_building_mouse_exited() -> void:
 	var tween = get_tree().create_tween()
 	tween.tween_property($"highlight areas", "modulate", Color(1,1,1,0), 0.3)
+	$Sprite2D.z_index = 1
 	mouse_hovered = false
 
 
