@@ -5,6 +5,8 @@ var highlight: bool = false
 var buildings_touched: Array[Node2D]
 var prox_bonus_amount: Array[float] = [0,0,0]
 @export_enum("Fun", "Safe", "Industry") var prox_bonus_type: int = 0
+## number that is added to other buildings' thingies
+@export var prox_bonus_addition: float = 1
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -29,13 +31,13 @@ func place() -> void:
 	prox_bonus_amount = [0,0,0]
 	for building in buildings_touched:
 		building.get_node("Sprite2D").self_modulate = Color(1,1,1,1)
-		building.prox_bonus_amount[prox_bonus_type] += 1
-		prox_bonus_amount[building.prox_bonus_type] += 1
+		building.prox_bonus_amount[prox_bonus_type] += prox_bonus_addition
+		prox_bonus_amount[building.prox_bonus_type] += building.prox_bonus_addition
 
 func remove() -> void:
 	$AnimationPlayer.play("on_destroy")
 	for building in buildings_touched:
-		building.prox_bonus_amount[prox_bonus_type] -= 1
+		building.prox_bonus_amount[prox_bonus_type] -= prox_bonus_addition
 
 func _on_area_2d_building_mouse_exited() -> void:
 	var tween = get_tree().create_tween()
