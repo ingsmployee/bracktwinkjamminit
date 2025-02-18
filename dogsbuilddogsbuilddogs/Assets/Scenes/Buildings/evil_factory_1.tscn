@@ -1,14 +1,14 @@
-[gd_scene load_steps=11 format=3 uid="uid://bjeo7btds7rq6"]
+[gd_scene load_steps=11 format=3 uid="uid://mwoim0pmku6h"]
 
-[ext_resource type="Script" path="res://Assets/Code/building.gd" id="1_qeawe"]
-[ext_resource type="Texture2D" uid="uid://c3acmgf6rbya1" path="res://Assets/Art/white circle.png" id="2_6nyao"]
-[ext_resource type="Texture2D" uid="uid://djg81wx38amla" path="res://Assets/Art/programmer-tennis-ball-100.png" id="3_hfcod"]
+[ext_resource type="Script" path="res://Assets/Code/building.gd" id="1_1h4cp"]
+[ext_resource type="Texture2D" uid="uid://c3acmgf6rbya1" path="res://Assets/Art/white circle.png" id="2_nomet"]
+[ext_resource type="Texture2D" uid="uid://cnhhmkj0mwg33" path="res://Assets/Art/programmer-factory1.png" id="3_g21kg"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_4ap14"]
-radius = 200.0
+radius = 380.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_f8u8x"]
-radius = 68.1175
+radius = 95.0
 
 [sub_resource type="Animation" id="Animation_ar5fb"]
 length = 0.001
@@ -144,30 +144,28 @@ _data = {
 "on_placed": SubResource("Animation_46lho")
 }
 
-[node name="FunTennisBuilding" type="Node2D"]
-scale = Vector2(0.5, 0.5)
-script = ExtResource("1_qeawe")
-prox_bonus_addition = 0.2
+[node name="EvilFactoryBuilding" type="Node2D"]
+script = ExtResource("1_1h4cp")
+prox_bonus_type = 2
 
 [node name="highlight areas" type="Node2D" parent="."]
 z_index = 2
-scale = Vector2(2, 2)
 
 [node name="Sprite2DProxBonus" type="Sprite2D" parent="highlight areas"]
 modulate = Color(1, 1, 1, 0.439216)
-scale = Vector2(1.55, 1.55)
-texture = ExtResource("2_6nyao")
+scale = Vector2(3.1, 3.1)
+texture = ExtResource("2_nomet")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 top_level = true
 z_index = 3
-texture = ExtResource("3_hfcod")
+scale = Vector2(3, 3)
+texture = ExtResource("3_g21kg")
 
 [node name="ProximityBonusArea2D" type="Area2D" parent="."]
 collision_layer = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ProximityBonusArea2D"]
-scale = Vector2(2, 2)
 shape = SubResource("CircleShape2D_4ap14")
 
 [node name="Area2DBuilding" type="Area2D" parent="."]
