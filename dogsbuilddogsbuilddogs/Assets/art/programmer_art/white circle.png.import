@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cnhhmkj0mwg33"
-path="res://.godot/imported/programmer-factory1.png-4de15ec733ba2d5ae47e0bad52c4dd8a.ctex"
+uid="uid://c3acmgf6rbya1"
+path="res://.godot/imported/white circle.png-8c858e173cfc19719fd922d1f07dddfd.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Art/programmer-factory1.png"
-dest_files=["res://.godot/imported/programmer-factory1.png-4de15ec733ba2d5ae47e0bad52c4dd8a.ctex"]
+source_file="res://assets/art/programmer_art/white circle.png"
+dest_files=["res://.godot/imported/white circle.png-8c858e173cfc19719fd922d1f07dddfd.ctex"]
 
 [params]
 

@@ -1,0 +1,34 @@
+[gd_scene load_steps=5 format=3 uid="uid://cvr84068ndqpx"]
+
+[ext_resource type="PackedScene" uid="uid://bjeo7btds7rq6" path="res://assets/scenes/buildings/building_template.tscn" id="1_p7y0c"]
+[ext_resource type="Texture2D" uid="uid://cnhhmkj0mwg33" path="res://assets/art/programmer_art/programmer-factory1.png" id="2_v630y"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_vqbqf"]
+radius = 380.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_0s3e0"]
+radius = 88.0909
+
+[node name="Building" instance=ExtResource("1_p7y0c")]
+building_name = "Cube Factory"
+prox_bonus_type = 2
+
+[node name="Sprite2DProxBonus" parent="highlight areas" index="0"]
+scale = Vector2(2.95, 2.95)
+
+[node name="Sprite2D" parent="." index="1"]
+scale = Vector2(3, 3)
+texture = ExtResource("2_v630y")
+
+[node name="CollisionShape2D" parent="ProximityBonusArea2D" index="0"]
+shape = SubResource("CircleShape2D_vqbqf")
+
+[node name="CollisionShape2D" parent="Area2DBuilding" index="0"]
+shape = SubResource("CircleShape2D_0s3e0")
+
+[node name="LocalUI" type="Control" parent="." index="5"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+mouse_filter = 2

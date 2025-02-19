@@ -1,19 +1,25 @@
-[gd_scene load_steps=10 format=4 uid="uid://wbrr1g2bb72e"]
+[gd_scene load_steps=14 format=4 uid="uid://wbrr1g2bb72e"]
 
-[ext_resource type="Script" path="res://Assets/Code/main.gd" id="1_75quv"]
-[ext_resource type="Texture2D" uid="uid://dpsekvbe3b236" path="res://Assets/Art/programmer-stone-100.png" id="2_avsov"]
-[ext_resource type="Texture2D" uid="uid://c6daperu140uk" path="res://Assets/Art/programmer-grass-export.png" id="3_nn64h"]
-[ext_resource type="Texture2D" uid="uid://djg81wx38amla" path="res://Assets/Art/programmer-tennis-ball-100.png" id="4_b8w78"]
-[ext_resource type="Script" path="res://Assets/code/user_interface.gd" id="4_vqshh"]
-[ext_resource type="Texture2D" uid="uid://cnhhmkj0mwg33" path="res://Assets/Art/programmer-factory1.png" id="5_smgpi"]
+[ext_resource type="Script" path="res://assets/code/main.gd" id="1_wup87"]
+[ext_resource type="Script" path="res://assets/code/money_manager.gd" id="2_xogqn"]
+[ext_resource type="Texture2D" uid="uid://dpsekvbe3b236" path="res://assets/art/programmer_art/programmer-stone-100.png" id="3_liv3y"]
+[ext_resource type="Texture2D" uid="uid://c6daperu140uk" path="res://assets/art/programmer_art/programmer-grass-export.png" id="4_pvwgi"]
+[ext_resource type="Script" path="res://assets/code/user_interface.gd" id="5_tds1k"]
+[ext_resource type="Texture2D" uid="uid://djg81wx38amla" path="res://assets/art/programmer_art/programmer-tennis-ball-100.png" id="6_tp1vl"]
+[ext_resource type="Texture2D" uid="uid://cnhhmkj0mwg33" path="res://assets/art/programmer_art/programmer-factory1.png" id="7_m1duc"]
+[ext_resource type="LabelSettings" uid="uid://g712jo4j6yjc" path="res://assets/misc/digital_text_label_thing.tres" id="8_6jrmf"]
+[ext_resource type="Texture2D" uid="uid://n2auibmq3xr0" path="res://assets/art/programmer_art/programmer-cloud.png" id="9_xc3o3"]
+
+[sub_resource type="TileMapPattern" id="TileMapPattern_16yyl"]
+tile_data = PackedInt32Array(524288, 5, 0, 393217, 5, 0, 458752, 5, 0, 524289, 5, 0, 589824, 5, 0, 655361, 5, 0, 262146, 5, 0, 327681, 5, 0, 393218, 4, 0, 458753, 4, 0, 524290, 4, 0, 589825, 4, 0, 655362, 4, 0, 720897, 5, 0, 786434, 5, 0, 131075, 5, 0, 196610, 5, 0, 262147, 4, 0, 327682, 5, 0, 393219, 4, 0, 458754, 4, 0, 524291, 4, 0, 589826, 4, 0, 655363, 4, 0, 720898, 5, 0, 786435, 4, 0, 851970, 5, 0, 917507, 5, 0, 4, 5, 0, 65539, 5, 0, 131076, 5, 0, 196611, 4, 0, 262148, 4, 0, 327683, 4, 0, 393220, 4, 0, 458755, 4, 0, 524292, 4, 0, 589827, 4, 0, 655364, 4, 0, 720899, 4, 0, 786436, 4, 0, 851971, 4, 0, 917508, 5, 0, 983043, 5, 0, 1048580, 5, 0, 65540, 5, 0, 131077, 5, 0, 196612, 4, 0, 262149, 4, 0, 327684, 4, 0, 393221, 4, 0, 458756, 4, 0, 524293, 4, 0, 589828, 4, 0, 655365, 4, 0, 720900, 4, 0, 786437, 4, 0, 851972, 4, 0, 917509, 5, 0, 983044, 5, 0, 196613, 5, 0, 262150, 5, 0, 327685, 5, 0, 393222, 4, 0, 458757, 4, 0, 524294, 4, 0, 589829, 4, 0, 655366, 4, 0, 720901, 5, 0, 786438, 5, 0, 851973, 5, 0, 327686, 5, 0, 393223, 5, 0, 458758, 4, 0, 524295, 5, 0, 589830, 4, 0, 655367, 5, 0, 720902, 5, 0, 458759, 5, 0, 524296, 5, 0, 589831, 5, 0)
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_s35fg"]
-texture = ExtResource("2_avsov")
+texture = ExtResource("3_liv3y")
 texture_region_size = Vector2i(100, 100)
 0:0/0 = 0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_u2le0"]
-texture = ExtResource("3_nn64h")
+texture = ExtResource("4_pvwgi")
 texture_region_size = Vector2i(99, 99)
 0:0/0 = 0
 
@@ -22,13 +28,16 @@ tile_shape = 1
 tile_size = Vector2i(100, 100)
 sources/4 = SubResource("TileSetAtlasSource_s35fg")
 sources/5 = SubResource("TileSetAtlasSource_u2le0")
+pattern_0 = SubResource("TileMapPattern_16yyl")
 
-[node name="Node2D" type="Node2D"]
-script = ExtResource("1_75quv")
+[node name="MainNode" type="Node2D"]
+texture_filter = 1
+script = ExtResource("1_wup87")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 
-[node name="buildings" type="Node2D" parent="."]
+[node name="Buildings" type="Node2D" parent="."]
+script = ExtResource("2_xogqn")
 
 [node name="Tilemaps" type="Node2D" parent="."]
 
@@ -42,7 +51,11 @@ tile_set = SubResource("TileSet_364tp")
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 
 [node name="UI" type="Control" parent="." node_paths=PackedStringArray("central_node")]
+unique_name_in_owner = true
 z_index = 10
+z_as_relative = false
+texture_filter = 1
+clip_contents = true
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -50,38 +63,88 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
-mouse_filter = 1
-script = ExtResource("4_vqshh")
+mouse_filter = 2
+script = ExtResource("5_tds1k")
 central_node = NodePath("..")
 
-[node name="Gameplay" type="Control" parent="UI"]
-layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
+[node name="MainScreen" type="CanvasLayer" parent="UI"]
 
-[node name="TabBar" type="TabBar" parent="UI/Gameplay"]
-layout_mode = 0
-offset_left = -560.0
-offset_top = 207.0
-offset_right = 558.0
-offset_bottom = 315.0
+[node name="MainScreen" type="Control" parent="UI/MainScreen"]
+texture_filter = 1
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="TabBar" type="TabBar" parent="UI/MainScreen/MainScreen"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -559.0
+offset_top = -108.0
+offset_right = 559.0
+grow_horizontal = 2
+grow_vertical = 0
 mouse_default_cursor_shape = 2
 current_tab = 0
 tab_alignment = 1
 tab_count = 2
 tab_0/title = "Tennis Ball House"
 tab_0/tooltip = "Fun: 1"
-tab_0/icon = ExtResource("4_b8w78")
+tab_0/icon = ExtResource("6_tp1vl")
 tab_1/title = "Evil Factory"
-tab_1/icon = ExtResource("5_smgpi")
+tab_1/icon = ExtResource("7_m1duc")
 
-[node name="Label" type="Label" parent="UI/Gameplay"]
+[node name="UI Resource Display" type="Label" parent="UI/MainScreen/MainScreen"]
+unique_name_in_owner = true
+offset_right = 94.0
+offset_bottom = 23.0
+text = "googoogaga"
+label_settings = ExtResource("8_6jrmf")
+
+[node name="DialogBox" type="Control" parent="UI/MainScreen/MainScreen"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 535.0
+offset_top = 459.0
+offset_right = 575.0
+offset_bottom = 499.0
+scale = Vector2(4.62021, 4.62021)
+
+[node name="TextureRect" type="TextureRect" parent="UI/MainScreen/MainScreen/DialogBox"]
 layout_mode = 1
-offset_left = -548.0
-offset_top = -303.0
-offset_right = -456.0
-offset_bottom = -280.0
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -128.0
+offset_top = -32.0
+offset_right = 128.0
+offset_bottom = 32.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("9_xc3o3")
 
-[connection signal="mouse_exited" from="UI/Gameplay/TabBar" to="UI" method="_on_tab_bar_mouse_exited"]
-[connection signal="tab_clicked" from="UI/Gameplay/TabBar" to="UI" method="_on_tab_bar_tab_clicked"]
+[node name="MainDialogBox" type="RichTextLabel" parent="UI/MainScreen/MainScreen/DialogBox/TextureRect"]
+unique_name_in_owner = true
+modulate = Color(0, 0, 0, 1)
+layout_mode = 0
+offset_left = 40.4706
+offset_top = 13.5151
+offset_right = 390.471
+offset_bottom = 93.5151
+scale = Vector2(0.5, 0.502278)
+bbcode_enabled = true
+text = "frearae"
+scroll_active = false
+autowrap_mode = 0
+
+[connection signal="mouse_exited" from="UI/MainScreen/MainScreen/TabBar" to="UI" method="_on_tab_bar_mouse_exited"]
+[connection signal="tab_clicked" from="UI/MainScreen/MainScreen/TabBar" to="UI" method="_on_tab_bar_tab_clicked"]

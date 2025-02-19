@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://kfh0s3qcuvog"]
+
+[ext_resource type="PackedScene" uid="uid://bjeo7btds7rq6" path="res://assets/scenes/buildings/building_template.tscn" id="1_2pfs1"]
+[ext_resource type="Texture2D" uid="uid://djg81wx38amla" path="res://assets/art/programmer_art/programmer-tennis-ball-100.png" id="2_0i0gc"]
+
+[node name="Building" instance=ExtResource("1_2pfs1")]
+
+[node name="Sprite2D" parent="." index="1"]
+texture = ExtResource("2_0i0gc")
+
+[node name="LocalUI" type="Control" parent="." index="5"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+mouse_filter = 2

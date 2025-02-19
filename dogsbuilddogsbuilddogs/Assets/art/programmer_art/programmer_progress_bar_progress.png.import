@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c3acmgf6rbya1"
-path="res://.godot/imported/white circle.png-db5dd2aca4fcc83691a3e7f6ee8ab0a2.ctex"
+uid="uid://co4b6s7bwlr0v"
+path="res://.godot/imported/programmer_progress_bar_progress.png-283ef541d69af489f81ba6f6b7213008.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Art/white circle.png"
-dest_files=["res://.godot/imported/white circle.png-db5dd2aca4fcc83691a3e7f6ee8ab0a2.ctex"]
+source_file="res://assets/art/programmer_art/programmer_progress_bar_progress.png"
+dest_files=["res://.godot/imported/programmer_progress_bar_progress.png-283ef541d69af489f81ba6f6b7213008.ctex"]
 
 [params]
 

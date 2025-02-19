@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dpsekvbe3b236"
-path="res://.godot/imported/programmer-stone-100.png-a2c3d603e29d5dd6478edb81b471df4b.ctex"
+uid="uid://bik8u7ihbepky"
+path="res://.godot/imported/programmer_progress_circle_bg.png-e572ff375f6b4c72384a8616f7c13ff0.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Art/programmer-stone-100.png"
-dest_files=["res://.godot/imported/programmer-stone-100.png-a2c3d603e29d5dd6478edb81b471df4b.ctex"]
+source_file="res://assets/art/programmer_art/programmer_progress_circle_bg.png"
+dest_files=["res://.godot/imported/programmer_progress_circle_bg.png-e572ff375f6b4c72384a8616f7c13ff0.ctex"]
 
 [params]
 

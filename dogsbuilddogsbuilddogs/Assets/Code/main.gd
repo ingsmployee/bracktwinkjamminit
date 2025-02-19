@@ -9,10 +9,11 @@ const MAX_ZOOM: float = 5
 const ZOOM_AMOUNT: float = 0.5
 
 
+## put buildings in here for them to be registered & interactable.
 @export var buildingScenes: Array[PackedScene] = [
-	preload("res://Assets/Scenes/Buildings/fun_tennis_ball.tscn"),
-	preload("res://Assets/Scenes/Buildings/evil_factory_1.tscn")
-]
+	preload("res://assets/scenes/buildings/fun_1.tscn"),
+	preload("res://assets/scenes/buildings/factory_1.tscn")
+] # also functions as an ID system via index
 
 var placement: Node2D
 var is_placing: bool = false
@@ -53,28 +54,15 @@ func _process(delta: float) -> void:
 			clamp($Camera2D.zoom.y * (1+ZOOM_AMOUNT), MIN_ZOOM, MAX_ZOOM)),
 			0.1).set_trans(Tween.TRANS_EXPO).set_ease(Tween.EASE_OUT)
 	
-	if Input.is_action_just_pressed("build_a") && placement == null:
-		holdMakeBuilding(0)
-	
-	if Input.is_action_pressed("mouse_primary") && placement != null:
+	if Input.is_action_just_pressed("mouse_primary") && placement != null:
 		# note that there are separate layers for proximity benefit areas and building collision boxes
 		if !placement.get_node("Area2DBuilding").get_overlapping_areas():
-			placement.global_position = gridify(get_global_mouse_position())
-			var player: AnimationPlayer = placement.get_node("AnimationPlayer")
-			placement.get_node("Sprite2D").position = placement.position
-			$Tilemaps/WhiteOverlay.clear()
-			player.queue("on_placed")
-			placement.place()
-			placement = null
+			place_held_building()
 		else:
 			var player: AnimationPlayer = placement.get_node("AnimationPlayer")
 			if !player.get_queue().has("flash_red_warning"):
 				player.queue("flash_red_warning")
 	
-	if Input.is_action_just_pressed("mouse_secondary") && hovered_building != null:
-		hovered_building.remove()
-		hovered_building = null
-		placement = null
 	
 	if (placement):
 		var mouse_position: Vector2 = get_global_mouse_position()
@@ -89,15 +77,25 @@ func _process(delta: float) -> void:
 func gridify(pos: Vector2) -> Vector2:
 	return $Tilemaps/WhiteOverlay.map_to_local($Tilemaps/WhiteOverlay.local_to_map(pos))
 
-func holdMakeBuilding(int) -> void:
-	placement = buildingScenes[int].instantiate()
-	$buildings.add_child(placement)
+func holdMakeBuilding(id: int) -> void:
+	placement = buildingScenes[id].instantiate()
+	$Buildings.add_child(placement)
 	placement.get_node("Area2DBuilding").mouse_entered.connect(_mouse_entered.bind(placement))
 	placement.get_node("Area2DBuilding").mouse_exited.connect(_mouse_exited.bind(placement))
 	placement.get_node("Sprite2D").modulate = Color(1,1,1,0.5)
-	
+	placement.main_node = self
 	
 	hovered_building = placement
+
+# it's in the name
+func place_held_building() -> void:
+	placement.global_position = gridify(get_global_mouse_position())
+	var player: AnimationPlayer = placement.get_node("AnimationPlayer")
+	placement.get_node("Sprite2D").position = placement.position
+	$Tilemaps/WhiteOverlay.clear()
+	player.queue("on_placed")
+	placement.place()
+	placement = null
 
 func _mouse_entered(sender: Node2D) -> void:
 	if !placement:

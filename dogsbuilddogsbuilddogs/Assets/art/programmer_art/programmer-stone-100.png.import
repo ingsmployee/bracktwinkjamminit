@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://djg81wx38amla"
-path="res://.godot/imported/programmer-tennis-ball-100.png-9899c10d7ba0c90b84e6315e26fe6c8b.ctex"
+uid="uid://dpsekvbe3b236"
+path="res://.godot/imported/programmer-stone-100.png-73ef1d0c86f4938e0df23576d13ffda3.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Art/programmer-tennis-ball-100.png"
-dest_files=["res://.godot/imported/programmer-tennis-ball-100.png-9899c10d7ba0c90b84e6315e26fe6c8b.ctex"]
+source_file="res://assets/art/programmer_art/programmer-stone-100.png"
+dest_files=["res://.godot/imported/programmer-stone-100.png-73ef1d0c86f4938e0df23576d13ffda3.ctex"]
 
 [params]
 
