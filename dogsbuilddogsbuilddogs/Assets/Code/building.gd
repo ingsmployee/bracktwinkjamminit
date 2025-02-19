@@ -71,6 +71,7 @@ func _process(delta: float) -> void:
 		
 
 func produce(amount: float) -> void:
+	print(amount)
 	get_parent().add_resource(resource_names[prox_bonus_type], amount)
 
 func update_modifiers() -> void:
@@ -102,6 +103,7 @@ func place() -> void:
 	$Sprite2D.self_modulate = Color(1,1,1,1)
 	$Sprite2D.z_index = 1
 	prox_bonus_amount = [0,0,0]
+	get_parent().building_type_amounts[prox_bonus_type] += 1
 	placed = true
 	for building in buildings_touched:
 		building.get_node("Sprite2D").self_modulate = Color(1,1,1,1)
@@ -118,6 +120,7 @@ func remove() -> void:
 	var tween = get_tree().create_tween()
 	tween.tween_property($Sprite2D, "scale", $Sprite2D.scale * 0.2, 0.5).set_ease(Tween.EASE_OUT_IN).set_trans(Tween.TRANS_EXPO)
 	$AnimationPlayer.play("on_destroy")
+	get_parent().building_type_amounts[prox_bonus_type] -= 1
 	if placed:
 		for building in buildings_touched:
 			building.prox_bonus_amount[prox_bonus_type] -= prox_bonus_addition

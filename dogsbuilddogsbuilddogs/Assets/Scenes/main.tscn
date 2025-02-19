@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=4 uid="uid://wbrr1g2bb72e"]
+[gd_scene load_steps=19 format=4 uid="uid://wbrr1g2bb72e"]
 
 [ext_resource type="Script" path="res://assets/code/main.gd" id="1_wup87"]
 [ext_resource type="Script" path="res://assets/code/money_manager.gd" id="2_xogqn"]
@@ -30,6 +30,135 @@ sources/4 = SubResource("TileSetAtlasSource_s35fg")
 sources/5 = SubResource("TileSetAtlasSource_u2le0")
 pattern_0 = SubResource("TileMapPattern_16yyl")
 
+[sub_resource type="AudioStreamGenerator" id="AudioStreamGenerator_2ylo6"]
+
+[sub_resource type="Animation" id="Animation_b40sm"]
+resource_name = "show_dialog_box"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(0.164938, 1),
+"update": 0,
+"values": [Vector2(535, 764), Vector2(535, 459)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.333333),
+"transitions": PackedFloat32Array(0.196146, 1),
+"update": 0,
+"values": [Color(0.313725, 0.313725, 0.313725, 0.505882), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_i88la"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(535, 764)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_qly0w"]
+resource_name = "hide_dialog_box"
+length = 0.5
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.5),
+"transitions": PackedFloat32Array(1, 5.27803, 1),
+"update": 0,
+"values": [Vector2(535, 459), Vector2(535, 442), Vector2(535, 764)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.3, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(0.313726, 0.313726, 0.313726, 0.505882)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.5),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_4oan2"]
+_data = {
+"RESET": SubResource("Animation_i88la"),
+"hide_dialog_box": SubResource("Animation_qly0w"),
+"show_dialog_box": SubResource("Animation_b40sm")
+}
+
 [node name="MainNode" type="Node2D"]
 texture_filter = 1
 script = ExtResource("1_wup87")
@@ -49,6 +178,7 @@ tile_set = SubResource("TileSet_364tp")
 tile_set = SubResource("TileSet_364tp")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = SubResource("AudioStreamGenerator_2ylo6")
 
 [node name="UI" type="Control" parent="." node_paths=PackedStringArray("central_node")]
 unique_name_in_owner = true
@@ -67,10 +197,18 @@ mouse_filter = 2
 script = ExtResource("5_tds1k")
 central_node = NodePath("..")
 
+[node name="DialogBoxAnimationPlayer" type="AnimationPlayer" parent="UI"]
+unique_name_in_owner = true
+root_node = NodePath("../MainScreen/MainScreen/MainDialogControl")
+libraries = {
+"": SubResource("AnimationLibrary_4oan2")
+}
+
 [node name="MainScreen" type="CanvasLayer" parent="UI"]
 
 [node name="MainScreen" type="Control" parent="UI/MainScreen"]
 texture_filter = 1
+clip_contents = true
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -103,21 +241,24 @@ tab_1/icon = ExtResource("7_m1duc")
 
 [node name="UI Resource Display" type="Label" parent="UI/MainScreen/MainScreen"]
 unique_name_in_owner = true
+layout_mode = 0
 offset_right = 94.0
 offset_bottom = 23.0
 text = "googoogaga"
 label_settings = ExtResource("8_6jrmf")
 
-[node name="DialogBox" type="Control" parent="UI/MainScreen/MainScreen"]
+[node name="MainDialogControl" type="Control" parent="UI/MainScreen/MainScreen"]
+unique_name_in_owner = true
+visible = false
 layout_mode = 3
 anchors_preset = 0
 offset_left = 535.0
-offset_top = 459.0
+offset_top = 764.0
 offset_right = 575.0
-offset_bottom = 499.0
+offset_bottom = 804.0
 scale = Vector2(4.62021, 4.62021)
 
-[node name="TextureRect" type="TextureRect" parent="UI/MainScreen/MainScreen/DialogBox"]
+[node name="TextureRect" type="TextureRect" parent="UI/MainScreen/MainScreen/MainDialogControl"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -132,19 +273,27 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("9_xc3o3")
 
-[node name="MainDialogBox" type="RichTextLabel" parent="UI/MainScreen/MainScreen/DialogBox/TextureRect"]
+[node name="MainDialogBox" type="RichTextLabel" parent="UI/MainScreen/MainScreen/MainDialogControl/TextureRect"]
 unique_name_in_owner = true
 modulate = Color(0, 0, 0, 1)
 layout_mode = 0
-offset_left = 40.4706
-offset_top = 13.5151
-offset_right = 390.471
-offset_bottom = 93.5151
-scale = Vector2(0.5, 0.502278)
+offset_left = 40.0
+offset_top = 14.0
+offset_right = 3720.0
+offset_bottom = 814.0
+scale = Vector2(0.05, 0.05)
+theme_override_font_sizes/normal_font_size = 150
 bbcode_enabled = true
 text = "frearae"
 scroll_active = false
 autowrap_mode = 0
 
+[node name="EventTimer" type="Timer" parent="."]
+unique_name_in_owner = true
+wait_time = 3.0
+one_shot = true
+autostart = true
+
 [connection signal="mouse_exited" from="UI/MainScreen/MainScreen/TabBar" to="UI" method="_on_tab_bar_mouse_exited"]
 [connection signal="tab_clicked" from="UI/MainScreen/MainScreen/TabBar" to="UI" method="_on_tab_bar_tab_clicked"]
+[connection signal="timeout" from="EventTimer" to="Buildings" method="_on_event_timer_timeout"]
