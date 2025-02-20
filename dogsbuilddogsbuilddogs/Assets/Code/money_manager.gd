@@ -25,7 +25,7 @@ func _process(delta: float) -> void:
 	
 
 # i don't care anymore just make it work
-func tryRandomEvent():
+func tryRandomEvent() -> void:
 	var random := RandomNumberGenerator.new()
 	if random.randf() < chance_of_bad:
 		match random.randi_range(0,3):
@@ -35,7 +35,7 @@ func tryRandomEvent():
 				pass
 			3:
 				pass
-		
+	
 	$%EventTimer.wait_time = round(clamp(random.randfn(7,1.1), 5, 12) * 10)
 	$%EventTimer.start()
 

@@ -3,7 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://d28xq02y1087o" path="res://assets/art/programmer_art/programmer_progress_bar_bg.png" id="1_2gxp0"]
 [ext_resource type="Texture2D" uid="uid://c56whrqjoqg2a" path="res://assets/art/programmer_art/programmer_progress_bar_frame.png" id="2_kv7ig"]
 [ext_resource type="Texture2D" uid="uid://co4b6s7bwlr0v" path="res://assets/art/programmer_art/programmer_progress_bar_progress.png" id="3_yq4um"]
-[ext_resource type="FontFile" uid="uid://cf2fntnn05kb5" path="res://assets/code/_decterm.ttf" id="4_8yha5"]
+[ext_resource type="FontFile" uid="uid://cf2fntnn05kb5" path="res://assets/misc/_decterm.ttf" id="4_8yha5"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_tdx70"]
 

@@ -183,6 +183,8 @@ offset_right = 40.0
 offset_bottom = 40.0
 mouse_filter = 2
 
+[node name="NavigationBarrier" type="StaticBody2D" parent="."]
+
 [connection signal="area_entered" from="ProximityBonusArea2D" to="." method="_on_proximity_bonus_area_2d_area_entered"]
 [connection signal="area_exited" from="ProximityBonusArea2D" to="." method="_on_proximity_bonus_area_2d_area_exited"]
 [connection signal="input_event" from="Area2DBuilding" to="." method="_on_area_2d_building_input_event"]

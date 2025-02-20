@@ -104,7 +104,7 @@ func queue_into_dialog(text: String, dialog_box: RichTextLabel = $%MainDialogBox
 		length_count += phrase_length
 		resulting_pages[page_index] += word + " "
 	
-	print(resulting_pages)
+	# print(resulting_pages)
 	main_dialog_queue.append_array(resulting_pages)
 
 ## starts the next page

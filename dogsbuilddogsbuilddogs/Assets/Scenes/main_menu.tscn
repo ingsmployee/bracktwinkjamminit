@@ -1,0 +1,212 @@
+[gd_scene load_steps=4 format=3 uid="uid://cl7o0o33bvfe0"]
+
+[ext_resource type="Theme" uid="uid://0wdocbrm4u1y" path="res://assets/misc/theme_1.tres" id="1_6fjhc"]
+[ext_resource type="Script" path="res://assets/code/main_menu.gd" id="1_wuv5x"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_qhewu"]
+radius = 316.31
+
+[node name="CanvasLayer" type="CanvasLayer"]
+
+[node name="MainMenu" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_6fjhc")
+script = ExtResource("1_wuv5x")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="MainMenu"]
+max_polyphony = 4
+bus = &"UI Sounds"
+
+[node name="BoxContainer" type="BoxContainer" parent="MainMenu"]
+layout_mode = 0
+offset_left = 6.0
+offset_top = 540.0
+offset_right = 837.0
+offset_bottom = 715.0
+theme = ExtResource("1_6fjhc")
+theme_override_constants/separation = 20
+
+[node name="PlayGame" type="Button" parent="MainMenu/BoxContainer"]
+layout_mode = 2
+theme = ExtResource("1_6fjhc")
+text = "Play Game"
+flat = true
+icon_alignment = 1
+
+[node name="LoadSave" type="Button" parent="MainMenu/BoxContainer"]
+layout_mode = 2
+theme = ExtResource("1_6fjhc")
+text = "Load Save"
+icon_alignment = 1
+
+[node name="Settings" type="Button" parent="MainMenu/BoxContainer"]
+layout_mode = 2
+theme = ExtResource("1_6fjhc")
+text = "Settings"
+icon_alignment = 1
+
+[node name="ExitGame" type="Button" parent="MainMenu/BoxContainer"]
+layout_mode = 2
+theme = ExtResource("1_6fjhc")
+text = "Exit Game"
+icon_alignment = 1
+
+[node name="Label" type="Label" parent="MainMenu"]
+layout_mode = 0
+offset_right = 422.0
+offset_bottom = 97.0
+scale = Vector2(1.395, 1.395)
+theme_override_font_sizes/font_size = 50
+text = "GAME TITLE"
+
+[node name="LoadingBar" type="ProgressBar" parent="MainMenu"]
+visible = false
+modulate = Color(1, 1, 1, 0)
+z_index = 1
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -200.0
+offset_top = -15.0
+offset_right = 200.0
+offset_bottom = 15.0
+grow_horizontal = 2
+grow_vertical = 2
+value = 27.88
+
+[node name="ColorRect" type="ColorRect" parent="MainMenu/LoadingBar"]
+z_index = -1
+layout_mode = 0
+offset_left = -462.0
+offset_top = -355.0
+offset_right = -362.0
+offset_bottom = -255.0
+scale = Vector2(13.1298, 7.416)
+color = Color(0, 0, 0, 0.301961)
+
+[node name="Label" type="Label" parent="MainMenu/LoadingBar"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -40.0
+offset_top = -50.0
+offset_right = 40.0
+offset_bottom = -24.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Loading..."
+
+[node name="TabContainer" type="TabContainer" parent="MainMenu"]
+z_index = 1
+layout_mode = 0
+offset_left = 390.0
+offset_top = 139.0
+offset_right = 840.0
+offset_bottom = 418.0
+current_tab = 0
+
+[node name="Sounds" type="VBoxContainer" parent="MainMenu/TabContainer"]
+layout_mode = 2
+theme_override_constants/separation = 30
+metadata/_tab_index = 0
+
+[node name="Music" type="HBoxContainer" parent="MainMenu/TabContainer/Sounds"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MainMenu/TabContainer/Sounds/Music"]
+custom_minimum_size = Vector2(200, 50)
+layout_mode = 2
+text = "Music"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HSlider" type="HSlider" parent="MainMenu/TabContainer/Sounds/Music"]
+custom_minimum_size = Vector2(190, 50)
+layout_mode = 2
+tick_count = 5
+
+[node name="SpinBox" type="SpinBox" parent="MainMenu/TabContainer/Sounds/Music"]
+layout_mode = 2
+
+[node name="UserInterface" type="HBoxContainer" parent="MainMenu/TabContainer/Sounds"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MainMenu/TabContainer/Sounds/UserInterface"]
+custom_minimum_size = Vector2(200, 50)
+layout_mode = 2
+text = "User Interface"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HSlider" type="HSlider" parent="MainMenu/TabContainer/Sounds/UserInterface"]
+custom_minimum_size = Vector2(190, 50)
+layout_mode = 2
+tick_count = 5
+
+[node name="SpinBox" type="SpinBox" parent="MainMenu/TabContainer/Sounds/UserInterface"]
+layout_mode = 2
+
+[node name="GameAudio" type="HBoxContainer" parent="MainMenu/TabContainer/Sounds"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MainMenu/TabContainer/Sounds/GameAudio"]
+custom_minimum_size = Vector2(200, 50)
+layout_mode = 2
+text = "Game Audio"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HSlider" type="HSlider" parent="MainMenu/TabContainer/Sounds/GameAudio"]
+custom_minimum_size = Vector2(190, 50)
+layout_mode = 2
+tick_count = 5
+
+[node name="SpinBox" type="SpinBox" parent="MainMenu/TabContainer/Sounds/GameAudio"]
+layout_mode = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+position = Vector2(996, 407)
+shape = SubResource("CircleShape2D_qhewu")
+
+[node name="Label2" type="Label" parent="CollisionShape2D"]
+offset_left = -297.0
+offset_top = -61.0
+offset_right = 327.0
+offset_bottom = 36.0
+scale = Vector2(0.944846, 0.944846)
+theme_override_font_sizes/font_size = 50
+text = "MAIN MENU DRAWING"
+
+[node name="Label3" type="Label" parent="CollisionShape2D"]
+offset_left = -1034.0
+offset_top = -61.0
+offset_right = -387.0
+offset_bottom = 36.0
+scale = Vector2(0.944846, 0.944846)
+theme_override_font_sizes/font_size = 50
+text = "PATTERNED BACKGROUND"
+
+[connection signal="button_down" from="MainMenu/BoxContainer/PlayGame" to="MainMenu" method="_on_button_down"]
+[connection signal="button_up" from="MainMenu/BoxContainer/PlayGame" to="MainMenu" method="_on_button_up"]
+[connection signal="pressed" from="MainMenu/BoxContainer/PlayGame" to="MainMenu" method="_on_play_game_pressed"]
+[connection signal="button_down" from="MainMenu/BoxContainer/LoadSave" to="MainMenu" method="_on_button_down"]
+[connection signal="button_up" from="MainMenu/BoxContainer/LoadSave" to="MainMenu" method="_on_button_up"]
+[connection signal="pressed" from="MainMenu/BoxContainer/LoadSave" to="MainMenu" method="_on_load_save_pressed"]
+[connection signal="button_down" from="MainMenu/BoxContainer/Settings" to="MainMenu" method="_on_button_down"]
+[connection signal="button_up" from="MainMenu/BoxContainer/Settings" to="MainMenu" method="_on_button_up"]
+[connection signal="pressed" from="MainMenu/BoxContainer/Settings" to="MainMenu" method="_on_settings_pressed"]
+[connection signal="button_down" from="MainMenu/BoxContainer/ExitGame" to="MainMenu" method="_on_button_down"]
+[connection signal="button_up" from="MainMenu/BoxContainer/ExitGame" to="MainMenu" method="_on_button_up"]
+[connection signal="pressed" from="MainMenu/BoxContainer/ExitGame" to="MainMenu" method="_on_exit_game_pressed"]

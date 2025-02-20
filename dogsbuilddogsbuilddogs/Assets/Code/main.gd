@@ -20,6 +20,7 @@ var is_placing: bool = false
 var hovered_building: Node2D
 var buildings_hovered_count: int = 0
 
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	pass
@@ -84,6 +85,8 @@ func holdMakeBuilding(id: int) -> void:
 	placement.get_node("Area2DBuilding").mouse_exited.connect(_mouse_exited.bind(placement))
 	placement.get_node("Sprite2D").modulate = Color(1,1,1,0.5)
 	placement.main_node = self
+	placement.rebake_navmap.connect($%NavigationRegion2D.bake_new_navmap)
+	placement.tree_exited.connect($%NavigationRegion2D.bake_new_navmap)
 	
 	hovered_building = placement
 

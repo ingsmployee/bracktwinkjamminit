@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://d4h3e06rcqw3r"]
+
+[ext_resource type="Texture2D" uid="uid://dpv3jt1t2c1oi" path="res://assets/art/programmer_art/programmer-dog.png" id="1_ic882"]
+[ext_resource type="Script" path="res://assets/code/alive.gd" id="1_qt7vq"]
+
+[node name="Alive" type="Node2D"]
+z_index = 1
+y_sort_enabled = true
+script = ExtResource("1_qt7vq")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("1_ic882")
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]

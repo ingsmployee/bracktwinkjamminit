@@ -1,6 +1,7 @@
 extends Node2D
 
 const BUILDING_TYPES: int = 3
+# if NavigationBarrier has no CollisionObject it will copy Area2DBuilding's
 
 var selected
 var highlightCopy: Sprite2D
@@ -26,9 +27,17 @@ var resource_names: Array[String] = ["Fun", "Safe", "Industry"]
 ## number that is added to other buildings' thingies
 @export var prox_bonus_addition: float = 1
 
+# when you place the building,
+# you must set main_node as the main Node
+# and connect the rebake_navmap signal to it
+
+signal rebake_navmap
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	pass # Replace with function body.
+	if $NavigationBarrier.get_child_count() == 0:
+		for child in $Area2DBuilding.get_children():
+			$NavigationBarrier.add_child(child.duplicate())
 
 func _on_area_2d_building_input_event(viewport: Node, event: InputEvent, shape_idx: int) -> void:
 	if event.is_action_pressed("mouse_primary") && main_node.placement == null:
@@ -71,7 +80,7 @@ func _process(delta: float) -> void:
 		
 
 func produce(amount: float) -> void:
-	print(amount)
+	#print(amount)
 	get_parent().add_resource(resource_names[prox_bonus_type], amount)
 
 func update_modifiers() -> void:
@@ -105,6 +114,7 @@ func place() -> void:
 	prox_bonus_amount = [0,0,0]
 	get_parent().building_type_amounts[prox_bonus_type] += 1
 	placed = true
+	rebake_navmap.emit()
 	for building in buildings_touched:
 		building.get_node("Sprite2D").self_modulate = Color(1,1,1,1)
 		building.prox_bonus_amount[prox_bonus_type] += prox_bonus_addition
@@ -115,11 +125,14 @@ func place() -> void:
 	tween.tween_property($"highlight areas", "modulate", Color(1,1,1,0), 0.3)
 	$Sprite2D.z_index = 1
 	update_modifiers()
+	
 
 func remove() -> void:
 	var tween = get_tree().create_tween()
 	tween.tween_property($Sprite2D, "scale", $Sprite2D.scale * 0.2, 0.5).set_ease(Tween.EASE_OUT_IN).set_trans(Tween.TRANS_EXPO)
 	$AnimationPlayer.play("on_destroy")
+	$NavigationBarrier.process_mode = Node.PROCESS_MODE_DISABLED #removes it as well
+	$NavigationBarrier.queue_free()
 	get_parent().building_type_amounts[prox_bonus_type] -= 1
 	if placed:
 		for building in buildings_touched:
