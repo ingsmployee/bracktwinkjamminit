@@ -3,10 +3,10 @@
 [ext_resource type="Script" path="res://assets/code/main.gd" id="1_wup87"]
 [ext_resource type="Script" path="res://assets/code/navigation_region_2d.gd" id="2_vjx6w"]
 [ext_resource type="Script" path="res://assets/code/money_manager.gd" id="2_xogqn"]
-[ext_resource type="Texture2D" uid="uid://dpsekvbe3b236" path="res://assets/art/programmer_art/programmer-stone-100.png" id="3_liv3y"]
-[ext_resource type="Texture2D" uid="uid://c6daperu140uk" path="res://assets/art/programmer_art/programmer-grass-export.png" id="4_pvwgi"]
 [ext_resource type="Script" path="res://assets/code/alives_management.gd" id="4_tkgb5"]
+[ext_resource type="Texture2D" uid="uid://dbnglwjeagddk" path="res://assets/art/Tile/tiletest.png" id="5_2wgt6"]
 [ext_resource type="Script" path="res://assets/code/user_interface.gd" id="5_tds1k"]
+[ext_resource type="Texture2D" uid="uid://bu332iprk2bcu" path="res://assets/art/Tile/grass_plain.png" id="6_udao6"]
 [ext_resource type="Theme" uid="uid://0wdocbrm4u1y" path="res://assets/misc/theme_1.tres" id="8_qrmrb"]
 [ext_resource type="Texture2D" uid="uid://bgcdbfg4vhjqx" path="res://assets/art/user_interface/textbox.png" id="11_wb7ej"]
 [ext_resource type="Texture2D" uid="uid://bk8yo61hnhspx" path="res://assets/art/user_interface/bigone.png" id="12_g7cdj"]
@@ -19,9 +19,9 @@
 [ext_resource type="Texture2D" uid="uid://dv2w4i7jn084d" path="res://assets/art/user_interface/Idkmaybeyoullfindauseforthis.png" id="17_3r60q"]
 [ext_resource type="Texture2D" uid="uid://mrftg8l5ia14" path="res://assets/art/user_interface/Pause/Paused.png" id="18_o40b0"]
 [ext_resource type="Texture2D" uid="uid://xl2s58n4bye3" path="res://assets/art/user_interface/Pause/pausefloor.png" id="19_pepmi"]
-[ext_resource type="Texture2D" uid="uid://c7petq6ifssua" path="res://assets/art/dogs/ennis.png" id="20_u7wq2"]
-[ext_resource type="Texture2D" uid="uid://tgxtplvxwvqy" path="res://assets/art/dogs/jack.png" id="21_fh1mo"]
-[ext_resource type="Texture2D" uid="uid://b47xfqnccm3nq" path="res://assets/art/dogs/schap.png" id="22_r4u7b"]
+[ext_resource type="Texture2D" uid="uid://c7petq6ifssua" path="res://assets/art/Dogs/Ennis.png" id="20_u7wq2"]
+[ext_resource type="Texture2D" uid="uid://tgxtplvxwvqy" path="res://assets/art/Dogs/Jack.png" id="21_fh1mo"]
+[ext_resource type="Texture2D" uid="uid://b47xfqnccm3nq" path="res://assets/art/Dogs/schap.png" id="22_r4u7b"]
 [ext_resource type="Texture2D" uid="uid://b072060iuhitx" path="res://assets/art/user_interface/Pause/Resume.png" id="23_q54qm"]
 [ext_resource type="Texture2D" uid="uid://btc3el1tt1oti" path="res://assets/art/user_interface/Pause/Settings.png" id="24_irhot"]
 [ext_resource type="Texture2D" uid="uid://cniacpsq6lrjg" path="res://assets/art/user_interface/Pause/exit.png" id="25_vvgcp"]
@@ -39,13 +39,21 @@ agent_radius = 30.0
 tile_data = PackedInt32Array(524288, 5, 0, 393217, 5, 0, 458752, 5, 0, 524289, 5, 0, 589824, 5, 0, 655361, 5, 0, 262146, 5, 0, 327681, 5, 0, 393218, 4, 0, 458753, 4, 0, 524290, 4, 0, 589825, 4, 0, 655362, 4, 0, 720897, 5, 0, 786434, 5, 0, 131075, 5, 0, 196610, 5, 0, 262147, 4, 0, 327682, 5, 0, 393219, 4, 0, 458754, 4, 0, 524291, 4, 0, 589826, 4, 0, 655363, 4, 0, 720898, 5, 0, 786435, 4, 0, 851970, 5, 0, 917507, 5, 0, 4, 5, 0, 65539, 5, 0, 131076, 5, 0, 196611, 4, 0, 262148, 4, 0, 327683, 4, 0, 393220, 4, 0, 458755, 4, 0, 524292, 4, 0, 589827, 4, 0, 655364, 4, 0, 720899, 4, 0, 786436, 4, 0, 851971, 4, 0, 917508, 5, 0, 983043, 5, 0, 1048580, 5, 0, 65540, 5, 0, 131077, 5, 0, 196612, 4, 0, 262149, 4, 0, 327684, 4, 0, 393221, 4, 0, 458756, 4, 0, 524293, 4, 0, 589828, 4, 0, 655365, 4, 0, 720900, 4, 0, 786437, 4, 0, 851972, 4, 0, 917509, 5, 0, 983044, 5, 0, 196613, 5, 0, 262150, 5, 0, 327685, 5, 0, 393222, 4, 0, 458757, 4, 0, 524294, 4, 0, 589829, 4, 0, 655366, 4, 0, 720901, 5, 0, 786438, 5, 0, 851973, 5, 0, 327686, 5, 0, 393223, 5, 0, 458758, 4, 0, 524295, 5, 0, 589830, 4, 0, 655367, 5, 0, 720902, 5, 0, 458759, 5, 0, 524296, 5, 0, 589831, 5, 0)
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_s35fg"]
-texture = ExtResource("3_liv3y")
-texture_region_size = Vector2i(100, 100)
+texture = ExtResource("5_2wgt6")
+texture_region_size = Vector2i(399, 399)
 0:0/0 = 0
+1:0/0 = 0
+2:0/0 = 0
+0:1/0 = 0
+1:1/0 = 0
+2:1/0 = 0
+0:2/0 = 0
+1:2/0 = 0
+2:2/0 = 0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_u2le0"]
-texture = ExtResource("4_pvwgi")
-texture_region_size = Vector2i(99, 99)
+texture = ExtResource("6_udao6")
+texture_region_size = Vector2i(399, 399)
 0:0/0 = 0
 
 [sub_resource type="TileSet" id="TileSet_364tp"]

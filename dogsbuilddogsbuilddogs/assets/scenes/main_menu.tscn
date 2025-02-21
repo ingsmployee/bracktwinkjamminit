@@ -2,8 +2,8 @@
 
 [ext_resource type="Theme" uid="uid://0wdocbrm4u1y" path="res://assets/misc/theme_1.tres" id="1_6fjhc"]
 [ext_resource type="Script" path="res://assets/code/main_menu.gd" id="1_wuv5x"]
-[ext_resource type="Texture2D" uid="uid://cyoh7pn0eg3s1" path="res://assets/art/not_by_tomato/wallpaper.jpg" id="3_8jpm1"]
 [ext_resource type="Texture2D" uid="uid://wjq157rjk0p" path="res://assets/art/user_interface/new.png" id="3_epgct"]
+[ext_resource type="Texture2D" uid="uid://dv5inumkn0xd3" path="res://assets/art/not_by_tomato/background.png" id="3_mqaxh"]
 [ext_resource type="Texture2D" uid="uid://dor6ypco6no67" path="res://assets/art/user_interface/load.png" id="4_r13kh"]
 [ext_resource type="Texture2D" uid="uid://ciudhw3mreg35" path="res://assets/art/user_interface/settings.png" id="5_n53ti"]
 [ext_resource type="Texture2D" uid="uid://bd7kxbrlbd0wq" path="res://assets/art/user_interface/exit.png" id="6_nmd6o"]
@@ -34,15 +34,42 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("3_8jpm1")
+texture = ExtResource("3_mqaxh")
+
+[node name="LoadSave" type="TextureButton" parent="MainMenu"]
+layout_mode = 2
+offset_left = 109.0
+offset_top = 680.0
+offset_right = 1160.0
+offset_bottom = 805.0
+theme = ExtResource("1_6fjhc")
+texture_normal = ExtResource("4_r13kh")
+
+[node name="Settings" type="TextureButton" parent="MainMenu"]
+layout_mode = 2
+offset_left = 177.0
+offset_top = 784.0
+offset_right = 1228.0
+offset_bottom = 913.0
+theme = ExtResource("1_6fjhc")
+texture_normal = ExtResource("5_n53ti")
+
+[node name="ExitGame" type="TextureButton" parent="MainMenu"]
+layout_mode = 2
+offset_left = 233.0
+offset_top = 909.0
+offset_right = 1284.0
+offset_bottom = 1006.0
+theme = ExtResource("1_6fjhc")
+texture_normal = ExtResource("6_nmd6o")
 
 [node name="BoxContainer2" type="PanelContainer" parent="MainMenu"]
 self_modulate = Color(1, 1, 1, 0)
 layout_mode = 0
-offset_left = 12.0
-offset_top = 916.0
-offset_right = 1063.0
-offset_bottom = 1066.0
+offset_left = 54.0
+offset_top = 556.0
+offset_right = 1105.0
+offset_bottom = 1100.0
 theme = ExtResource("1_6fjhc")
 theme_override_styles/panel = SubResource("StyleBoxFlat_hqt2a")
 
@@ -50,26 +77,12 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_hqt2a")
 layout_mode = 2
 theme = ExtResource("1_6fjhc")
 theme_override_constants/separation = 20
+vertical = true
 
 [node name="PlayGame" type="TextureButton" parent="MainMenu/BoxContainer2/BoxContainer"]
 layout_mode = 2
 theme = ExtResource("1_6fjhc")
 texture_normal = ExtResource("3_epgct")
-
-[node name="LoadSave" type="TextureButton" parent="MainMenu/BoxContainer2/BoxContainer"]
-layout_mode = 2
-theme = ExtResource("1_6fjhc")
-texture_normal = ExtResource("4_r13kh")
-
-[node name="Settings" type="TextureButton" parent="MainMenu/BoxContainer2/BoxContainer"]
-layout_mode = 2
-theme = ExtResource("1_6fjhc")
-texture_normal = ExtResource("5_n53ti")
-
-[node name="ExitGame" type="TextureButton" parent="MainMenu/BoxContainer2/BoxContainer"]
-layout_mode = 2
-theme = ExtResource("1_6fjhc")
-texture_normal = ExtResource("6_nmd6o")
 
 [node name="GameTitle" type="Label" parent="MainMenu"]
 layout_mode = 0
@@ -145,15 +158,15 @@ scale = Vector2(0.944846, 0.944846)
 theme_override_font_sizes/font_size = 50
 text = "PATTERNED BACKGROUND"
 
+[connection signal="button_down" from="MainMenu/LoadSave" to="MainMenu" method="_on_button_down"]
+[connection signal="button_up" from="MainMenu/LoadSave" to="MainMenu" method="_on_button_up"]
+[connection signal="pressed" from="MainMenu/LoadSave" to="MainMenu" method="_on_load_save_pressed"]
+[connection signal="button_down" from="MainMenu/Settings" to="MainMenu" method="_on_button_down"]
+[connection signal="button_up" from="MainMenu/Settings" to="MainMenu" method="_on_button_up"]
+[connection signal="pressed" from="MainMenu/Settings" to="MainMenu" method="_on_settings_pressed"]
+[connection signal="button_down" from="MainMenu/ExitGame" to="MainMenu" method="_on_button_down"]
+[connection signal="button_up" from="MainMenu/ExitGame" to="MainMenu" method="_on_button_up"]
+[connection signal="pressed" from="MainMenu/ExitGame" to="MainMenu" method="_on_exit_game_pressed"]
 [connection signal="button_down" from="MainMenu/BoxContainer2/BoxContainer/PlayGame" to="MainMenu" method="_on_button_down"]
 [connection signal="button_up" from="MainMenu/BoxContainer2/BoxContainer/PlayGame" to="MainMenu" method="_on_button_up"]
 [connection signal="pressed" from="MainMenu/BoxContainer2/BoxContainer/PlayGame" to="MainMenu" method="_on_play_game_pressed"]
-[connection signal="button_down" from="MainMenu/BoxContainer2/BoxContainer/LoadSave" to="MainMenu" method="_on_button_down"]
-[connection signal="button_up" from="MainMenu/BoxContainer2/BoxContainer/LoadSave" to="MainMenu" method="_on_button_up"]
-[connection signal="pressed" from="MainMenu/BoxContainer2/BoxContainer/LoadSave" to="MainMenu" method="_on_load_save_pressed"]
-[connection signal="button_down" from="MainMenu/BoxContainer2/BoxContainer/Settings" to="MainMenu" method="_on_button_down"]
-[connection signal="button_up" from="MainMenu/BoxContainer2/BoxContainer/Settings" to="MainMenu" method="_on_button_up"]
-[connection signal="pressed" from="MainMenu/BoxContainer2/BoxContainer/Settings" to="MainMenu" method="_on_settings_pressed"]
-[connection signal="button_down" from="MainMenu/BoxContainer2/BoxContainer/ExitGame" to="MainMenu" method="_on_button_down"]
-[connection signal="button_up" from="MainMenu/BoxContainer2/BoxContainer/ExitGame" to="MainMenu" method="_on_button_up"]
-[connection signal="pressed" from="MainMenu/BoxContainer2/BoxContainer/ExitGame" to="MainMenu" method="_on_exit_game_pressed"]
