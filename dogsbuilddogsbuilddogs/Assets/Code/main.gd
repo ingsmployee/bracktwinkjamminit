@@ -13,6 +13,11 @@ var is_placing: bool = false
 var hovered_building: Node2D
 var buildings_hovered_count: int = 0
 
+# i ammmm 90% sure that hovered_building is mostly useless and should be replaced
+# with a system dependent on signals if theres any desirable features it even has
+# the white overlay grid thing when building also stopped working a while ago. probably because i deleted a part of it
+# last comment for today (2/21) (just walked through some of the scripts). im going to sleep now lol
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -21,7 +26,9 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	
+	# what you are about to see is some of the first code i wrote on this project
+	# after not using godot for months.
+	# prepare your PPE as i have since then not altered any of it
 	## scuffed. Input.get_blah blah blah only measures it every 0.1s 
 	if Input.is_action_pressed("camera_pan"):
 		$Camera2D.position -= (Input.get_last_mouse_velocity() * 1 / $Camera2D.zoom) * delta
@@ -34,6 +41,7 @@ func _process(delta: float) -> void:
 	if Input.is_action_pressed("camera_pan"):
 		$Camera2D.position = get_global_mouse_position() - desired_mouse_position"""
 	
+	# AAAAHHHHHH
 	if Input.is_action_just_pressed("mouse_wheel_down"):
 		var tween: Tween = get_tree().create_tween()
 		tween.tween_property($Camera2D, "zoom", Vector2(
@@ -48,6 +56,7 @@ func _process(delta: float) -> void:
 			clamp($Camera2D.zoom.y * (1+ZOOM_AMOUNT), MIN_ZOOM, MAX_ZOOM)),
 			0.1).set_trans(Tween.TRANS_EXPO).set_ease(Tween.EASE_OUT)
 	
+	# maybe we should move "you can't build here!" detection to the buildings themselves?? idk lmfao
 	if Input.is_action_just_pressed("mouse_primary") && placement != null:
 		# note that there are separate layers for proximity benefit areas and building collision boxes
 		if !placement.get_node("Area2DBuilding").get_overlapping_areas():

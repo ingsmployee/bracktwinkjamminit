@@ -4,6 +4,11 @@ var alives: Array[PackedScene] = [
 	preload("res://assets/scenes/alive/dog_template.tscn")
 ]
 
+# todo:
+# make a navigation ordering system, where we can send dogs to random places or something.
+# just get them moving lol
+
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	pass # Replace with function body.

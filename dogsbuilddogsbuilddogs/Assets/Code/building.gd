@@ -1,7 +1,10 @@
 extends Node2D
 
-const BUILDING_TYPES: int = 3
-# if NavigationBarrier has no CollisionObject it will copy Area2DBuilding's
+## README when you place the building,
+# you must set main_node as the main Node
+# and connect the rebake_navmap signal to it
+# if you don't give NavigationBarrier a collision_shape, it will copy Area2DBuilding's.
+# don't put too much navigation in here besides something like "hey! we're available!", AliveStuff should handle actual nav orders
 
 @export var stats: BuildingStats
 
@@ -20,9 +23,7 @@ var speed_multiplier: float = stats.baseline_speed_multiplier
 
 var placed: bool = false
 
-## when you place the building,
-# you must set main_node as the main Node
-# and connect the rebake_navmap signal to it
+var housed_dogs: int = 0 # dog housing is unimplemented
 
 signal rebake_navmap
 
@@ -52,9 +53,11 @@ func _input(event: InputEvent) -> void:
 func _process(delta: float) -> void:
 	if placed:
 		match stats.building_type:
-			1:
+			0: # if this is a fun building
 				pass
-			2:
+			1: # if this is a safe building
+				pass
+			2: # if this is a factory
 				production_progress += delta * speed_multiplier
 				if production_progress > stats.production_time:
 					var productions:int = floor(production_progress / stats.production_time)
@@ -67,17 +70,19 @@ func _process(delta: float) -> void:
 				
 				if progress_bar != null:
 					progress_bar.value = (production_progress / stats.production_time) * (progress_bar.max_value - progress_bar.min_value) + progress_bar.min_value
-			3:
-				pass
 		
+		# still if placed
 		
+	
+	
 
 func produce(amount: float) -> void:
 	GameResources.add_resource_dict(stats.production_result)
 	GameResources.subtract_resource_dict(stats.production_cost)
 
 func update_modifiers() -> void:
-	production_multiplier = (0.2 * log(prox_bonus_amount[(stats.building_type+1) % BUILDING_TYPES] + 1) + 1) * stats.baseline_production_multiplier
+	# production multiplier benefits from having Fun around
+	production_multiplier = (0.2 * log(prox_bonus_amount[0] + 1) + 1) * stats.baseline_production_multiplier
 	speed_multiplier = (0.2 * log(prox_bonus_amount[stats.building_type] + 1) + 1) * stats.baseline_speed_multiplier 
 	
 

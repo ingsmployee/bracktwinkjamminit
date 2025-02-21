@@ -7,7 +7,7 @@ var loading: bool = false
 func _ready() -> void:
 	pass
 
-
+# it has to be done this way because of threading i think
 var progress_arr: Array[float]
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:

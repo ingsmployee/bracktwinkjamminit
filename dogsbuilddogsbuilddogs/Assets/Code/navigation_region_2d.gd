@@ -13,6 +13,9 @@ func _ready() -> void:
 # note that this function is connected to by buildings via signals
 # aka dont change the name unless you go into main and change the connection there too
 func bake_new_navmap() -> void:
+	# i know
+	# it bakes literally the entire map over again
+	# i don't want to change it unless it starts causing problems
 	bake_navigation_polygon()
 	# print("Attempted to bake new thing")
 
