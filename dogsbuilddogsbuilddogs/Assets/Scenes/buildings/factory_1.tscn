@@ -10,8 +10,6 @@ radius = 380.0
 radius = 88.0909
 
 [node name="Building" instance=ExtResource("1_p7y0c")]
-building_name = "Cube Factory"
-prox_bonus_type = 2
 
 [node name="Sprite2DProxBonus" parent="highlight areas" index="0"]
 scale = Vector2(2.95, 2.95)

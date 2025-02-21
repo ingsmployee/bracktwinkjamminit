@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=4 uid="uid://wbrr1g2bb72e"]
+[gd_scene load_steps=39 format=4 uid="uid://wbrr1g2bb72e"]
 
 [ext_resource type="Script" path="res://assets/code/main.gd" id="1_wup87"]
 [ext_resource type="Script" path="res://assets/code/navigation_region_2d.gd" id="2_vjx6w"]
@@ -7,10 +7,24 @@
 [ext_resource type="Texture2D" uid="uid://c6daperu140uk" path="res://assets/art/programmer_art/programmer-grass-export.png" id="4_pvwgi"]
 [ext_resource type="Script" path="res://assets/code/alives_management.gd" id="4_tkgb5"]
 [ext_resource type="Script" path="res://assets/code/user_interface.gd" id="5_tds1k"]
-[ext_resource type="Texture2D" uid="uid://djg81wx38amla" path="res://assets/art/programmer_art/programmer-tennis-ball-100.png" id="6_tp1vl"]
-[ext_resource type="Texture2D" uid="uid://cnhhmkj0mwg33" path="res://assets/art/programmer_art/programmer-factory1.png" id="7_m1duc"]
-[ext_resource type="LabelSettings" uid="uid://g712jo4j6yjc" path="res://assets/misc/digital_text_label_thing.tres" id="8_6jrmf"]
+[ext_resource type="Theme" uid="uid://0wdocbrm4u1y" path="res://assets/misc/theme_1.tres" id="8_qrmrb"]
 [ext_resource type="Texture2D" uid="uid://n2auibmq3xr0" path="res://assets/art/programmer_art/programmer-cloud.png" id="9_xc3o3"]
+[ext_resource type="Texture2D" uid="uid://bk8yo61hnhspx" path="res://assets/art/user_interface/bigone.png" id="12_g7cdj"]
+[ext_resource type="Texture2D" uid="uid://dac6ej46mxkq0" path="res://assets/art/user_interface/money.png" id="13_37yl8"]
+[ext_resource type="Texture2D" uid="uid://g42suf2yvsim" path="res://assets/art/user_interface/taskbar.png" id="14_c7coi"]
+[ext_resource type="Texture2D" uid="uid://dq3d33y732255" path="res://assets/art/user_interface/pausebutton.png" id="14_rc3il"]
+[ext_resource type="Texture2D" uid="uid://dhb2wtgb2jqna" path="res://assets/art/user_interface/fun.png" id="14_sidcn"]
+[ext_resource type="Texture2D" uid="uid://f8sg1sh7ly2g" path="res://assets/art/programmer_art/programmer_building_icon_placeholder.png" id="16_7mnvx"]
+[ext_resource type="Texture2D" uid="uid://s3coi3tdw4ao" path="res://assets/art/user_interface/button.png" id="16_sqmfi"]
+[ext_resource type="Texture2D" uid="uid://dv2w4i7jn084d" path="res://assets/art/user_interface/Idkmaybeyoullfindauseforthis.png" id="17_3r60q"]
+[ext_resource type="Texture2D" uid="uid://mrftg8l5ia14" path="res://assets/art/user_interface/Pause/Paused.png" id="18_o40b0"]
+[ext_resource type="Texture2D" uid="uid://xl2s58n4bye3" path="res://assets/art/user_interface/Pause/pausefloor.png" id="19_pepmi"]
+[ext_resource type="Texture2D" uid="uid://c7petq6ifssua" path="res://assets/art/dogs/ennis.png" id="20_u7wq2"]
+[ext_resource type="Texture2D" uid="uid://tgxtplvxwvqy" path="res://assets/art/dogs/jack.png" id="21_fh1mo"]
+[ext_resource type="Texture2D" uid="uid://b47xfqnccm3nq" path="res://assets/art/dogs/schap.png" id="22_r4u7b"]
+[ext_resource type="Texture2D" uid="uid://b072060iuhitx" path="res://assets/art/user_interface/Pause/Resume.png" id="23_q54qm"]
+[ext_resource type="Texture2D" uid="uid://btc3el1tt1oti" path="res://assets/art/user_interface/Pause/Settings.png" id="24_irhot"]
+[ext_resource type="Texture2D" uid="uid://cniacpsq6lrjg" path="res://assets/art/user_interface/Pause/exit.png" id="25_vvgcp"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_boabj"]
 vertices = PackedVector2Array(10749.1, 7406.18, -8414.07, 6904.85, -7148.72, -6293.14, 10366.8, -6388.83)
@@ -36,12 +50,10 @@ texture_region_size = Vector2i(99, 99)
 
 [sub_resource type="TileSet" id="TileSet_364tp"]
 tile_shape = 1
-tile_size = Vector2i(100, 100)
+tile_size = Vector2i(399, 399)
 sources/4 = SubResource("TileSetAtlasSource_s35fg")
 sources/5 = SubResource("TileSetAtlasSource_u2le0")
 pattern_0 = SubResource("TileMapPattern_16yyl")
-
-[sub_resource type="AudioStreamGenerator" id="AudioStreamGenerator_2ylo6"]
 
 [sub_resource type="Animation" id="Animation_i88la"]
 length = 0.001
@@ -170,6 +182,97 @@ _data = {
 "show_dialog_box": SubResource("Animation_b40sm")
 }
 
+[sub_resource type="Animation" id="Animation_w4uiv"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MainScreen/MainScreen/TasksPanel/TasksPanel:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1472, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("MainScreen/MainScreen/TasksPanel/TasksPanelShowButton:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1947, 110)]
+}
+
+[sub_resource type="Animation" id="Animation_a222j"]
+resource_name = "hide_tasks_panel"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MainScreen/MainScreen/TasksPanel/TasksPanel:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(0.138697, 1),
+"update": 0,
+"values": [Vector2(1472, 0), Vector2(1923, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("MainScreen/MainScreen/TasksPanel/TasksPanelShowButton:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(0.133971, 1),
+"update": 0,
+"values": [Vector2(1933, 309), Vector2(1792, 309)]
+}
+
+[sub_resource type="Animation" id="Animation_27pip"]
+resource_name = "show_tasks_panel"
+length = 0.5
+step = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MainScreen/MainScreen/TasksPanel/TasksPanel:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(0.14, 1),
+"update": 0,
+"values": [Vector2(1923, 0), Vector2(1472, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("MainScreen/MainScreen/TasksPanel/TasksPanelShowButton:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(0.14, 1),
+"update": 0,
+"values": [Vector2(1792, 309), Vector2(1933, 309)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_e6rqu"]
+_data = {
+"RESET": SubResource("Animation_w4uiv"),
+"hide_tasks_panel": SubResource("Animation_a222j"),
+"show_tasks_panel": SubResource("Animation_27pip")
+}
+
 [node name="MainNode" type="Node2D" groups=["navigation_collide_with_ground"]]
 texture_filter = 1
 script = ExtResource("1_wup87")
@@ -197,14 +300,10 @@ tile_set = SubResource("TileSet_364tp")
 [node name="WhiteOverlay" type="TileMapLayer" parent="Tilemaps"]
 tile_set = SubResource("TileSet_364tp")
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
-stream = SubResource("AudioStreamGenerator_2ylo6")
-
 [node name="UI" type="Control" parent="." node_paths=PackedStringArray("central_node")]
 unique_name_in_owner = true
 z_index = 10
 z_as_relative = false
-texture_filter = 1
 clip_contents = true
 layout_mode = 3
 anchors_preset = 15
@@ -217,55 +316,50 @@ mouse_filter = 2
 script = ExtResource("5_tds1k")
 central_node = NodePath("..")
 
-[node name="DialogBoxAnimationPlayer" type="AnimationPlayer" parent="UI"]
-unique_name_in_owner = true
-root_node = NodePath("../MainScreen/MainScreen/MainDialogControl")
-libraries = {
-"": SubResource("AnimationLibrary_4oan2")
-}
-
 [node name="MainScreen" type="CanvasLayer" parent="UI"]
 
 [node name="MainScreen" type="Control" parent="UI/MainScreen"]
-texture_filter = 1
-clip_contents = true
+texture_filter = 2
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-mouse_filter = 2
+mouse_filter = 1
+theme = ExtResource("8_qrmrb")
 
-[node name="TabBar" type="TabBar" parent="UI/MainScreen/MainScreen"]
+[node name="TopBar" type="TextureRect" parent="UI/MainScreen/MainScreen"]
 layout_mode = 1
-anchors_preset = 7
+anchors_preset = 5
 anchor_left = 0.5
-anchor_top = 1.0
 anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -559.0
-offset_top = -108.0
-offset_right = 559.0
+offset_left = -760.0
+offset_right = 451.0
+offset_bottom = 217.0
 grow_horizontal = 2
-grow_vertical = 0
-mouse_default_cursor_shape = 2
-current_tab = 0
-tab_alignment = 1
-tab_count = 2
-tab_0/title = "Tennis Ball House"
-tab_0/tooltip = "Fun: 1"
-tab_0/icon = ExtResource("6_tp1vl")
-tab_1/title = "Evil Factory"
-tab_1/icon = ExtResource("7_m1duc")
+texture = ExtResource("12_g7cdj")
 
-[node name="UI Resource Display" type="Label" parent="UI/MainScreen/MainScreen"]
-unique_name_in_owner = true
+[node name="MoneySymbol" type="TextureRect" parent="UI/MainScreen/MainScreen/TopBar"]
 layout_mode = 0
-offset_right = 94.0
-offset_bottom = 23.0
-text = "googoogaga"
-label_settings = ExtResource("8_6jrmf")
+offset_left = 116.328
+offset_top = 5.36044
+offset_right = 203.328
+offset_bottom = 92.3604
+texture = ExtResource("13_37yl8")
+
+[node name="MoneyCounter" type="Label" parent="UI/MainScreen/MainScreen/TopBar"]
+unique_name_in_owner = true
+z_index = 1
+layout_mode = 0
+offset_left = 205.328
+offset_top = 20.3604
+offset_right = 325.328
+offset_bottom = 90.3604
+theme_override_font_sizes/font_size = 30
+text = "x 0"
+vertical_alignment = 1
+autowrap_mode = 1
 
 [node name="MainDialogControl" type="Control" parent="UI/MainScreen/MainScreen"]
 unique_name_in_owner = true
@@ -277,6 +371,12 @@ offset_top = 764.0
 offset_right = 575.0
 offset_bottom = 804.0
 scale = Vector2(4.62021, 4.62021)
+
+[node name="DialogBoxAnimationPlayer" type="AnimationPlayer" parent="UI/MainScreen/MainScreen/MainDialogControl"]
+unique_name_in_owner = true
+libraries = {
+"": SubResource("AnimationLibrary_4oan2")
+}
 
 [node name="TextureRect" type="TextureRect" parent="UI/MainScreen/MainScreen/MainDialogControl"]
 layout_mode = 1
@@ -308,12 +408,305 @@ text = "frearae"
 scroll_active = false
 autowrap_mode = 0
 
+[node name="TasksPanel" type="Control" parent="UI/MainScreen/MainScreen"]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="TasksPanelAnimationPlayer" type="AnimationPlayer" parent="UI/MainScreen/MainScreen/TasksPanel"]
+unique_name_in_owner = true
+root_node = NodePath("../../../..")
+libraries = {
+"": SubResource("AnimationLibrary_e6rqu")
+}
+
+[node name="TasksPanel" type="TextureRect" parent="UI/MainScreen/MainScreen/TasksPanel"]
+layout_mode = 0
+offset_left = 1472.0
+offset_right = 1920.0
+offset_bottom = 374.0
+texture = ExtResource("14_c7coi")
+
+[node name="TasksPanelHideButton" type="TextureButton" parent="UI/MainScreen/MainScreen/TasksPanel/TasksPanel"]
+layout_mode = 0
+offset_left = 411.0
+offset_top = 29.0
+offset_right = 451.0
+offset_bottom = 69.0
+scale = Vector2(1.1645, 5.66084)
+mouse_default_cursor_shape = 2
+
+[node name="Label" type="RichTextLabel" parent="UI/MainScreen/MainScreen/TasksPanel/TasksPanel"]
+texture_filter = 2
+layout_mode = 0
+offset_left = 145.0
+offset_top = 73.0
+offset_right = 515.0
+offset_bottom = 473.0
+scale = Vector2(0.5, 0.5)
+theme_override_colors/default_color = Color(0.321728, 0.321728, 0.321728, 1)
+theme_override_font_sizes/normal_font_size = 50
+text = "> Build 3 Safe buildings
+> Reach 1.5 average Fun
+> WORK HARDER!!!"
+
+[node name="Label2" type="RichTextLabel" parent="UI/MainScreen/MainScreen/TasksPanel/TasksPanel"]
+texture_filter = 2
+layout_mode = 0
+offset_left = 109.0
+offset_top = 21.0
+offset_right = 309.0
+offset_bottom = 121.0
+scale = Vector2(0.5, 0.5)
+theme_override_font_sizes/normal_font_size = 50
+text = "Tasks:"
+
+[node name="TasksPanelShowButton" type="TextureButton" parent="UI/MainScreen/MainScreen/TasksPanel"]
+z_index = -1
+texture_filter = 2
+layout_mode = 0
+offset_left = 1947.0
+offset_top = 110.0
+offset_right = 2256.0
+offset_bottom = 248.0
+rotation = -1.39801
+mouse_default_cursor_shape = 2
+texture_normal = ExtResource("16_sqmfi")
+
+[node name="BottomBar" type="Control" parent="UI/MainScreen/MainScreen"]
+anchors_preset = 0
+offset_left = 467.0
+offset_top = 913.0
+offset_right = 507.0
+offset_bottom = 953.0
+
+[node name="FunCategory" type="Control" parent="UI/MainScreen/MainScreen/BottomBar"]
+unique_name_in_owner = true
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="FunCategoryLabel" type="TextureRect" parent="UI/MainScreen/MainScreen/BottomBar/FunCategory"]
+unique_name_in_owner = true
+layout_mode = 2
+offset_left = -16.0
+offset_top = 168.0
+offset_right = 268.0
+offset_bottom = 305.0
+texture = ExtResource("17_3r60q")
+
+[node name="Label" type="Label" parent="UI/MainScreen/MainScreen/BottomBar/FunCategory/FunCategoryLabel"]
+layout_mode = 0
+offset_left = 93.0
+offset_top = 15.0
+offset_right = 175.0
+offset_bottom = 78.0
+theme_override_colors/font_color = Color(0.798469, 0, 0.297191, 1)
+theme_override_colors/font_shadow_color = Color(0.439049, 0.439049, 0.439049, 1)
+theme_override_font_sizes/font_size = 50
+text = "Fun"
+
+[node name="TextureButton" type="TextureButton" parent="UI/MainScreen/MainScreen/BottomBar/FunCategory"]
+layout_mode = 2
+offset_right = 284.0
+offset_bottom = 137.0
+mouse_default_cursor_shape = 2
+texture_normal = ExtResource("14_sidcn")
+
+[node name="Panel" type="Panel" parent="UI/MainScreen/MainScreen/BottomBar/FunCategory"]
+layout_mode = 2
+offset_left = 4.0
+offset_top = 171.0
+offset_right = 504.0
+offset_bottom = 671.0
+mouse_force_pass_scroll_events = false
+
+[node name="ReferenceRect" type="ScrollContainer" parent="UI/MainScreen/MainScreen/BottomBar/FunCategory/Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 10.0
+offset_top = 10.0
+offset_right = -10.0
+offset_bottom = -10.0
+grow_horizontal = 2
+grow_vertical = 2
+follow_focus = true
+horizontal_scroll_mode = 0
+vertical_scroll_mode = 2
+
+[node name="GridContainer" type="GridContainer" parent="UI/MainScreen/MainScreen/BottomBar/FunCategory/Panel/ReferenceRect"]
+layout_mode = 2
+theme_override_constants/h_separation = 15
+theme_override_constants/v_separation = 15
+columns = 2
+
+[node name="TextureRect" type="TextureRect" parent="UI/MainScreen/MainScreen/BottomBar/FunCategory/Panel/ReferenceRect/GridContainer"]
+layout_mode = 2
+texture = ExtResource("16_7mnvx")
+stretch_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UI/MainScreen/MainScreen/BottomBar/FunCategory/Panel/ReferenceRect/GridContainer/TextureRect"]
+layout_mode = 0
+offset_left = 10.0
+offset_top = 185.0
+offset_right = 225.0
+offset_bottom = 225.0
+
+[node name="TextureRect" type="TextureRect" parent="UI/MainScreen/MainScreen/BottomBar/FunCategory/Panel/ReferenceRect/GridContainer/TextureRect/HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("13_37yl8")
+expand_mode = 3
+
+[node name="Label" type="Label" parent="UI/MainScreen/MainScreen/BottomBar/FunCategory/Panel/ReferenceRect/GridContainer/TextureRect/HBoxContainer"]
+layout_mode = 2
+text = "x 500"
+
+[node name="BuildingName" type="Label" parent="UI/MainScreen/MainScreen/BottomBar/FunCategory/Panel/ReferenceRect/GridContainer/TextureRect"]
+layout_mode = 0
+offset_left = 10.0
+offset_top = 10.0
+offset_right = 110.0
+offset_bottom = 36.0
+text = "Small House"
+
+[node name="TextureRect2" type="TextureRect" parent="UI/MainScreen/MainScreen/BottomBar/FunCategory/Panel/ReferenceRect/GridContainer"]
+layout_mode = 2
+texture = ExtResource("16_7mnvx")
+stretch_mode = 2
+
+[node name="TextureRect3" type="TextureRect" parent="UI/MainScreen/MainScreen/BottomBar/FunCategory/Panel/ReferenceRect/GridContainer"]
+layout_mode = 2
+texture = ExtResource("16_7mnvx")
+stretch_mode = 2
+
+[node name="TextureRect4" type="TextureRect" parent="UI/MainScreen/MainScreen/BottomBar/FunCategory/Panel/ReferenceRect/GridContainer"]
+layout_mode = 2
+texture = ExtResource("16_7mnvx")
+stretch_mode = 2
+
+[node name="TextureRect5" type="TextureRect" parent="UI/MainScreen/MainScreen/BottomBar/FunCategory/Panel/ReferenceRect/GridContainer"]
+layout_mode = 2
+texture = ExtResource("16_7mnvx")
+stretch_mode = 2
+
+[node name="TextureRect6" type="TextureRect" parent="UI/MainScreen/MainScreen/BottomBar/FunCategory/Panel/ReferenceRect/GridContainer"]
+layout_mode = 2
+texture = ExtResource("16_7mnvx")
+stretch_mode = 2
+
+[node name="TextureRect7" type="TextureRect" parent="UI/MainScreen/MainScreen/BottomBar/FunCategory/Panel/ReferenceRect/GridContainer"]
+layout_mode = 2
+texture = ExtResource("16_7mnvx")
+stretch_mode = 2
+
+[node name="TextureRect8" type="TextureRect" parent="UI/MainScreen/MainScreen/BottomBar/FunCategory/Panel/ReferenceRect/GridContainer"]
+layout_mode = 2
+texture = ExtResource("16_7mnvx")
+stretch_mode = 2
+
+[node name="PauseButton" type="TextureButton" parent="UI/MainScreen/MainScreen"]
+layout_mode = 0
+offset_left = 11.0
+offset_top = 3.0
+offset_right = 108.0
+offset_bottom = 104.0
+mouse_default_cursor_shape = 2
+texture_normal = ExtResource("14_rc3il")
+
+[node name="PauseMenuColorRect" type="ColorRect" parent="UI/MainScreen/MainScreen"]
+unique_name_in_owner = true
+visible = false
+modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.329412)
+
+[node name="TextureRect" type="TextureRect" parent="UI/MainScreen/MainScreen/PauseMenuColorRect"]
+layout_mode = 0
+offset_left = 548.0
+offset_top = 19.0
+offset_right = 1374.0
+offset_bottom = 338.0
+texture = ExtResource("18_o40b0")
+
+[node name="TextureRect2" type="TextureRect" parent="UI/MainScreen/MainScreen/PauseMenuColorRect"]
+layout_mode = 0
+offset_left = 31.0
+offset_top = 611.0
+offset_right = 1867.0
+offset_bottom = 1046.0
+texture = ExtResource("19_pepmi")
+
+[node name="TextureRect3" type="TextureRect" parent="UI/MainScreen/MainScreen/PauseMenuColorRect"]
+layout_mode = 0
+offset_left = 183.0
+offset_top = 520.0
+offset_right = 627.0
+offset_bottom = 868.0
+texture = ExtResource("20_u7wq2")
+flip_h = true
+
+[node name="TextureRect4" type="TextureRect" parent="UI/MainScreen/MainScreen/PauseMenuColorRect"]
+layout_mode = 0
+offset_left = 1382.0
+offset_top = 482.0
+offset_right = 1915.0
+offset_bottom = 857.0
+texture = ExtResource("21_fh1mo")
+
+[node name="TextureRect5" type="TextureRect" parent="UI/MainScreen/MainScreen/PauseMenuColorRect"]
+layout_mode = 0
+offset_left = 871.0
+offset_top = 689.0
+offset_right = 1155.0
+offset_bottom = 878.0
+texture = ExtResource("22_r4u7b")
+
+[node name="PauseResumeButton" type="TextureButton" parent="UI/MainScreen/MainScreen/PauseMenuColorRect"]
+layout_mode = 0
+offset_left = 826.0
+offset_top = 252.0
+offset_right = 1105.0
+offset_bottom = 389.0
+mouse_default_cursor_shape = 2
+texture_normal = ExtResource("23_q54qm")
+
+[node name="PauseSettingsButton" type="TextureButton" parent="UI/MainScreen/MainScreen/PauseMenuColorRect"]
+layout_mode = 0
+offset_left = 844.0
+offset_top = 375.0
+offset_right = 1123.0
+offset_bottom = 512.0
+mouse_default_cursor_shape = 2
+texture_normal = ExtResource("24_irhot")
+
+[node name="PauseExitButton" type="TextureButton" parent="UI/MainScreen/MainScreen/PauseMenuColorRect"]
+layout_mode = 0
+offset_left = 857.0
+offset_top = 486.0
+offset_right = 1136.0
+offset_bottom = 623.0
+mouse_default_cursor_shape = 2
+texture_normal = ExtResource("25_vvgcp")
+
 [node name="EventTimer" type="Timer" parent="."]
 unique_name_in_owner = true
 wait_time = 3.0
 one_shot = true
 autostart = true
 
-[connection signal="mouse_exited" from="UI/MainScreen/MainScreen/TabBar" to="UI" method="_on_tab_bar_mouse_exited"]
-[connection signal="tab_clicked" from="UI/MainScreen/MainScreen/TabBar" to="UI" method="_on_tab_bar_tab_clicked"]
+[connection signal="gui_input" from="UI/MainScreen/MainScreen" to="UI" method="_on_main_screen_gui_input"]
+[connection signal="pressed" from="UI/MainScreen/MainScreen/TasksPanel/TasksPanel/TasksPanelHideButton" to="UI" method="_on_tasks_panel_visibility_button_pressed"]
+[connection signal="pressed" from="UI/MainScreen/MainScreen/TasksPanel/TasksPanelShowButton" to="UI" method="_on_tasks_panel_visibility_button_pressed"]
+[connection signal="mouse_entered" from="UI/MainScreen/MainScreen/BottomBar/FunCategory/TextureButton" to="UI" method="_on_fun_icon_mouse_entered"]
+[connection signal="mouse_exited" from="UI/MainScreen/MainScreen/BottomBar/FunCategory/TextureButton" to="UI" method="_on_fun_icon_mouse_exited"]
+[connection signal="pressed" from="UI/MainScreen/MainScreen/BottomBar/FunCategory/TextureButton" to="UI" method="_on_fun_button_pressed"]
+[connection signal="pressed" from="UI/MainScreen/MainScreen/PauseButton" to="UI" method="_on_pause_button_pressed"]
+[connection signal="pressed" from="UI/MainScreen/MainScreen/PauseMenuColorRect/PauseResumeButton" to="UI" method="_on_pause_button_pressed"]
 [connection signal="timeout" from="EventTimer" to="Buildings" method="_on_event_timer_timeout"]

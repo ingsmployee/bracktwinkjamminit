@@ -1,0 +1,68 @@
+[gd_scene format=3 uid="uid://byw5pheavpks0"]
+
+[node name="TabContainer" type="TabContainer"]
+z_index = 1
+offset_left = 390.0
+offset_top = 139.0
+offset_right = 840.0
+offset_bottom = 418.0
+current_tab = 0
+
+[node name="Sounds" type="VBoxContainer" parent="."]
+layout_mode = 2
+theme_override_constants/separation = 30
+metadata/_tab_index = 0
+
+[node name="Music" type="HBoxContainer" parent="Sounds"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Sounds/Music"]
+custom_minimum_size = Vector2(200, 50)
+layout_mode = 2
+text = "Music"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HSlider" type="HSlider" parent="Sounds/Music"]
+custom_minimum_size = Vector2(190, 50)
+layout_mode = 2
+tick_count = 5
+
+[node name="SpinBox" type="SpinBox" parent="Sounds/Music"]
+layout_mode = 2
+
+[node name="UserInterface" type="HBoxContainer" parent="Sounds"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Sounds/UserInterface"]
+custom_minimum_size = Vector2(200, 50)
+layout_mode = 2
+text = "User Interface"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HSlider" type="HSlider" parent="Sounds/UserInterface"]
+custom_minimum_size = Vector2(190, 50)
+layout_mode = 2
+tick_count = 5
+
+[node name="SpinBox" type="SpinBox" parent="Sounds/UserInterface"]
+layout_mode = 2
+
+[node name="GameAudio" type="HBoxContainer" parent="Sounds"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Sounds/GameAudio"]
+custom_minimum_size = Vector2(200, 50)
+layout_mode = 2
+text = "Game Audio"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HSlider" type="HSlider" parent="Sounds/GameAudio"]
+custom_minimum_size = Vector2(190, 50)
+layout_mode = 2
+tick_count = 5
+
+[node name="SpinBox" type="SpinBox" parent="Sounds/GameAudio"]
+layout_mode = 2

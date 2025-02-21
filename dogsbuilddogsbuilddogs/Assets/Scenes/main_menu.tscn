@@ -1,7 +1,15 @@
-[gd_scene load_steps=4 format=3 uid="uid://cl7o0o33bvfe0"]
+[gd_scene load_steps=10 format=3 uid="uid://cl7o0o33bvfe0"]
 
 [ext_resource type="Theme" uid="uid://0wdocbrm4u1y" path="res://assets/misc/theme_1.tres" id="1_6fjhc"]
 [ext_resource type="Script" path="res://assets/code/main_menu.gd" id="1_wuv5x"]
+[ext_resource type="Texture2D" uid="uid://cyoh7pn0eg3s1" path="res://assets/art/not_by_tomato/wallpaper.jpg" id="3_8jpm1"]
+[ext_resource type="Texture2D" uid="uid://wjq157rjk0p" path="res://assets/art/user_interface/new.png" id="3_epgct"]
+[ext_resource type="Texture2D" uid="uid://dor6ypco6no67" path="res://assets/art/user_interface/load.png" id="4_r13kh"]
+[ext_resource type="Texture2D" uid="uid://ciudhw3mreg35" path="res://assets/art/user_interface/settings.png" id="5_n53ti"]
+[ext_resource type="Texture2D" uid="uid://bd7kxbrlbd0wq" path="res://assets/art/user_interface/exit.png" id="6_nmd6o"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hqt2a"]
+bg_color = Color(1, 1, 1, 0.407843)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_qhewu"]
 radius = 316.31
@@ -18,51 +26,58 @@ grow_vertical = 2
 theme = ExtResource("1_6fjhc")
 script = ExtResource("1_wuv5x")
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="MainMenu"]
-max_polyphony = 4
-bus = &"UI Sounds"
+[node name="Wallpaper" type="TextureRect" parent="MainMenu"]
+z_index = -1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_8jpm1")
 
-[node name="BoxContainer" type="BoxContainer" parent="MainMenu"]
+[node name="BoxContainer2" type="PanelContainer" parent="MainMenu"]
+self_modulate = Color(1, 1, 1, 0)
 layout_mode = 0
-offset_left = 6.0
-offset_top = 540.0
-offset_right = 837.0
-offset_bottom = 715.0
+offset_left = 12.0
+offset_top = 916.0
+offset_right = 1063.0
+offset_bottom = 1066.0
+theme = ExtResource("1_6fjhc")
+theme_override_styles/panel = SubResource("StyleBoxFlat_hqt2a")
+
+[node name="BoxContainer" type="BoxContainer" parent="MainMenu/BoxContainer2"]
+layout_mode = 2
 theme = ExtResource("1_6fjhc")
 theme_override_constants/separation = 20
 
-[node name="PlayGame" type="Button" parent="MainMenu/BoxContainer"]
+[node name="PlayGame" type="TextureButton" parent="MainMenu/BoxContainer2/BoxContainer"]
 layout_mode = 2
 theme = ExtResource("1_6fjhc")
-text = "Play Game"
-flat = true
-icon_alignment = 1
+texture_normal = ExtResource("3_epgct")
 
-[node name="LoadSave" type="Button" parent="MainMenu/BoxContainer"]
+[node name="LoadSave" type="TextureButton" parent="MainMenu/BoxContainer2/BoxContainer"]
 layout_mode = 2
 theme = ExtResource("1_6fjhc")
-text = "Load Save"
-icon_alignment = 1
+texture_normal = ExtResource("4_r13kh")
 
-[node name="Settings" type="Button" parent="MainMenu/BoxContainer"]
+[node name="Settings" type="TextureButton" parent="MainMenu/BoxContainer2/BoxContainer"]
 layout_mode = 2
 theme = ExtResource("1_6fjhc")
-text = "Settings"
-icon_alignment = 1
+texture_normal = ExtResource("5_n53ti")
 
-[node name="ExitGame" type="Button" parent="MainMenu/BoxContainer"]
+[node name="ExitGame" type="TextureButton" parent="MainMenu/BoxContainer2/BoxContainer"]
 layout_mode = 2
 theme = ExtResource("1_6fjhc")
-text = "Exit Game"
-icon_alignment = 1
+texture_normal = ExtResource("6_nmd6o")
 
-[node name="Label" type="Label" parent="MainMenu"]
+[node name="GameTitle" type="Label" parent="MainMenu"]
 layout_mode = 0
 offset_right = 422.0
 offset_bottom = 97.0
-scale = Vector2(1.395, 1.395)
-theme_override_font_sizes/font_size = 50
-text = "GAME TITLE"
+scale = Vector2(1.4, 1.4)
+theme_override_font_sizes/font_size = 100
+text = "Dogs Build Dogs"
 
 [node name="LoadingBar" type="ProgressBar" parent="MainMenu"]
 visible = false
@@ -107,74 +122,6 @@ grow_horizontal = 2
 grow_vertical = 2
 text = "Loading..."
 
-[node name="TabContainer" type="TabContainer" parent="MainMenu"]
-z_index = 1
-layout_mode = 0
-offset_left = 390.0
-offset_top = 139.0
-offset_right = 840.0
-offset_bottom = 418.0
-current_tab = 0
-
-[node name="Sounds" type="VBoxContainer" parent="MainMenu/TabContainer"]
-layout_mode = 2
-theme_override_constants/separation = 30
-metadata/_tab_index = 0
-
-[node name="Music" type="HBoxContainer" parent="MainMenu/TabContainer/Sounds"]
-layout_mode = 2
-
-[node name="Label" type="Label" parent="MainMenu/TabContainer/Sounds/Music"]
-custom_minimum_size = Vector2(200, 50)
-layout_mode = 2
-text = "Music"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="HSlider" type="HSlider" parent="MainMenu/TabContainer/Sounds/Music"]
-custom_minimum_size = Vector2(190, 50)
-layout_mode = 2
-tick_count = 5
-
-[node name="SpinBox" type="SpinBox" parent="MainMenu/TabContainer/Sounds/Music"]
-layout_mode = 2
-
-[node name="UserInterface" type="HBoxContainer" parent="MainMenu/TabContainer/Sounds"]
-layout_mode = 2
-
-[node name="Label" type="Label" parent="MainMenu/TabContainer/Sounds/UserInterface"]
-custom_minimum_size = Vector2(200, 50)
-layout_mode = 2
-text = "User Interface"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="HSlider" type="HSlider" parent="MainMenu/TabContainer/Sounds/UserInterface"]
-custom_minimum_size = Vector2(190, 50)
-layout_mode = 2
-tick_count = 5
-
-[node name="SpinBox" type="SpinBox" parent="MainMenu/TabContainer/Sounds/UserInterface"]
-layout_mode = 2
-
-[node name="GameAudio" type="HBoxContainer" parent="MainMenu/TabContainer/Sounds"]
-layout_mode = 2
-
-[node name="Label" type="Label" parent="MainMenu/TabContainer/Sounds/GameAudio"]
-custom_minimum_size = Vector2(200, 50)
-layout_mode = 2
-text = "Game Audio"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="HSlider" type="HSlider" parent="MainMenu/TabContainer/Sounds/GameAudio"]
-custom_minimum_size = Vector2(190, 50)
-layout_mode = 2
-tick_count = 5
-
-[node name="SpinBox" type="SpinBox" parent="MainMenu/TabContainer/Sounds/GameAudio"]
-layout_mode = 2
-
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 visible = false
 position = Vector2(996, 407)
@@ -198,15 +145,15 @@ scale = Vector2(0.944846, 0.944846)
 theme_override_font_sizes/font_size = 50
 text = "PATTERNED BACKGROUND"
 
-[connection signal="button_down" from="MainMenu/BoxContainer/PlayGame" to="MainMenu" method="_on_button_down"]
-[connection signal="button_up" from="MainMenu/BoxContainer/PlayGame" to="MainMenu" method="_on_button_up"]
-[connection signal="pressed" from="MainMenu/BoxContainer/PlayGame" to="MainMenu" method="_on_play_game_pressed"]
-[connection signal="button_down" from="MainMenu/BoxContainer/LoadSave" to="MainMenu" method="_on_button_down"]
-[connection signal="button_up" from="MainMenu/BoxContainer/LoadSave" to="MainMenu" method="_on_button_up"]
-[connection signal="pressed" from="MainMenu/BoxContainer/LoadSave" to="MainMenu" method="_on_load_save_pressed"]
-[connection signal="button_down" from="MainMenu/BoxContainer/Settings" to="MainMenu" method="_on_button_down"]
-[connection signal="button_up" from="MainMenu/BoxContainer/Settings" to="MainMenu" method="_on_button_up"]
-[connection signal="pressed" from="MainMenu/BoxContainer/Settings" to="MainMenu" method="_on_settings_pressed"]
-[connection signal="button_down" from="MainMenu/BoxContainer/ExitGame" to="MainMenu" method="_on_button_down"]
-[connection signal="button_up" from="MainMenu/BoxContainer/ExitGame" to="MainMenu" method="_on_button_up"]
-[connection signal="pressed" from="MainMenu/BoxContainer/ExitGame" to="MainMenu" method="_on_exit_game_pressed"]
+[connection signal="button_down" from="MainMenu/BoxContainer2/BoxContainer/PlayGame" to="MainMenu" method="_on_button_down"]
+[connection signal="button_up" from="MainMenu/BoxContainer2/BoxContainer/PlayGame" to="MainMenu" method="_on_button_up"]
+[connection signal="pressed" from="MainMenu/BoxContainer2/BoxContainer/PlayGame" to="MainMenu" method="_on_play_game_pressed"]
+[connection signal="button_down" from="MainMenu/BoxContainer2/BoxContainer/LoadSave" to="MainMenu" method="_on_button_down"]
+[connection signal="button_up" from="MainMenu/BoxContainer2/BoxContainer/LoadSave" to="MainMenu" method="_on_button_up"]
+[connection signal="pressed" from="MainMenu/BoxContainer2/BoxContainer/LoadSave" to="MainMenu" method="_on_load_save_pressed"]
+[connection signal="button_down" from="MainMenu/BoxContainer2/BoxContainer/Settings" to="MainMenu" method="_on_button_down"]
+[connection signal="button_up" from="MainMenu/BoxContainer2/BoxContainer/Settings" to="MainMenu" method="_on_button_up"]
+[connection signal="pressed" from="MainMenu/BoxContainer2/BoxContainer/Settings" to="MainMenu" method="_on_settings_pressed"]
+[connection signal="button_down" from="MainMenu/BoxContainer2/BoxContainer/ExitGame" to="MainMenu" method="_on_button_down"]
+[connection signal="button_up" from="MainMenu/BoxContainer2/BoxContainer/ExitGame" to="MainMenu" method="_on_button_up"]
+[connection signal="pressed" from="MainMenu/BoxContainer2/BoxContainer/ExitGame" to="MainMenu" method="_on_exit_game_pressed"]

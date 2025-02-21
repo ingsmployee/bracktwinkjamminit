@@ -15,17 +15,17 @@ var selection: int = -1
 
 var ui := UI.new()
 var dialog_tween: Tween
+var fun_category_tween: Tween
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	pass
-
-func update(element_name: String, input: Variant) -> void:
-	pass
+	for button:BaseButton in find_children("*", "BaseButton", true):
+		button.pressed.connect(play_button_noise)
+		
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	pass
+	$%MoneyCounter.text = "x %s" % GameResources.get_resource("money")
 
 func _input(event: InputEvent):
 	pass
@@ -122,11 +122,81 @@ func type_next_main_char(dialog_box: RichTextLabel) -> void:
 		main_dialog_queue.remove_at(0)
 		main_dialog_ready = true
 
-func _on_tab_bar_tab_clicked(tab: int) -> void:
+
+
+func _on_builder_clicked(tab: int) -> void:
 	selection = tab
 
 
-func _on_tab_bar_mouse_exited() -> void:
+func _on_builder_mouse_exited() -> void:
 	if selection > -1:
 		central_node.holdMakeBuilding(selection)
 		selection = -1
+
+var tasks_panel_shown: bool = true
+func _on_tasks_panel_visibility_button_pressed() -> void:
+	if tasks_panel_shown:
+		tasks_panel_shown = false
+		$%TasksPanelAnimationPlayer.play("hide_tasks_panel")
+	else:
+		tasks_panel_shown = true
+		$%TasksPanelAnimationPlayer.play("show_tasks_panel")
+
+var selected_tab: String
+func _on_fun_icon_mouse_entered() -> void:
+	if fun_category_tween:
+		fun_category_tween.kill()
+	fun_category_tween = get_tree().create_tween()
+	fun_category_tween.tween_property($%FunCategoryLabel, "position", Vector2(-16, -89), 0.2).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_SINE)
+
+func _on_fun_icon_mouse_exited() -> void:
+	if selected_tab != "fun":
+		if fun_category_tween:
+			fun_category_tween.kill()
+		fun_category_tween = get_tree().create_tween()
+		fun_category_tween.tween_property($%FunCategoryLabel, "position", Vector2(-16, 168), 0.4).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_EXPO)
+
+func _on_fun_button_pressed() -> void:
+	if selected_tab == "fun":
+		return
+	selected_tab = "fun"
+	if fun_category_tween:
+		fun_category_tween.kill()
+	fun_category_tween = get_tree().create_tween()
+	fun_category_tween.tween_property($%FunCategory, "position", Vector2(0, -410), 0.4).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_EXPO)
+
+func retract_bottom_bar() -> void:
+	match selected_tab:
+		"fun":
+			if fun_category_tween:
+				fun_category_tween.kill()
+			fun_category_tween = get_tree().create_tween()
+			get_tree().create_tween().tween_property($%FunCategoryLabel, "position", Vector2(-16, 168), 0.2)
+			fun_category_tween.tween_property($%FunCategory, "position", Vector2(0, 0), 0.2).set_trans(Tween.TRANS_CIRC)
+		# other cases here
+	
+	selected_tab = ""
+
+func _on_main_screen_gui_input(event: InputEvent) -> void:
+	if event.is_action_pressed("mouse_primary"):
+		retract_bottom_bar()
+
+var paused: bool = false
+var pause_tween: Tween
+func _on_pause_button_pressed() -> void:
+	paused = !paused
+	# i dont care anymore
+	# i do care but time is not with us
+	if pause_tween:
+		pause_tween.kill()
+	pause_tween = get_tree().create_tween()
+	
+	if paused:
+		pause_tween.tween_callback($%PauseMenuColorRect.show)
+		pause_tween.tween_property($%PauseMenuColorRect, "modulate", Color(1,1,1,1), 0.5).set_ease(Tween.EASE_OUT)
+	else:
+		pause_tween.tween_property($%PauseMenuColorRect, "modulate", Color(1,1,1,0), 0.5).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_CUBIC)
+		pause_tween.tween_callback($%PauseMenuColorRect.hide)
+
+func play_button_noise() -> void:
+	SoundEffects.play("button_pressed")

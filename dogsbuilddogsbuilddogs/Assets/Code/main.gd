@@ -8,13 +8,6 @@ const MAX_ZOOM: float = 5
 ## amount of zoom to add or remove when using the scroll wheel
 const ZOOM_AMOUNT: float = 0.5
 
-
-## put buildings in here for them to be registered & interactable.
-@export var buildingScenes: Array[PackedScene] = [
-	preload("res://assets/scenes/buildings/fun_1.tscn"),
-	preload("res://assets/scenes/buildings/factory_1.tscn")
-] # also functions as an ID system via index
-
 var placement: Node2D
 var is_placing: bool = false
 var hovered_building: Node2D
@@ -78,8 +71,8 @@ func _process(delta: float) -> void:
 func gridify(pos: Vector2) -> Vector2:
 	return $Tilemaps/WhiteOverlay.map_to_local($Tilemaps/WhiteOverlay.local_to_map(pos))
 
-func holdMakeBuilding(id: int) -> void:
-	placement = buildingScenes[id].instantiate()
+func holdMakeBuilding(building_name: String) -> void:
+	placement = GameResources.buildingScenes[building_name].instantiate()
 	$Buildings.add_child(placement)
 	placement.get_node("Area2DBuilding").mouse_entered.connect(_mouse_entered.bind(placement))
 	placement.get_node("Area2DBuilding").mouse_exited.connect(_mouse_exited.bind(placement))

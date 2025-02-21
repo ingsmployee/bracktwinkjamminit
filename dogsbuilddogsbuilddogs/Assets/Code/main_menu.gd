@@ -26,6 +26,7 @@ func push_error_text(input: String):
 	pass
 
 func _on_button_down() -> void:
+	SoundEffects.play("button_pressed")
 	pass # Replace with function body.
 	# all buttons hit here. play a sound effect
 
@@ -39,8 +40,7 @@ func begin_loading_new() -> void:
 	var tween = get_tree().create_tween()
 	tween.tween_property($LoadingBar, "modulate", Color(1,1,1,1), 1).set_ease(Tween.EASE_OUT)
 	ResourceLoader.load_threaded_request(MAIN_SCENE_PATH)
-	
-	pass
+
 
 
 func _on_play_game_pressed() -> void:
@@ -53,4 +53,4 @@ func _on_settings_pressed() -> void:
 	pass # Replace with function body.
 
 func _on_exit_game_pressed() -> void:
-	pass # Replace with function body.
+	get_tree().quit()
