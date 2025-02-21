@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://b47xfqnccm3nq"
-path="res://.godot/imported/schap.png-ae82ea1e338776c357188bf57dd5c5ea.ctex"
+path="res://.godot/imported/schap.png-1330d8642b5b81c3783296fc71cbe43c.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/art/dogs/schap.png"
-dest_files=["res://.godot/imported/schap.png-ae82ea1e338776c357188bf57dd5c5ea.ctex"]
+source_file="res://assets/art/Dogs/schap.png"
+dest_files=["res://.godot/imported/schap.png-1330d8642b5b81c3783296fc71cbe43c.ctex"]
 
 [params]
 

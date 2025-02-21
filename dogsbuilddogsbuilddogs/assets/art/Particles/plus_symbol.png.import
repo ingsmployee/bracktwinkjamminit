@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://cse1gb7njeag8"
-path="res://.godot/imported/plus_symbol.png-b541eb9445f63474c270bcd3698eeecb.ctex"
+path="res://.godot/imported/plus_symbol.png-071f0389f02eb51297e91f77a46d93e7.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/art/particles/plus_symbol.png"
-dest_files=["res://.godot/imported/plus_symbol.png-b541eb9445f63474c270bcd3698eeecb.ctex"]
+source_file="res://assets/art/Particles/plus_symbol.png"
+dest_files=["res://.godot/imported/plus_symbol.png-071f0389f02eb51297e91f77a46d93e7.ctex"]
 
 [params]
 

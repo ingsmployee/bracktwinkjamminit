@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://dtsp46vq2w0j8"
-path="res://.godot/imported/suit.png-0f6cd5f9af078e99710897ca0c5ebfcd.ctex"
+path="res://.godot/imported/Suit.png-59947adb64cdcabd4f76e7dce4fe199e.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/art/dogs/suit.png"
-dest_files=["res://.godot/imported/suit.png-0f6cd5f9af078e99710897ca0c5ebfcd.ctex"]
+source_file="res://assets/art/Dogs/Suit.png"
+dest_files=["res://.godot/imported/Suit.png-59947adb64cdcabd4f76e7dce4fe199e.ctex"]
 
 [params]
 
