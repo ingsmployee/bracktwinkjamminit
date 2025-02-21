@@ -5,7 +5,7 @@
 [ext_resource type="Script" path="res://assets/code/money_manager.gd" id="2_xogqn"]
 [ext_resource type="Script" path="res://assets/code/alives_management.gd" id="4_tkgb5"]
 [ext_resource type="Texture2D" uid="uid://dbnglwjeagddk" path="res://assets/art/Tile/tiletest.png" id="5_2wgt6"]
-[ext_resource type="Script" path="res://assets/code/user_interface.gd" id="5_tds1k"]
+[ext_resource type="Script" path="res://assets/code/user_interface/user_interface.gd" id="5_tds1k"]
 [ext_resource type="Texture2D" uid="uid://bu332iprk2bcu" path="res://assets/art/Tile/grass_plain.png" id="6_udao6"]
 [ext_resource type="Theme" uid="uid://0wdocbrm4u1y" path="res://assets/misc/theme_1.tres" id="8_qrmrb"]
 [ext_resource type="Texture2D" uid="uid://bgcdbfg4vhjqx" path="res://assets/art/user_interface/textbox.png" id="11_wb7ej"]
@@ -58,7 +58,7 @@ texture_region_size = Vector2i(399, 399)
 
 [sub_resource type="TileSet" id="TileSet_364tp"]
 tile_shape = 1
-tile_size = Vector2i(399, 399)
+tile_size = Vector2i(397, 397)
 sources/4 = SubResource("TileSetAtlasSource_s35fg")
 sources/5 = SubResource("TileSetAtlasSource_u2le0")
 pattern_0 = SubResource("TileMapPattern_16yyl")

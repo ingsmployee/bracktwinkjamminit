@@ -1,15 +1,12 @@
-[gd_scene load_steps=10 format=3 uid="uid://cl7o0o33bvfe0"]
+[gd_scene load_steps=9 format=3 uid="uid://cl7o0o33bvfe0"]
 
 [ext_resource type="Theme" uid="uid://0wdocbrm4u1y" path="res://assets/misc/theme_1.tres" id="1_6fjhc"]
-[ext_resource type="Script" path="res://assets/code/main_menu.gd" id="1_wuv5x"]
+[ext_resource type="Script" path="res://assets/code/user_interface/main_menu.gd" id="1_wuv5x"]
 [ext_resource type="Texture2D" uid="uid://wjq157rjk0p" path="res://assets/art/user_interface/new.png" id="3_epgct"]
 [ext_resource type="Texture2D" uid="uid://dv5inumkn0xd3" path="res://assets/art/not_by_tomato/background.png" id="3_mqaxh"]
 [ext_resource type="Texture2D" uid="uid://dor6ypco6no67" path="res://assets/art/user_interface/load.png" id="4_r13kh"]
 [ext_resource type="Texture2D" uid="uid://ciudhw3mreg35" path="res://assets/art/user_interface/settings.png" id="5_n53ti"]
 [ext_resource type="Texture2D" uid="uid://bd7kxbrlbd0wq" path="res://assets/art/user_interface/exit.png" id="6_nmd6o"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hqt2a"]
-bg_color = Color(1, 1, 1, 0.407843)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_qhewu"]
 radius = 316.31
@@ -36,12 +33,23 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("3_mqaxh")
 
+[node name="PlayGame" type="TextureButton" parent="MainMenu"]
+layout_mode = 2
+offset_left = 54.0
+offset_top = 556.0
+offset_right = 334.0
+offset_bottom = 689.0
+mouse_default_cursor_shape = 2
+theme = ExtResource("1_6fjhc")
+texture_normal = ExtResource("3_epgct")
+
 [node name="LoadSave" type="TextureButton" parent="MainMenu"]
 layout_mode = 2
 offset_left = 109.0
 offset_top = 680.0
-offset_right = 1160.0
+offset_right = 418.0
 offset_bottom = 805.0
+mouse_default_cursor_shape = 2
 theme = ExtResource("1_6fjhc")
 texture_normal = ExtResource("4_r13kh")
 
@@ -49,8 +57,9 @@ texture_normal = ExtResource("4_r13kh")
 layout_mode = 2
 offset_left = 177.0
 offset_top = 784.0
-offset_right = 1228.0
+offset_right = 395.0
 offset_bottom = 913.0
+mouse_default_cursor_shape = 2
 theme = ExtResource("1_6fjhc")
 texture_normal = ExtResource("5_n53ti")
 
@@ -58,31 +67,11 @@ texture_normal = ExtResource("5_n53ti")
 layout_mode = 2
 offset_left = 233.0
 offset_top = 909.0
-offset_right = 1284.0
+offset_right = 417.0
 offset_bottom = 1006.0
+mouse_default_cursor_shape = 2
 theme = ExtResource("1_6fjhc")
 texture_normal = ExtResource("6_nmd6o")
-
-[node name="BoxContainer2" type="PanelContainer" parent="MainMenu"]
-self_modulate = Color(1, 1, 1, 0)
-layout_mode = 0
-offset_left = 54.0
-offset_top = 556.0
-offset_right = 1105.0
-offset_bottom = 1100.0
-theme = ExtResource("1_6fjhc")
-theme_override_styles/panel = SubResource("StyleBoxFlat_hqt2a")
-
-[node name="BoxContainer" type="BoxContainer" parent="MainMenu/BoxContainer2"]
-layout_mode = 2
-theme = ExtResource("1_6fjhc")
-theme_override_constants/separation = 20
-vertical = true
-
-[node name="PlayGame" type="TextureButton" parent="MainMenu/BoxContainer2/BoxContainer"]
-layout_mode = 2
-theme = ExtResource("1_6fjhc")
-texture_normal = ExtResource("3_epgct")
 
 [node name="GameTitle" type="Label" parent="MainMenu"]
 layout_mode = 0
@@ -158,6 +147,9 @@ scale = Vector2(0.944846, 0.944846)
 theme_override_font_sizes/font_size = 50
 text = "PATTERNED BACKGROUND"
 
+[connection signal="button_down" from="MainMenu/PlayGame" to="MainMenu" method="_on_button_down"]
+[connection signal="button_up" from="MainMenu/PlayGame" to="MainMenu" method="_on_button_up"]
+[connection signal="pressed" from="MainMenu/PlayGame" to="MainMenu" method="_on_play_game_pressed"]
 [connection signal="button_down" from="MainMenu/LoadSave" to="MainMenu" method="_on_button_down"]
 [connection signal="button_up" from="MainMenu/LoadSave" to="MainMenu" method="_on_button_up"]
 [connection signal="pressed" from="MainMenu/LoadSave" to="MainMenu" method="_on_load_save_pressed"]
@@ -167,6 +159,3 @@ text = "PATTERNED BACKGROUND"
 [connection signal="button_down" from="MainMenu/ExitGame" to="MainMenu" method="_on_button_down"]
 [connection signal="button_up" from="MainMenu/ExitGame" to="MainMenu" method="_on_button_up"]
 [connection signal="pressed" from="MainMenu/ExitGame" to="MainMenu" method="_on_exit_game_pressed"]
-[connection signal="button_down" from="MainMenu/BoxContainer2/BoxContainer/PlayGame" to="MainMenu" method="_on_button_down"]
-[connection signal="button_up" from="MainMenu/BoxContainer2/BoxContainer/PlayGame" to="MainMenu" method="_on_button_up"]
-[connection signal="pressed" from="MainMenu/BoxContainer2/BoxContainer/PlayGame" to="MainMenu" method="_on_play_game_pressed"]

@@ -1,14 +1,14 @@
-[gd_resource type="Resource" script_class="BuildingStats" load_steps=2 format=3 uid="uid://bhty3bdwppeha"]
+[gd_resource type="Resource" script_class="BuildingStats" load_steps=2 format=3 uid="uid://dsnk0vgcq05ly"]
 
-[ext_resource type="Script" path="res://assets/code/custom_resources/building_stats.gd" id="2_mf3dk"]
+[ext_resource type="Script" path="res://assets/code/custom_resources/building_stats.gd" id="1_mdvwr"]
 
 [resource]
-script = ExtResource("2_mf3dk")
-building_name = "Tennis Ball House"
-building_type = 0
+script = ExtResource("1_mdvwr")
+building_name = "Resource Extractor"
+building_type = 2
 prox_bonus_addition = 1.0
-risk = 1.0
-housing_space = 3
+risk = 2.0
+housing_space = 0
 cost = {
 "energy": 0,
 "lava": 0,
@@ -25,7 +25,7 @@ production_result = {
 "wood": 0
 }
 production_cost = {
-"energy": 0,
+"energy": 10,
 "lava": 0,
 "money": 0,
 "wood": 0
