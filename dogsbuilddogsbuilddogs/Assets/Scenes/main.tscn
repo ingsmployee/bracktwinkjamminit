@@ -105,10 +105,10 @@ tracks/0/path = NodePath(".:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.5),
-"transitions": PackedFloat32Array(1, 1, 1),
+"times": PackedFloat32Array(0, 0.25, 0.5),
+"transitions": PackedFloat32Array(0.183011, 1.86607, 1),
 "update": 0,
-"values": [Vector2(535, 600), Vector2(535, 650), Vector2(535, 900)]
+"values": [Vector2(535, 700), Vector2(535, 600), Vector2(535, 900)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -120,7 +120,7 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0.3, 0.5),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Color(1, 1, 1, 1), Color(0.313726, 0.313726, 0.313726, 0.505882)]
+"values": [Color(1, 1, 1, 1), Color(0.741176, 0.741176, 0.741176, 0.266667)]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
@@ -554,12 +554,12 @@ offset_top = 185.0
 offset_right = 225.0
 offset_bottom = 225.0
 
-[node name="TextureRect" type="TextureRect" parent="UI/MainScreen/MainScreen/BottomBar/FunCategory/Panel/ReferenceRect/GridContainer/TextureRect/HBoxContainer"]
+[node name="Resource1" type="TextureRect" parent="UI/MainScreen/MainScreen/BottomBar/FunCategory/Panel/ReferenceRect/GridContainer/TextureRect/HBoxContainer"]
 layout_mode = 2
 texture = ExtResource("13_37yl8")
 expand_mode = 3
 
-[node name="Label" type="Label" parent="UI/MainScreen/MainScreen/BottomBar/FunCategory/Panel/ReferenceRect/GridContainer/TextureRect/HBoxContainer"]
+[node name="Cost1" type="Label" parent="UI/MainScreen/MainScreen/BottomBar/FunCategory/Panel/ReferenceRect/GridContainer/TextureRect/HBoxContainer"]
 layout_mode = 2
 text = "x 500"
 
@@ -570,41 +570,6 @@ offset_top = 10.0
 offset_right = 110.0
 offset_bottom = 36.0
 text = "Small House"
-
-[node name="TextureRect2" type="TextureRect" parent="UI/MainScreen/MainScreen/BottomBar/FunCategory/Panel/ReferenceRect/GridContainer"]
-layout_mode = 2
-texture = ExtResource("16_7mnvx")
-stretch_mode = 2
-
-[node name="TextureRect3" type="TextureRect" parent="UI/MainScreen/MainScreen/BottomBar/FunCategory/Panel/ReferenceRect/GridContainer"]
-layout_mode = 2
-texture = ExtResource("16_7mnvx")
-stretch_mode = 2
-
-[node name="TextureRect4" type="TextureRect" parent="UI/MainScreen/MainScreen/BottomBar/FunCategory/Panel/ReferenceRect/GridContainer"]
-layout_mode = 2
-texture = ExtResource("16_7mnvx")
-stretch_mode = 2
-
-[node name="TextureRect5" type="TextureRect" parent="UI/MainScreen/MainScreen/BottomBar/FunCategory/Panel/ReferenceRect/GridContainer"]
-layout_mode = 2
-texture = ExtResource("16_7mnvx")
-stretch_mode = 2
-
-[node name="TextureRect6" type="TextureRect" parent="UI/MainScreen/MainScreen/BottomBar/FunCategory/Panel/ReferenceRect/GridContainer"]
-layout_mode = 2
-texture = ExtResource("16_7mnvx")
-stretch_mode = 2
-
-[node name="TextureRect7" type="TextureRect" parent="UI/MainScreen/MainScreen/BottomBar/FunCategory/Panel/ReferenceRect/GridContainer"]
-layout_mode = 2
-texture = ExtResource("16_7mnvx")
-stretch_mode = 2
-
-[node name="TextureRect8" type="TextureRect" parent="UI/MainScreen/MainScreen/BottomBar/FunCategory/Panel/ReferenceRect/GridContainer"]
-layout_mode = 2
-texture = ExtResource("16_7mnvx")
-stretch_mode = 2
 
 [node name="PauseButton" type="TextureButton" parent="UI/MainScreen/MainScreen"]
 layout_mode = 0

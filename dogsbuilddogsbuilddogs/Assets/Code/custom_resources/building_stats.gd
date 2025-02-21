@@ -1,8 +1,8 @@
 extends Resource
 class_name BuildingStats
 
-## The scene of the building.
-@export var building_scene: PackedScene = preload("res://assets/scenes/buildings/building_template.tscn")
+# this is not meant to store the path of the building. that should go in the GameResources singleton.
+
 ## The displayed name of the building. Don't make it too long.
 @export var building_name: String = "Amazing Building"
 ## Affects behavior and provided proximity benefit.
@@ -13,7 +13,7 @@ class_name BuildingStats
 @export var risk: float = 1
 ## The amount of dogs that can be housed in this building.
 @export var housing_space: int = 0
-## The cost to build one. Don't put more than 2.
+## The cost to build one. Don't put more than 2 resource types.
 @export var cost: Dictionary = {"money": 10, "lava": 0, "wood": 0, "energy": 0}
 ## How much the Bureaucats like this building.
 @export var cat_appeasement: int = 1

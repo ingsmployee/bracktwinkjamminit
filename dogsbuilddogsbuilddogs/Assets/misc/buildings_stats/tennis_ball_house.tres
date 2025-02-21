@@ -1,0 +1,35 @@
+[gd_resource type="Resource" script_class="BuildingStats" load_steps=2 format=3 uid="uid://bhty3bdwppeha"]
+
+[ext_resource type="Script" path="res://assets/code/custom_resources/building_stats.gd" id="2_mf3dk"]
+
+[resource]
+script = ExtResource("2_mf3dk")
+building_name = "Tennis Ball House"
+building_type = 0
+prox_bonus_addition = 1.0
+risk = 1.0
+housing_space = 0
+cost = {
+"energy": 0,
+"lava": 0,
+"money": 10,
+"wood": 0
+}
+cat_appeasement = 1
+fun_power = 1.0
+anti_disaster_power = 1.0
+production_result = {
+"energy": 0,
+"lava": 0,
+"money": 1,
+"wood": 0
+}
+production_cost = {
+"energy": 0,
+"lava": 0,
+"money": 0,
+"wood": 0
+}
+baseline_production_multiplier = 1.0
+production_time = 10.0
+baseline_speed_multiplier = 1.0

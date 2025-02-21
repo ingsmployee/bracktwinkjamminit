@@ -1,14 +1,9 @@
 extends Node
 
-#var player: AudioStreamPlayer
-#func _ready() -> void:
-	#player = AudioStreamPlayer.new()
-	#add_child(player)
-	#
-	#var stream := AudioStreamPolyphonic.new()
-	#player.stream = stream
-	#
-	#print(player)
+## this is where you wanna add new sounds
+var sfx: Dictionary = {
+	"button_pressed": preload("res://assets/sounds/Pop sound effect.mp3")
+}
 
 var player: AudioStreamPlayer
 var stream: AudioStreamPolyphonic
@@ -24,9 +19,6 @@ func _ready():
 	player.play()
 	playback = player.get_stream_playback()
 
-var sfx: Dictionary = {
-	"button_pressed": preload("res://assets/sounds/Pop sound effect.mp3")
-}
 
 func _input(event:InputEvent):
 	if event.is_action_pressed("build_a"):

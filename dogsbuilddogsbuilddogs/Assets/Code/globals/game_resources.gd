@@ -5,8 +5,8 @@ var _resources: Dictionary
 
 ## [name, PackedScene]
 var buildingScenes: Dictionary = {
-	"tennis_ball": preload("res://assets/scenes/buildings/fun_1.tscn"),
-	"resource_collector": preload("res://assets/scenes/buildings/factory_1.tscn"),
+	"Tennis Ball House": preload("res://assets/scenes/buildings/fun_1.tscn"),
+	"Resource Extractor": preload("res://assets/scenes/buildings/factory_1.tscn"),
 }
 
 func _ready() -> void:
