@@ -12,11 +12,11 @@
 [ext_resource type="Texture2D" uid="uid://bgcdbfg4vhjqx" path="res://assets/art/user_interface/textbox.png" id="11_wb7ej"]
 [ext_resource type="Texture2D" uid="uid://bk8yo61hnhspx" path="res://assets/art/user_interface/bigone.png" id="12_g7cdj"]
 [ext_resource type="Texture2D" uid="uid://dac6ej46mxkq0" path="res://assets/art/user_interface/money.png" id="13_37yl8"]
+[ext_resource type="Texture2D" uid="uid://dxpdrghvhxlkj" path="res://assets/art/user_interface/taskbar_out.png" id="14_bqw27"]
 [ext_resource type="Texture2D" uid="uid://g42suf2yvsim" path="res://assets/art/user_interface/taskbar.png" id="14_c7coi"]
 [ext_resource type="Texture2D" uid="uid://dq3d33y732255" path="res://assets/art/user_interface/pausebutton.png" id="14_rc3il"]
 [ext_resource type="Texture2D" uid="uid://dhb2wtgb2jqna" path="res://assets/art/user_interface/fun.png" id="14_sidcn"]
 [ext_resource type="Texture2D" uid="uid://f8sg1sh7ly2g" path="res://assets/art/programmer_art/programmer_building_icon_placeholder.png" id="16_7mnvx"]
-[ext_resource type="Texture2D" uid="uid://s3coi3tdw4ao" path="res://assets/art/user_interface/button.png" id="16_sqmfi"]
 [ext_resource type="Texture2D" uid="uid://dv2w4i7jn084d" path="res://assets/art/user_interface/Idkmaybeyoullfindauseforthis.png" id="17_3r60q"]
 [ext_resource type="Texture2D" uid="uid://mrftg8l5ia14" path="res://assets/art/user_interface/Pause/Paused.png" id="18_o40b0"]
 [ext_resource type="Texture2D" uid="uid://xl2s58n4bye3" path="res://assets/art/user_interface/Pause/pausefloor.png" id="19_pepmi"]
@@ -489,11 +489,10 @@ texture_filter = 2
 layout_mode = 0
 offset_left = 1947.0
 offset_top = 110.0
-offset_right = 2256.0
-offset_bottom = 248.0
-rotation = -1.39801
+offset_right = 2148.0
+offset_bottom = 415.0
 mouse_default_cursor_shape = 2
-texture_normal = ExtResource("16_sqmfi")
+texture_normal = ExtResource("14_bqw27")
 
 [node name="BottomBar" type="Control" parent="UI/MainScreen/MainScreen"]
 anchors_preset = 0
