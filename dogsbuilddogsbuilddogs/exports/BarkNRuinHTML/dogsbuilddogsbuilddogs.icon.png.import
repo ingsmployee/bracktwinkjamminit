@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://c83ipydlulkl5"
-path="res://.godot/imported/dogsbuilddogsbuilddogs.icon.png-d190bc2335ddd1ad52f11bf583c09ae9.ctex"
+path="res://.godot/imported/dogsbuilddogsbuilddogs.icon.png-e7da4ccd176ea578a0dff6b6154e138c.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://exports/dogsbuilddogsbuilddogs.icon.png"
-dest_files=["res://.godot/imported/dogsbuilddogsbuilddogs.icon.png-d190bc2335ddd1ad52f11bf583c09ae9.ctex"]
+source_file="res://exports/BarkNRuinHTML/dogsbuilddogsbuilddogs.icon.png"
+dest_files=["res://.godot/imported/dogsbuilddogsbuilddogs.icon.png-e7da4ccd176ea578a0dff6b6154e138c.ctex"]
 
 [params]
 
