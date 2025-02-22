@@ -200,3 +200,7 @@ func _on_pause_button_pressed() -> void:
 
 func play_button_noise() -> void:
 	SoundEffects.play("button_pressed")
+
+
+func _on_pause_settings_button_pressed() -> void:
+	$%SettingsContainer.fade_in()

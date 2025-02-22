@@ -1,68 +1,154 @@
-[gd_scene format=3 uid="uid://byw5pheavpks0"]
+[gd_scene load_steps=4 format=3 uid="uid://byw5pheavpks0"]
 
-[node name="TabContainer" type="TabContainer"]
+[ext_resource type="Script" path="res://assets/code/user_interface/settings_menu.gd" id="1_8a2mo"]
+[ext_resource type="Theme" uid="uid://0wdocbrm4u1y" path="res://assets/misc/theme_1.tres" id="1_buc3w"]
+[ext_resource type="Texture2D" uid="uid://17p7usog51mj" path="res://assets/art/user_interface/button_back.png" id="3_i43db"]
+
+[node name="SettingsContainer" type="Panel"]
 z_index = 1
-offset_left = 390.0
-offset_top = 139.0
-offset_right = 840.0
-offset_bottom = 418.0
-current_tab = 0
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -435.0
+offset_top = -196.0
+offset_right = 435.0
+offset_bottom = 217.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+theme = ExtResource("1_buc3w")
+script = ExtResource("1_8a2mo")
 
-[node name="Sounds" type="VBoxContainer" parent="."]
+[node name="VBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -73.0
+offset_right = 288.0
+grow_vertical = 0
+
+[node name="ExitButton" type="TextureButton" parent="VBoxContainer"]
 layout_mode = 2
+mouse_default_cursor_shape = 2
+texture_normal = ExtResource("3_i43db")
+
+[node name="Label" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "Exit Settings"
+
+[node name="SettingsStuff" type="VBoxContainer" parent="."]
+layout_mode = 2
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 31.0
 theme_override_constants/separation = 30
-metadata/_tab_index = 0
 
-[node name="Music" type="HBoxContainer" parent="Sounds"]
+[node name="Master" type="HBoxContainer" parent="SettingsStuff"]
+custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
 
-[node name="Label" type="Label" parent="Sounds/Music"]
+[node name="Label" type="Label" parent="SettingsStuff/Master"]
 custom_minimum_size = Vector2(200, 50)
 layout_mode = 2
+theme_override_font_sizes/font_size = 35
+text = "Master"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HSlider" type="HSlider" parent="SettingsStuff/Master"]
+custom_minimum_size = Vector2(190, 50)
+layout_mode = 2
+mouse_default_cursor_shape = 2
+tick_count = 5
+
+[node name="SpinBox" type="SpinBox" parent="SettingsStuff/Master"]
+layout_mode = 2
+mouse_default_cursor_shape = 2
+
+[node name="Music" type="HBoxContainer" parent="SettingsStuff"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+
+[node name="Label" type="Label" parent="SettingsStuff/Music"]
+custom_minimum_size = Vector2(200, 50)
+layout_mode = 2
+theme_override_font_sizes/font_size = 35
 text = "Music"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="HSlider" type="HSlider" parent="Sounds/Music"]
+[node name="HSlider" type="HSlider" parent="SettingsStuff/Music"]
 custom_minimum_size = Vector2(190, 50)
 layout_mode = 2
+mouse_default_cursor_shape = 2
 tick_count = 5
 
-[node name="SpinBox" type="SpinBox" parent="Sounds/Music"]
+[node name="SpinBox" type="SpinBox" parent="SettingsStuff/Music"]
 layout_mode = 2
+mouse_default_cursor_shape = 2
 
-[node name="UserInterface" type="HBoxContainer" parent="Sounds"]
+[node name="UserInterface" type="HBoxContainer" parent="SettingsStuff"]
+custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
 
-[node name="Label" type="Label" parent="Sounds/UserInterface"]
+[node name="Label" type="Label" parent="SettingsStuff/UserInterface"]
 custom_minimum_size = Vector2(200, 50)
 layout_mode = 2
+theme_override_font_sizes/font_size = 35
 text = "User Interface"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="HSlider" type="HSlider" parent="Sounds/UserInterface"]
+[node name="HSlider" type="HSlider" parent="SettingsStuff/UserInterface"]
 custom_minimum_size = Vector2(190, 50)
 layout_mode = 2
+mouse_default_cursor_shape = 2
 tick_count = 5
 
-[node name="SpinBox" type="SpinBox" parent="Sounds/UserInterface"]
+[node name="SpinBox" type="SpinBox" parent="SettingsStuff/UserInterface"]
 layout_mode = 2
+mouse_default_cursor_shape = 2
 
-[node name="GameAudio" type="HBoxContainer" parent="Sounds"]
+[node name="GameAudio" type="HBoxContainer" parent="SettingsStuff"]
+custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
 
-[node name="Label" type="Label" parent="Sounds/GameAudio"]
+[node name="Label" type="Label" parent="SettingsStuff/GameAudio"]
 custom_minimum_size = Vector2(200, 50)
 layout_mode = 2
+theme_override_font_sizes/font_size = 35
 text = "Game Audio"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="HSlider" type="HSlider" parent="Sounds/GameAudio"]
+[node name="HSlider" type="HSlider" parent="SettingsStuff/GameAudio"]
 custom_minimum_size = Vector2(190, 50)
 layout_mode = 2
+mouse_default_cursor_shape = 2
 tick_count = 5
 
-[node name="SpinBox" type="SpinBox" parent="Sounds/GameAudio"]
+[node name="SpinBox" type="SpinBox" parent="SettingsStuff/GameAudio"]
 layout_mode = 2
+mouse_default_cursor_shape = 2
+
+[connection signal="pressed" from="VBoxContainer/ExitButton" to="." method="_on_exit_button_pressed"]
+[connection signal="value_changed" from="SettingsStuff/Master/HSlider" to="." method="_on_sounds_music_slider_value_changed"]
+[connection signal="value_changed" from="SettingsStuff/Master/SpinBox" to="." method="_on_sounds_music_spin_box_value_changed"]
+[connection signal="value_changed" from="SettingsStuff/Music/HSlider" to="." method="_on_sounds_music_slider_value_changed"]
+[connection signal="value_changed" from="SettingsStuff/Music/SpinBox" to="." method="_on_sounds_music_spin_box_value_changed"]
+[connection signal="value_changed" from="SettingsStuff/UserInterface/HSlider" to="." method="_on_sounds_ui_slider_value_changed"]
+[connection signal="value_changed" from="SettingsStuff/UserInterface/SpinBox" to="." method="_on_sounds_ui_spin_box_value_changed"]
+[connection signal="value_changed" from="SettingsStuff/GameAudio/HSlider" to="." method="_on_sounds_music_slider_value_changed"]
+[connection signal="value_changed" from="SettingsStuff/GameAudio/SpinBox" to="." method="_on_sounds_music_spin_box_value_changed"]

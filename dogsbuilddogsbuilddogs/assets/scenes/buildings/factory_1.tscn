@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://cvr84068ndqpx"]
+[gd_scene load_steps=6 format=3 uid="uid://cvr84068ndqpx"]
 
 [ext_resource type="PackedScene" uid="uid://bjeo7btds7rq6" path="res://assets/scenes/buildings/building_template.tscn" id="1_p7y0c"]
 [ext_resource type="Texture2D" uid="uid://cnhhmkj0mwg33" path="res://assets/art/programmer_art/programmer-factory1.png" id="2_v630y"]
+[ext_resource type="Resource" uid="uid://dsnk0vgcq05ly" path="res://assets/misc/buildings_stats/resource_extractor.tres" id="2_vtjf5"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_vqbqf"]
 radius = 380.0
@@ -10,6 +11,7 @@ radius = 380.0
 radius = 88.0909
 
 [node name="Building" instance=ExtResource("1_p7y0c")]
+stats = ExtResource("2_vtjf5")
 
 [node name="Sprite2DProxBonus" parent="highlight areas" index="0"]
 scale = Vector2(2.95, 2.95)
