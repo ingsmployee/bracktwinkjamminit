@@ -5,25 +5,24 @@ var sfx: Dictionary = {
 	"button_pressed": preload("res://assets/sounds/Pop sound effect.mp3")
 }
 
-var player: AudioStreamPlayer
-var stream: AudioStreamPolyphonic
-var playback: AudioStreamPlaybackPolyphonic
+# {bus_name: String, [AudioStreamPlayer, AudioStreamPlaybackPolyphonic]}
+var players: Dictionary
 
 func _ready():
-	player = AudioStreamPlayer.new()
-	player.bus = "UI Sounds"
-	stream = AudioStreamPolyphonic.new()
+	newPlayer("UI Sounds")
+
+func newPlayer(bus_name: String) -> void:
+	var player := AudioStreamPlayer.new()
+	player.bus = bus_name
+	player.name = bus_name
+	var stream = AudioStreamPolyphonic.new()
 	stream.polyphony = 10
 	player.stream = stream
 	add_child(player)
 	player.play()
-	playback = player.get_stream_playback()
+	players[bus_name] = [player, player.get_stream_playback()]
 
-
-func _input(event:InputEvent):
-	if event.is_action_pressed("build_a"):
-		play("button_click")
-
-func play(sound_name: String) -> void:
+func play(sound_name: String, bus_name: StringName) -> void:
+	var player = players[bus_name][0]
 	if !player.playing: player.play()
-	playback.play_stream(sfx[sound_name])
+	players[bus_name][1].play_stream(sfx[sound_name])

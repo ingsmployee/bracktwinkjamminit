@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://tgxtplvxwvqy"
-path="res://.godot/imported/Jack.png-8ff08317a07c52646d80a608e5afd800.ctex"
+path="res://.godot/imported/Jack.png-c3f0bed3fbcb3918ae92cbe50f0b3c3d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/art/Dogs/Jack.png"
-dest_files=["res://.godot/imported/Jack.png-8ff08317a07c52646d80a608e5afd800.ctex"]
+source_file="res://assets/art/dogs/Jack.png"
+dest_files=["res://.godot/imported/Jack.png-c3f0bed3fbcb3918ae92cbe50f0b3c3d.ctex"]
 
 [params]
 

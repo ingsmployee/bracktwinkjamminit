@@ -14,3 +14,5 @@ scale = Vector2(1.5, 1.5)
 texture = ExtResource("1_ic882")
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+
+[connection signal="navigation_finished" from="NavigationAgent2D" to="." method="_on_navigation_agent_2d_navigation_finished"]

@@ -33,6 +33,8 @@ func _process(delta: float) -> void:
 	if Input.is_action_pressed("camera_pan"):
 		$Camera2D.position -= (Input.get_last_mouse_velocity() * 1 / $Camera2D.zoom) * delta
 	
+	#print(get_global_mouse_position())
+	
 	# previous attempt to fix pan. my brain's not working
 	"""
 	if Input.is_action_just_pressed("camera_pan"):
@@ -74,14 +76,15 @@ func _process(delta: float) -> void:
 		$Tilemaps/WhiteOverlay.set_cell(grid_position, 0, Vector2i(0,0))
 		var local_position: Vector2 = $Tilemaps/WhiteOverlay.map_to_local(grid_position)
 		placement.global_position = local_position
-		placement.get_node("Sprite2D").global_position = placement.get_node("Sprite2D").global_position.lerp(local_position, 0.2)
+		#placement.get_node("Sprite2D").global_position = local_position + placement.sprite_offset
+		placement.get_node("Sprite2D").global_position = (placement.get_node("Sprite2D").global_position).lerp(local_position + placement.sprite_offset, 0.2)
 
 ## give it a local position, it will spit out a position centered in that tilemap cell
 func gridify(pos: Vector2) -> Vector2:
 	return $Tilemaps/WhiteOverlay.map_to_local($Tilemaps/WhiteOverlay.local_to_map(pos))
 
-func holdMakeBuilding(building_name: String) -> void:
-	placement = GameResources.buildingScenes[building_name].instantiate()
+func hold_make_building(building_scene: PackedScene) -> void:
+	placement = building_scene.instantiate()
 	$Buildings.add_child(placement)
 	placement.get_node("Area2DBuilding").mouse_entered.connect(_mouse_entered.bind(placement))
 	placement.get_node("Area2DBuilding").mouse_exited.connect(_mouse_exited.bind(placement))
@@ -89,16 +92,22 @@ func holdMakeBuilding(building_name: String) -> void:
 	placement.main_node = self
 	placement.rebake_navmap.connect($%NavigationRegion2D.bake_new_navmap)
 	placement.tree_exited.connect($%NavigationRegion2D.bake_new_navmap)
+	placement.make_self_available.connect($%AlivesManager.make_building_available.bind(placement))
 	
 	hovered_building = placement
 
 # it's in the name
 func place_held_building() -> void:
 	placement.global_position = gridify(get_global_mouse_position())
-	var player: AnimationPlayer = placement.get_node("AnimationPlayer")
-	placement.get_node("Sprite2D").position = placement.position
+	# sprite position will be handled by placement.place()
+	
+	print("placement placed at %s from %s" % [placement.global_position, get_global_mouse_position()])
+	
 	$Tilemaps/WhiteOverlay.clear()
-	player.queue("on_placed")
+	placement.get_node("AnimationPlayer").queue("on_placed")
+	# spawn animals
+	for i in range(0, placement.stats.housing_space):
+		placement.housed_dogs.append($AlivesManager.instantiate_random_from_building(placement))
 	placement.place()
 	placement = null
 

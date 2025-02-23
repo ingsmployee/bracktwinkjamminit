@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://d1jbqvtpgu78b"
-path="res://.godot/imported/Shiba.png-6a7a75b7c61d26c3733fbd1ac0b476ff.ctex"
+path="res://.godot/imported/Shiba.png-dcd48bbecd4ce2dd1b347352b197f2e0.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/art/Dogs/Shiba.png"
-dest_files=["res://.godot/imported/Shiba.png-6a7a75b7c61d26c3733fbd1ac0b476ff.ctex"]
+source_file="res://assets/art/dogs/Shiba.png"
+dest_files=["res://.godot/imported/Shiba.png-dcd48bbecd4ce2dd1b347352b197f2e0.ctex"]
 
 [params]
 

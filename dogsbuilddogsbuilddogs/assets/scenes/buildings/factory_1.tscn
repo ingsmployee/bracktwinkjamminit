@@ -1,27 +1,34 @@
-[gd_scene load_steps=6 format=3 uid="uid://cvr84068ndqpx"]
+[gd_scene load_steps=6 format=3 uid="uid://bbubbftfw5beb"]
 
 [ext_resource type="PackedScene" uid="uid://bjeo7btds7rq6" path="res://assets/scenes/buildings/building_template.tscn" id="1_p7y0c"]
-[ext_resource type="Texture2D" uid="uid://cnhhmkj0mwg33" path="res://assets/art/programmer_art/programmer-factory1.png" id="2_v630y"]
-[ext_resource type="Resource" uid="uid://dsnk0vgcq05ly" path="res://assets/misc/buildings_stats/resource_extractor.tres" id="2_vtjf5"]
+[ext_resource type="Resource" uid="uid://dsnk0vgcq05ly" path="res://assets/misc/buildings_stats/factory_1.tres" id="2_vtjf5"]
+[ext_resource type="Texture2D" uid="uid://cysxbgftpvk2u" path="res://assets/art/buildings/factory.png" id="3_1rtlv"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_vqbqf"]
-radius = 380.0
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wu8r0"]
+size = Vector2(844.993, 837.922)
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_0s3e0"]
-radius = 88.0909
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_tfvar"]
+size = Vector2(439.214, 276.479)
 
 [node name="Building" instance=ExtResource("1_p7y0c")]
 stats = ExtResource("2_vtjf5")
 
 [node name="Sprite2DProxBonus" parent="highlight areas" index="0"]
-scale = Vector2(2.95, 2.95)
+scale = Vector2(-14.6284, -14.6284)
 
 [node name="Sprite2D" parent="." index="1"]
-scale = Vector2(3, 3)
-texture = ExtResource("2_v630y")
-
-[node name="CollisionShape2D" parent="ProximityBonusArea2D" index="0"]
-shape = SubResource("CircleShape2D_vqbqf")
+y_sort_enabled = true
+position = Vector2(-29, -397)
+texture = ExtResource("3_1rtlv")
 
 [node name="CollisionShape2D" parent="Area2DBuilding" index="0"]
-shape = SubResource("CircleShape2D_0s3e0")
+position = Vector2(-3.5, 0.999939)
+rotation = 0.785398
+scale = Vector2(1, 1)
+shape = SubResource("RectangleShape2D_wu8r0")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Area2DBuilding" index="1"]
+position = Vector2(-525.964, 234.536)
+rotation = 0.785398
+scale = Vector2(1, 1)
+shape = SubResource("RectangleShape2D_tfvar")

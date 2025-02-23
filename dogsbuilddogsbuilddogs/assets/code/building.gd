@@ -3,6 +3,8 @@ extends Node2D
 ## README when you place the building,
 # you must set main_node as the main Node
 # and connect the rebake_navmap signal to it
+# also connect the make_self_available signal to AlivesManager
+
 # if you don't give NavigationBarrier a collision_shape, it will copy Area2DBuilding's.
 # don't put too much navigation in here besides something like "hey! we're available!", AliveStuff should handle actual nav orders
 
@@ -18,14 +20,17 @@ var progress_bar: TextureProgressBar
 var ui: UI = UI.new()
 
 var production_progress: float = 0
-var production_multiplier: float = stats.baseline_speed_multiplier
-var speed_multiplier: float = stats.baseline_speed_multiplier
+@onready var production_multiplier: float = stats.baseline_production_multiplier
+@onready var speed_multiplier: float = stats.baseline_speed_multiplier
+
+@onready var sprite_offset: Vector2 = $Sprite2D.position
 
 var placed: bool = false
 
-var housed_dogs: int = 0 # dog housing is unimplemented
+var housed_dogs: Array[Node2D]
 
 signal rebake_navmap
+signal make_self_available
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -76,6 +81,15 @@ func _process(delta: float) -> void:
 	
 	
 
+func animal_interact(animal: Node2D):
+	match stats.building_type:
+		0:
+			pass
+		1:
+			pass
+		2:
+			produce(1)
+
 func produce(amount: float) -> void:
 	GameResources.add_resource_dict(stats.production_result)
 	GameResources.subtract_resource_dict(stats.production_cost)
@@ -107,12 +121,18 @@ func set_selected(input: bool) -> void:
 			progress_bar = null
 
 func place() -> void:
+	GameResources.subtract_resource_dict(stats.cost)
+	$Sprite2D.top_level = false
+	$Sprite2D.position = sprite_offset
+	print(position, $Sprite2D.position)
+	$Sprite2D.y_sort_enabled = true
 	$Sprite2D.self_modulate = Color(1,1,1,1)
 	$Sprite2D.z_index = 1
 	prox_bonus_amount = [0,0,0]
 	get_parent().building_type_amounts[stats.building_type] += 1
 	placed = true
 	rebake_navmap.emit()
+	make_self_available.emit()
 	for building in buildings_touched:
 		building.get_node("Sprite2D").self_modulate = Color(1,1,1,1)
 		building.prox_bonus_amount[stats.building_type] += stats.prox_bonus_addition
@@ -126,6 +146,10 @@ func place() -> void:
 	
 
 func remove() -> void:
+	GameResources.add_resource("money", stats.cost["money"] * 0.7) # return 70% of money back
+	for animal in housed_dogs:
+		animal.remove()
+	
 	var tween = get_tree().create_tween()
 	tween.tween_property($Sprite2D, "scale", $Sprite2D.scale * 0.2, 0.5).set_ease(Tween.EASE_OUT_IN).set_trans(Tween.TRANS_EXPO)
 	$AnimationPlayer.play("on_destroy")

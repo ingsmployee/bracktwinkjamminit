@@ -1,34 +1,30 @@
 [gd_resource type="Resource" script_class="BuildingStats" load_steps=2 format=3 uid="uid://dsnk0vgcq05ly"]
 
-[ext_resource type="Script" path="res://assets/code/custom_resources/building_stats.gd" id="1_mdvwr"]
+[ext_resource type="Script" path="res://assets/code/custom_resources/building_stats.gd" id="1_56hrk"]
 
 [resource]
-script = ExtResource("1_mdvwr")
+script = ExtResource("1_56hrk")
+building_scene = "res://assets/scenes/buildings/factory_1.tscn"
 building_name = "Resource Extractor"
 building_type = 2
 prox_bonus_addition = 1.0
 risk = 2.0
 housing_space = 0
 cost = {
-"energy": 0,
 "lava": 0,
-"money": 10,
-"wood": 0
+"money": 10
 }
 cat_appeasement = 1
+interact_energy_change = 0.0
 fun_power = 1.0
 anti_disaster_power = 1.0
 production_result = {
-"energy": 0,
 "lava": 0,
-"money": 1,
-"wood": 0
+"money": 1
 }
 production_cost = {
-"energy": 10,
 "lava": 0,
-"money": 0,
-"wood": 0
+"money": 0
 }
 baseline_production_multiplier = 1.0
 production_time = 10.0

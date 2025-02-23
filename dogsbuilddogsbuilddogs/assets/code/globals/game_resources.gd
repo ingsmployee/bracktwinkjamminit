@@ -1,15 +1,22 @@
 extends Node
 
-var resource_types: Array[String] = ["money", "dogs", "lava", "wood", "energy"]
+var resource_types: Array[String] = ["money", "dogs", "lava"]
 var _resources: Dictionary
 
+
+var buildings: Array[BuildingStats] = [
+	preload("res://assets/misc/buildings_stats/factory_1.tres"),
+]
+
 ## [name, PackedScene]
-var buildingScenes: Dictionary = {
-	"Tennis Ball House": preload("res://assets/scenes/buildings/fun_1.tscn"),
-	"Resource Extractor": preload("res://assets/scenes/buildings/factory_1.tscn"),
-}
+var building_scenes: Dictionary
 
 func _ready() -> void:
+	# we have less than 12 hours
+	for building_stat in buildings:
+		building_scenes[building_stat.building_name] = load(building_stat.building_scene)
+	
+	print(building_scenes)
 	for resource in resource_types:
 		_resources[resource] = 0
 		

@@ -1,0 +1,35 @@
+[gd_scene load_steps=3 format=3 uid="uid://dghrx5x2fny23"]
+
+[ext_resource type="Texture2D" uid="uid://f8sg1sh7ly2g" path="res://assets/art/programmer_art/programmer_building_icon_placeholder.png" id="1_5b6hv"]
+[ext_resource type="Texture2D" uid="uid://dac6ej46mxkq0" path="res://assets/art/user_interface/money.png" id="2_n5vhx"]
+
+[node name="TextureRect" type="TextureButton"]
+mouse_default_cursor_shape = 2
+texture_normal = ExtResource("1_5b6hv")
+stretch_mode = 0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 0
+offset_left = 10.0
+offset_top = 185.0
+offset_right = 225.0
+offset_bottom = 225.0
+mouse_filter = 2
+
+[node name="Item" type="TextureRect" parent="HBoxContainer"]
+layout_mode = 2
+mouse_filter = 2
+texture = ExtResource("2_n5vhx")
+expand_mode = 3
+
+[node name="Cost" type="Label" parent="HBoxContainer"]
+layout_mode = 2
+text = "x 500"
+
+[node name="BuildingName" type="Label" parent="."]
+layout_mode = 0
+offset_left = 10.0
+offset_top = 10.0
+offset_right = 110.0
+offset_bottom = 36.0
+text = "Small House"

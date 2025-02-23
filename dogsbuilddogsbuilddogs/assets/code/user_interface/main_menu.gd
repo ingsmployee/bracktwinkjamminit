@@ -26,7 +26,7 @@ func push_error_text(input: String):
 	pass
 
 func _on_button_down() -> void:
-	SoundEffects.play("button_pressed")
+	SoundEffects.play("button_pressed", "UI Sounds")
 	pass # Replace with function body.
 	# all buttons hit here. play a sound effect
 

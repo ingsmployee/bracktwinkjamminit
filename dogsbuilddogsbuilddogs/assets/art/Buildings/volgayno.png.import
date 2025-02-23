@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://ctwbelmta05j0"
-path="res://.godot/imported/volgayno.png-e1489ebce0d7f6f007ae3839fd4aae11.ctex"
+path="res://.godot/imported/volgayno.png-c7b8e41929b22baeb9f3a3ea9c0c7e72.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/art/Buildings/volgayno.png"
-dest_files=["res://.godot/imported/volgayno.png-e1489ebce0d7f6f007ae3839fd4aae11.ctex"]
+source_file="res://assets/art/buildings/volgayno.png"
+dest_files=["res://.godot/imported/volgayno.png-c7b8e41929b22baeb9f3a3ea9c0c7e72.ctex"]
 
 [params]
 
