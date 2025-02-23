@@ -66,8 +66,8 @@ func _process(delta: float) -> void:
 	
 	if (placement):
 		var mouse_position: Vector2 = get_global_mouse_position()
-		var grid_position: Vector2i = $Tilemaps/WhiteOverlay.local_to_map(mouse_position)
-		var local_position: Vector2 = $Tilemaps/WhiteOverlay.map_to_local(grid_position)
+		var grid_position: Vector2i = $Tilemaps/Grass.local_to_map(mouse_position)
+		var local_position: Vector2 = $Tilemaps/Grass.map_to_local(grid_position)
 		placement.global_position = local_position
 		placement.get_node("Sprite2D").global_position = (placement.get_node("Sprite2D").global_position).lerp(local_position, 0.2)
 
@@ -87,7 +87,7 @@ func _physics_process(delta: float) -> void:
 
 ## give it a local position, it will spit out a position centered in that tilemap cell
 func gridify(pos: Vector2) -> Vector2:
-	return $Tilemaps/WhiteOverlay.map_to_local($Tilemaps/WhiteOverlay.local_to_map(pos))
+	return $Tilemaps/Grass.map_to_local($Tilemaps/Grass.local_to_map(pos))
 
 func hold_make_building(building_scene: PackedScene) -> void:
 	if placement:
@@ -111,7 +111,6 @@ func place_held_building() -> void:
 	
 	#print("placement placed at %s from %s" % [placement.global_position, get_global_mouse_position()])
 	
-	$Tilemaps/WhiteOverlay.clear()
 	placement.get_node("AnimationPlayer").queue("on_placed")
 	# spawn animals
 	for i in range(0, placement.stats.housing_space):

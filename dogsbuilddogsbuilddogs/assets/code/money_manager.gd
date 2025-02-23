@@ -11,12 +11,12 @@ func add_resource(resource_name: String, amount: float):
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	spawn_building("Resource Extractor", Vector2i(0,0))
-	#spawn_building("Tennis Ball House", Vector2i(-1, -3))
+	spawn_building("Tennis Ball House", Vector2i(-1, -3))
 
 func spawn_building(building_name:String, location: Vector2i) -> Node2D:
 	var building = GameResources.building_scenes[building_name].instantiate()
 	add_child(building)
-	building.position = $"../Tilemaps/Grass".map_to_local($"../Tilemaps/Grass".local_to_map(Vector2(0,0)))
+	building.position = $"../Tilemaps/Grass".map_to_local(location)
 	building.get_node("AnimationPlayer").queue("on_placed")
 	building.main_node = $".."
 	building.get_node("Area2DBuilding").mouse_entered.connect($".."._mouse_entered.bind(building))
