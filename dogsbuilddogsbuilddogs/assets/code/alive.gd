@@ -16,7 +16,7 @@ var speed_boost: float = 0
 # also while it is a circle it doesn't really have equal weights. this is because square
 const WANDER_RADIUS: int = 1000
 
-const TELEPORT_DISTANCE:float = 10
+const TELEPORT_DISTANCE:float = 20
 const MAX_MOVE_SPEED: float = 800 # pixels per second, scales with energy down to 70% movespeed at 70% energy
 const MAX_ACCELERATION: float = 50
 var current_move_speed: float = 0

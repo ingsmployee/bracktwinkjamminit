@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://xl2s58n4bye3"
-path="res://.godot/imported/pausefloor.png-be658d67e3def7e73240eda60e1328e2.ctex"
+path="res://.godot/imported/pausefloor.png-cbc5f66f60b97ad7e812823011b3630c.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/art/user_interface/Pause/pausefloor.png"
-dest_files=["res://.godot/imported/pausefloor.png-be658d67e3def7e73240eda60e1328e2.ctex"]
+source_file="res://assets/art/user_interface/pause/pausefloor.png"
+dest_files=["res://.godot/imported/pausefloor.png-cbc5f66f60b97ad7e812823011b3630c.ctex"]
 
 [params]
 
