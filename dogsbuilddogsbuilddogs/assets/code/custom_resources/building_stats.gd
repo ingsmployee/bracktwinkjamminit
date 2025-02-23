@@ -9,7 +9,6 @@ class_name BuildingStats
 ## The building's icon, for populating shop entries.
 @export var building_icon: Texture2D
 
-
 ## The displayed name of the building. Don't make it too long.
 @export var building_name: String = "Amazing Building"
 ## Affects behavior and provided proximity benefit.
@@ -21,11 +20,17 @@ class_name BuildingStats
 ## The amount of dogs that can be housed in this building.
 @export var housing_space: int = 0
 ## The cost to build one. Don't put more than 2 resource types.
-@export var cost: Dictionary = {"money": 10, "lava": 0, "wood": 0, "energy": 0}
+@export var cost: Dictionary = {"money": 10, "lava": 0}
 ## How much the Bureaucats like this building.
 @export var cat_appeasement: int = 1
+
+@export_category("Animal AI")
+## Whether to ask animals to come to this building or not.
+@export var request_animals: bool = true
 ## Added or subtracted from animals' energy when they interact with this building.
 @export var interact_energy_change: float = 0
+## Time (seconds) that animals will take when interacting with this building.
+@export var interact_time: float = 5
 
 ## Only relevant for Fun buildings.
 @export_category("Fun buildings")

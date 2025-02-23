@@ -1,21 +1,25 @@
-[gd_resource type="Resource" script_class="BuildingStats" load_steps=2 format=3 uid="uid://bhty3bdwppeha"]
+[gd_resource type="Resource" script_class="BuildingStats" load_steps=3 format=3 uid="uid://bhty3bdwppeha"]
 
+[ext_resource type="Texture2D" uid="uid://oblp4xxsjrop" path="res://assets/art/user_interface/shop_housing.png" id="1_a553r"]
 [ext_resource type="Script" path="res://assets/code/custom_resources/building_stats.gd" id="2_mf3dk"]
 
 [resource]
 script = ExtResource("2_mf3dk")
 building_scene = "res://assets/scenes/buildings/fun_1.tscn"
+building_icon = ExtResource("1_a553r")
 building_name = "Tennis Ball House"
 building_type = 0
 prox_bonus_addition = 1.0
 risk = 0.0
-housing_space = 3
+housing_space = 1
 cost = {
 "lava": 0,
-"money": 10
+"money": 25
 }
 cat_appeasement = 1
+request_animals = false
 interact_energy_change = 0.0
+interact_time = 5.0
 fun_power = 1.0
 anti_disaster_power = 1.0
 production_result = {

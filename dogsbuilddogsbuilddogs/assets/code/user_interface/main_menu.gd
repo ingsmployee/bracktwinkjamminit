@@ -44,6 +44,7 @@ func begin_loading_new() -> void:
 
 
 func _on_play_game_pressed() -> void:
+	GameResources.new_game = true
 	begin_loading_new()
 
 func _on_load_save_pressed() -> void:

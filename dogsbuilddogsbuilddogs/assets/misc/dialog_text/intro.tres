@@ -1,0 +1,7 @@
+[gd_resource type="Resource" script_class="DialogText" load_steps=2 format=3 uid="uid://tvyljmjojngh"]
+
+[ext_resource type="Script" path="res://assets/code/custom_resources/dialog_text.gd" id="1_ofmtm"]
+
+[resource]
+script = ExtResource("1_ofmtm")
+dialog = ["assistant", "This is some example speech!", "assistant", "Bark bark bark!"]

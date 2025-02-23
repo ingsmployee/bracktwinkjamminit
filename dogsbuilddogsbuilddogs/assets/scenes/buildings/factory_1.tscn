@@ -32,3 +32,8 @@ position = Vector2(-460.214, 262.786)
 rotation = 0.785398
 scale = Vector2(1, 1)
 shape = SubResource("RectangleShape2D_tfvar")
+
+[node name="DoggyDoor" parent="." index="7"]
+z_index = 5
+position = Vector2(-365, 371)
+gizmo_extents = 452.6

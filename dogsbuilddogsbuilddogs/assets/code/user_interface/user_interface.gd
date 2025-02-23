@@ -43,84 +43,53 @@ func _process(delta: float) -> void:
 func _input(event: InputEvent):
 	if event.is_action_pressed("escape"):
 		go_down_a_level()
-
-func go_down_a_level() -> void:
-	if $%SettingsContainer.visible:
-		$%SettingsContainer.fade_out()
-		return
-	
-	_on_pause_button_pressed()
-
-func populate_shop() -> void:
-	for building_stats in GameResources.buildings:
-		print("Name: %s, Category: %s, Cost: %s" % [building_stats.building_name, building_stats.building_type, building_stats.cost["money"]])
-		var shop_entry: TextureButton = shop_entry_scene.instantiate()
-		var category: Control
-		match building_stats.building_type: # reparent to a category
-			0: # fun
-				category = $%FunCategory
-			1: # safe
-				category = $%SafeCategory
-			2: # industry
-				category = $%FactoryCategory
-		category.get_node("Panel/ScrollContainer/GridContainer").add_child(shop_entry)
-		
-		if building_stats.building_icon:
-			shop_entry.texture_normal = building_stats.building_icon
-		else:
-			shop_entry.texture_normal = shop_icon_placeholder
-		shop_entry.get_node("BuildingName").text = building_stats.building_name
-		shop_entry.get_node("HBoxContainer/Cost").text = "x %s" % building_stats.cost["money"]
-		shop_entry.pressed.connect(shop_button_clicked.bind(building_stats))
-	
-
-func shop_button_clicked(stats: BuildingStats):
-	if GameResources.get_resource("money") < stats.cost["money"]:
-		# happens when you can't afford the thing
-		## NEED AN ANIMATION HERE OR A SOUND
-		print("no money")
-		return
-	
-	# building.gd will handle actually subtracting the money once the building is placed
-	# ergo the money won't be subtracted if you're just holding the building
-	central_node.hold_make_building(GameResources.building_scenes[stats.building_name])
-	retract_bottom_bar()
-
-
-
+	if event.is_action_pressed("build_a"):
+		queue_dt_into_dialog("introduction")
+	if event.is_action_pressed("build_b"):
+		play_main_dialog()
 
 ## each index of this is a page's worth of text
 var main_dialog_queue: PackedStringArray
+## each index of this is an image to be used in parallel with main_dialog_queue
+var main_image_queue: PackedStringArray
 ## if the main thing is ready to be fed the next line
 var main_dialog_ready: bool = true
+var current_dialog_image: String = ""
 
-func play_main_dialog(input: String = "") -> bool:
-	if input != "":
-		queue_into_dialog(input)
-	elif main_dialog_queue.size() == 0:
-		$DialogBoxAnimationPlayer.queue("hide_dialog_box")
-		get_tree().create_tween().tween_callback($%MainDialogBox.clear).set_delay(0.3)
+## fetches a DialogText from GameResources to be the dialog
+func queue_dt_into_dialog(input: String):
+	# accessing the DialogText then taking its contents
+	var dialog: PackedStringArray = GameResources.dialog[input].dialog
+	for index: int in range(0, dialog.size()/2):
+		print((index * 2), " ",dialog[index * 2], " " , (index * 2) + 1, dialog[(index * 2) + 1])
+		queue_line_into_dialog(dialog[index * 2], dialog[(index * 2) + 1])
+
+func play_main_dialog() -> bool:
+	if main_dialog_queue.size() == 0:
+		$%DialogBoxAnimationPlayer.queue("hide_dialog_box")
 		return false
 	
 	if !$%MainDialogControl.visible:
-		$DialogBoxAnimationPlayer.play("show_dialog_box")
+		$%DialogBoxAnimationPlayer.play("show_dialog_box")
+		$%MainDialogControl/DialogImage.texture = GameResources.alives_dialog_images[main_image_queue[0]]
 		get_tree().create_tween().tween_callback(play_main_dialog).set_delay(0.4)
 		return true
 	
 	if main_dialog_ready:
 		advance_dialog()
 		return true
-	else:
+	else: # if you mash the button, skip the dialog
 		dialog_tween.kill()
 		$%MainDialogBox.add_text(main_dialog_queue[0])
 		main_dialog_queue.remove_at(0)
+		main_image_queue.remove_at(0)
 		main_dialog_ready = true
 		return true
 
 func show_dialog_box():
-	$DialogBoxAnimationPlayer.queue("show_dialog_box")
+	$%DialogBoxAnimationPlayer.queue("show_dialog_box")
 func hide_dialog_box():
-	$DialogBoxAnimationPlayer.queue("hide_dialog_box")
+	$%DialogBoxAnimationPlayer.queue("hide_dialog_box")
 
 # doesn't support custom fonts. i could have made it do that and decided not to. haha im evil. haha.
 # not like i spent 30 minutes trying to figure out how to get the characters only to realize that
@@ -128,13 +97,9 @@ func hide_dialog_box():
 # also doesn't work well when words are longer than the max characters
 # and in the end that didn't work so you have to define the max length. yay
 # fuck it i'll implement the font agile one anyway so we don't need to use monospaced
-func queue_into_dialog(text: String, dialog_box: RichTextLabel = $%MainDialogBox) -> void:
+func queue_line_into_dialog(animal_image: String, text: String, dialog_box: RichTextLabel = $%MainDialogBox) -> void:
 	var max_height = dialog_box.size.y
 	var max_length = dialog_box.size.x
-	
-	if dialog_box == $%MainDialogBox:
-		main_dialog_queue.clear()
-	dialog_box.clear()
 	
 	var words: PackedStringArray = text.split(" ", false)
 	
@@ -163,23 +128,77 @@ func queue_into_dialog(text: String, dialog_box: RichTextLabel = $%MainDialogBox
 		length_count += phrase_length
 		resulting_pages[page_index] += word + " "
 	
-	# print(resulting_pages)
+	for i in resulting_pages:
+		main_image_queue.append(animal_image)
+	print(resulting_pages)
 	main_dialog_queue.append_array(resulting_pages)
 
 ## starts the next page
 func advance_dialog(dialog_box: RichTextLabel = $%MainDialogBox):
+	SoundEffects.play_dialog_start(main_image_queue[0])
 	main_dialog_ready = false
 	dialog_box.clear()
-	dialog_tween = get_tree().create_tween().set_loops(main_dialog_queue[0].length())
-	dialog_tween.tween_callback(type_next_main_char.bind(dialog_box)).set_delay(0.01)
+	dialog_tween = get_tree().create_tween()
+	dialog_tween.set_loops(main_dialog_queue[0].length()).tween_callback(type_next_main_char.bind(dialog_box)).set_delay(0.01)
+	if current_dialog_image != main_image_queue[0]:
+		$%DialogImage.texture = GameResources.alives_dialog_images[main_image_queue[0]]
+	current_dialog_image = main_image_queue[0]
+	print(main_dialog_queue, " started")
+	print(main_image_queue, " started")
 
 ## helper method for turn_into_dialog
 func type_next_main_char(dialog_box: RichTextLabel) -> void:
+	print(main_dialog_queue[0], dialog_box.text)
 	dialog_box.add_text(main_dialog_queue[0][0])
 	main_dialog_queue[0] = main_dialog_queue[0].substr(1)
 	if main_dialog_queue[0].length() == 0:
 		main_dialog_queue.remove_at(0)
+		main_image_queue.remove_at(0)
+		print(main_dialog_queue, " finished")
+		print(main_image_queue, " finished")
 		main_dialog_ready = true
+
+func go_down_a_level() -> void:
+	if $%SettingsContainer.visible:
+		$%SettingsContainer.fade_out()
+		return
+	
+	_on_pause_button_pressed()
+
+func populate_shop() -> void:
+	for building_stats in GameResources.buildings:
+		# print("Name: %s, Category: %s, Cost: %s" % [building_stats.building_name, building_stats.building_type, building_stats.cost["money"]])
+		var shop_entry: TextureButton = shop_entry_scene.instantiate()
+		var category: Control
+		match building_stats.building_type: # reparent to a category
+			0: # fun
+				category = $%FunCategory
+			1: # safe
+				category = $%SafeCategory
+			2: # industry
+				category = $%FactoryCategory
+		category.get_node("Panel/ScrollContainer/GridContainer").add_child(shop_entry)
+		
+		if building_stats.building_icon:
+			shop_entry.get_node("TextureRect").texture = building_stats.building_icon
+		else:
+			shop_entry.get_node("TextureRect").texture = shop_icon_placeholder
+		shop_entry.get_node("BuildingName").text = building_stats.building_name
+		shop_entry.get_node("HBoxContainer/Cost").text = "x %s" % building_stats.cost["money"]
+		shop_entry.pressed.connect(shop_button_clicked.bind(building_stats))
+	
+
+func shop_button_clicked(stats: BuildingStats):
+	if GameResources.get_resource("money") < stats.cost["money"]:
+		# happens when you can't afford the thing
+		## NEED AN ANIMATION HERE OR A SOUND
+		print("no money")
+		return
+	
+	# building.gd will handle actually subtracting the money once the building is placed
+	# ergo the money won't be subtracted if you're just holding the building
+	central_node.hold_make_building(GameResources.building_scenes[stats.building_name])
+	retract_bottom_bar()
 
 var tasks_panel_shown: bool = true
 func _on_tasks_panel_visibility_button_pressed() -> void:

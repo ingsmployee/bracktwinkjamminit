@@ -2,11 +2,12 @@ extends Node
 
 var resource_types: Array[String] = ["money", "dogs", "lava"]
 var _resources: Dictionary
-
+var new_game: bool
 
 var buildings: Array[BuildingStats] = [
 	preload("res://assets/misc/buildings_stats/factory_1.tres"),
-	preload("res://assets/misc/buildings_stats/tennis_ball_house.tres")
+	preload("res://assets/misc/buildings_stats/tennis_ball_house.tres"),
+	preload("res://assets/misc/buildings_stats/vet_clinic.tres")
 ]
 
 ## [name, PackedScene]
@@ -16,12 +17,22 @@ var alives: Array[PackedScene] = [
 	preload("res://assets/scenes/alive/assistant.tscn")
 ]
 
+## [name: String, image: Texture2D]
+var alives_dialog_images: Dictionary = {
+	"assistant": preload("res://assets/art/dogs/assistant.png"),
+}
+
+## [name: String, dialog_entry: DialogText]
+var dialog: Dictionary = {
+	"introduction": preload("res://assets/misc/dialog_text/intro.tres")
+}
+
 func _ready() -> void:
 	# we have less than 12 hours
 	for building_stat in buildings:
 		building_scenes[building_stat.building_name] = load(building_stat.building_scene)
 	
-	print(building_scenes)
+	# print(building_scenes)
 	for resource in resource_types:
 		_resources[resource] = 0
 	_resources["money"] = 100

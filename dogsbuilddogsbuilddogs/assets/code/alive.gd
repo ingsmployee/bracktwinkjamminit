@@ -9,61 +9,97 @@ var velocity: float = 0 # single number because it will only move along the path
 
 var energy: float = 100
 var resting: bool = true
+var idle: bool = true
 
-const ACCELERATION: float = 5
-@export var max_velocity: float = 3
+## this is not the maximum wandering distance. it is how far the animal can wander in one cycle.
+# also while it is a circle it doesn't really have equal weights. this is because square
+const WANDER_RADIUS: int = 1000
+
+const TELEPORT_DISTANCE:float = 10
+const MAX_MOVE_SPEED: float = 800 # pixels per second, scales with energy down to 70% movespeed at 70% energy
+const MAX_ACCELERATION: float = 50
+var current_move_speed: float = 0
+
+func _raedy() -> void:
+	wander()
 
 func _process(delta:float) -> void:
 	if resting:
 		energy = max(0, energy)
-		energy += delta * 100
+		energy += delta * 5
 		if energy >= 100:
 			energy = 100
 			resting = false
 			leave_building()
+	
 
-func _input(event: InputEvent) -> void:
-	if event.is_action_pressed("build_b"):
-		# note that this type of thing is literally all you have to do to find a path
-		$NavigationAgent2D.target_position = get_global_mouse_position()
-		# print("Going to %s!" % $NavigationAgent2D.target_position)
-		# print($NavigationAgent2D.get_next_path_position())
 
 func _physics_process(delta: float) -> void:
-	if target_building:
-		var desired_position = global_position - $NavigationAgent2D.get_next_path_position()
-		global_position -= desired_position.normalized() * min(desired_position.length(), 3) * 500 * delta
-
-func go_to_building(building: Node2D) -> void:
-	target_building = building
-	$NavigationAgent2D.target_position = building.position
-
-func make_self_ready() -> void:
-	target_building = null
-	get_parent().add_ready_alive(self)
-
-func finished_last_task() -> void:
-	target_building.emit_signal("make_self_available")
-	if energy < 10:
-		target_building = home_building
-	else: 
-		make_self_ready()
+	if target_building or idle:
+		
+		# if we're already there, teleport. if we're not, use the movement system
+		if ($NavigationAgent2D.get_final_position() == $NavigationAgent2D.get_next_path_position()) && (($NavigationAgent2D.get_final_position() - global_position).length() < TELEPORT_DISTANCE):
+			global_position = $NavigationAgent2D.get_final_position()
+			current_move_speed = 0
+		else:
+			var displacement: Vector2 = ($NavigationAgent2D.get_next_path_position() - global_position)
+			current_move_speed += min(MAX_MOVE_SPEED - current_move_speed, MAX_ACCELERATION, 0.3 * (MAX_MOVE_SPEED - current_move_speed)) + 5
+			var move_vector: Vector2 = displacement.normalized() * current_move_speed * min(displacement.length() * 10, 1)
+			
+			$Sprite2D.flip_h = move_vector.x > 0
+			global_position += move_vector * delta
+	
 
 func remove() -> void:
+	get_parent().ready_alives.erase(self)
 	if target_building:
 		target_building.emit_signal("make_self_available")
 		target_building = null
 	queue_free()
 
-func _on_navigation_agent_2d_navigation_finished() -> void:
-	if (($NavigationAgent2D.target_position - position).length() < 20): # then we have reached the target
-		enter_building(target_building)
+func make_self_ready() -> void:
+	idle = true
+	wander()
+	target_building = null
+	get_parent().add_ready_alive(self)
+
+var oops_building_deleted: bool = true
+func finished_last_task() -> void:
+	if !oops_building_deleted && target_building && target_building.stats.request_animals:
+		get_tree().create_tween().tween_callback(target_building.emit_signal.bind("make_self_available")).set_delay(target_building.stats.interact_time)
+	else:
+		oops_building_deleted = false
+	target_building = null
+	if energy < 10:
+		go_to_building(home_building)
 	else:
 		make_self_ready()
 
+var wander_wait_tween: Tween
+func _on_navigation_agent_2d_navigation_finished() -> void:
+	if idle:
+		if wander_wait_tween:
+			wander_wait_tween.kill()
+		wander_wait_tween = get_tree().create_tween()
+		wander_wait_tween.tween_callback(wander).set_delay($"..".random.randi_range(3,7))
+	else:
+		enter_building(target_building)
+
+func wander():
+	energy -= 5
+	$NavigationAgent2D.target_position = position + Vector2($"..".random.randi_range(-WANDER_RADIUS, WANDER_RADIUS), $"..".random.randi_range(-WANDER_RADIUS, WANDER_RADIUS)).normalized() * WANDER_RADIUS
+
+func go_to_building(building: Node2D) -> void:
+	idle = false
+	if wander_wait_tween:
+		wander_wait_tween.kill()
+	target_building = building
+	$NavigationAgent2D.target_position = building.get_node("DoggyDoor").global_position
+
 func enter_building(building: Node2D) -> void:
 	building.animal_interact(self)
-	hide()
+	building.tree_exiting.connect(oops_building_was_deleted)
+	$AnimationPlayer.play("enter_building")
 	
 	if target_building == home_building: # if we're going home, we leave when we're rested
 		resting = true
@@ -81,9 +117,13 @@ func enter_building(building: Node2D) -> void:
 	if target_building.stats.risk > 0:
 		if RandomNumberGenerator.new().randi_range(0, 10) <= target_building.stats.risk:
 			energy = 0.3 * energy
-	
-	
 
 func leave_building() -> void:
-	show()
+	if target_building && !oops_building_deleted:
+		target_building.tree_exiting.disconnect(oops_building_was_deleted)
+	$AnimationPlayer.play("exit_building")
 	finished_last_task()
+
+func oops_building_was_deleted() -> void:
+	oops_building_deleted = true
+	leave_building()

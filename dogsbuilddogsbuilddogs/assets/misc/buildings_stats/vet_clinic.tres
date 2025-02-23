@@ -1,0 +1,35 @@
+[gd_resource type="Resource" script_class="BuildingStats" load_steps=3 format=3 uid="uid://bwwj24236ef5r"]
+
+[ext_resource type="Texture2D" uid="uid://be1onwcndwook" path="res://assets/art/user_interface/shop_health.png" id="1_afh4u"]
+[ext_resource type="Script" path="res://assets/code/custom_resources/building_stats.gd" id="2_44hjk"]
+
+[resource]
+script = ExtResource("2_44hjk")
+building_scene = "res://assets/scenes/buildings/safe_1.tscn"
+building_icon = ExtResource("1_afh4u")
+building_name = "Vet Clinic"
+building_type = 1
+prox_bonus_addition = 5.0
+risk = 0.0
+housing_space = 0
+cost = {
+"lava": 0,
+"money": 100
+}
+cat_appeasement = 1
+request_animals = true
+interact_energy_change = 0.0
+interact_time = 5.0
+fun_power = 1.0
+anti_disaster_power = 1.0
+production_result = {
+"lava": 0,
+"money": 1
+}
+production_cost = {
+"lava": 0,
+"money": 0
+}
+baseline_production_multiplier = 1.0
+production_time = 10.0
+baseline_speed_multiplier = 1.0

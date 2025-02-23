@@ -129,7 +129,8 @@ func place() -> void:
 	get_parent().building_type_amounts[stats.building_type] += 1
 	placed = true
 	rebake_navmap.emit()
-	make_self_available.emit()
+	if stats.request_animals:
+		make_self_available.emit()
 	for building in buildings_touched:
 		building.get_node("Sprite2D").self_modulate = Color(1,1,1,1)
 		building.prox_bonus_amount[stats.building_type] += stats.prox_bonus_addition
@@ -146,6 +147,7 @@ func remove() -> void:
 	GameResources.add_resource("money", stats.cost["money"] * 0.7) # return 70% of money back
 	for animal in housed_dogs:
 		animal.remove()
+	$"../../AlivesManager".ready_buildings.erase(self)
 	
 	var tween = get_tree().create_tween()
 	tween.tween_property($Sprite2D, "scale", $Sprite2D.scale * 0.2, 0.5).set_ease(Tween.EASE_OUT_IN).set_trans(Tween.TRANS_EXPO)

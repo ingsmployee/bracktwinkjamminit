@@ -1,9 +1,14 @@
 extends Node
 
+@onready var random := RandomNumberGenerator.new()
+
 ## this is where you wanna add new sounds
 var sfx: Dictionary = {
 	"button_pressed": preload("res://assets/sounds/click.wav"),
-	"woosh": preload("res://assets/sounds/woosh.wav")
+	"woosh": preload("res://assets/sounds/woosh.wav"),
+	"mumble_1": preload("res://assets/sounds/mumble_a.wav"),
+	"mumble_2": preload("res://assets/sounds/mumble_b.wav"),
+	"mumble_3": preload("res://assets/sounds/mumble_c.wav")
 }
 
 # {bus_name: String, [AudioStreamPlayer, AudioStreamPlaybackPolyphonic]}
@@ -11,6 +16,8 @@ var players: Dictionary
 
 func _ready():
 	newPlayer("UI Sounds")
+	newPlayer("Music")
+	newPlayer("Ingame SFX")
 
 func newPlayer(bus_name: String) -> void:
 	var player := AudioStreamPlayer.new()
@@ -27,3 +34,9 @@ func play(sound_name: String, bus_name: StringName) -> void:
 	var player = players[bus_name][0]
 	if !player.playing: player.play()
 	players[bus_name][1].play_stream(sfx[sound_name])
+
+func play_dialog_start(input: String):
+	if input == "bureaucat":
+		play("meow", "Ingame SFX")
+	else:
+		play("mumble_%s" % random.randi_range(0,3), "Ingame SFX")

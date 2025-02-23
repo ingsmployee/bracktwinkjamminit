@@ -33,15 +33,16 @@ texture = ExtResource("3_mqaxh")
 
 [node name="PlayGame" type="TextureButton" parent="MainMenu"]
 layout_mode = 2
-offset_left = 54.0
-offset_top = 556.0
-offset_right = 334.0
-offset_bottom = 689.0
+offset_left = 48.0
+offset_top = 698.0
+offset_right = 328.0
+offset_bottom = 831.0
 mouse_default_cursor_shape = 2
 theme = ExtResource("1_6fjhc")
 texture_normal = ExtResource("3_epgct")
 
 [node name="LoadSave" type="TextureButton" parent="MainMenu"]
+visible = false
 layout_mode = 2
 offset_left = 109.0
 offset_top = 680.0
@@ -53,20 +54,20 @@ texture_normal = ExtResource("4_r13kh")
 
 [node name="Settings" type="TextureButton" parent="MainMenu"]
 layout_mode = 2
-offset_left = 177.0
-offset_top = 784.0
-offset_right = 395.0
-offset_bottom = 913.0
+offset_left = 100.0
+offset_top = 808.0
+offset_right = 318.0
+offset_bottom = 937.0
 mouse_default_cursor_shape = 2
 theme = ExtResource("1_6fjhc")
 texture_normal = ExtResource("5_n53ti")
 
 [node name="ExitGame" type="TextureButton" parent="MainMenu"]
 layout_mode = 2
-offset_left = 233.0
-offset_top = 909.0
-offset_right = 417.0
-offset_bottom = 1006.0
+offset_left = 156.0
+offset_top = 933.0
+offset_right = 340.0
+offset_bottom = 1030.0
 mouse_default_cursor_shape = 2
 theme = ExtResource("1_6fjhc")
 texture_normal = ExtResource("6_nmd6o")

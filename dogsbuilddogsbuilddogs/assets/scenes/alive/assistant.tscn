@@ -1,9 +1,10 @@
 [gd_scene load_steps=3 format=3 uid="uid://bjbp255rdtyqa"]
 
 [ext_resource type="PackedScene" uid="uid://d4h3e06rcqw3r" path="res://assets/scenes/alive/dog_template.tscn" id="1_5cwes"]
-[ext_resource type="Texture2D" uid="uid://sdlfk7a0kwui" path="res://assets/art/dogs/Assistant.png" id="2_o7372"]
+[ext_resource type="Texture2D" uid="uid://sdlfk7a0kwui" path="res://assets/art/dogs/assistant.png" id="2_o7372"]
 
 [node name="Alive" instance=ExtResource("1_5cwes")]
 
 [node name="Sprite2D" parent="." index="0"]
 texture = ExtResource("2_o7372")
+offset = Vector2(0, -80)

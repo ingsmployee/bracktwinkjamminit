@@ -1,18 +1,32 @@
-[gd_scene load_steps=3 format=3 uid="uid://dghrx5x2fny23"]
+[gd_scene load_steps=4 format=3 uid="uid://dghrx5x2fny23"]
 
 [ext_resource type="Texture2D" uid="uid://f8sg1sh7ly2g" path="res://assets/art/programmer_art/programmer_building_icon_placeholder.png" id="1_5b6hv"]
+[ext_resource type="Texture2D" uid="uid://dwq57t14j1mkj" path="res://assets/art/user_interface/shop_plain.png" id="2_ld2rx"]
 [ext_resource type="Texture2D" uid="uid://dac6ej46mxkq0" path="res://assets/art/user_interface/money.png" id="2_n5vhx"]
 
-[node name="TextureRect" type="TextureButton"]
+[node name="TextureButton" type="TextureButton"]
+self_modulate = Color(1, 1, 1, 0)
 mouse_default_cursor_shape = 2
 texture_normal = ExtResource("1_5b6hv")
 stretch_mode = 0
 
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1.00125, 1)
+texture = ExtResource("2_ld2rx")
+expand_mode = 3
+stretch_mode = 5
+
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
 layout_mode = 0
-offset_left = 10.0
+offset_left = 19.0
 offset_top = 185.0
-offset_right = 225.0
+offset_right = 234.0
 offset_bottom = 225.0
 mouse_filter = 2
 
@@ -24,12 +38,20 @@ expand_mode = 3
 
 [node name="Cost" type="Label" parent="HBoxContainer"]
 layout_mode = 2
+theme_override_colors/font_shadow_color = Color(0.347817, 0.347817, 0.347817, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 5
+theme_override_font_sizes/font_size = 30
 text = "x 500"
 
 [node name="BuildingName" type="Label" parent="."]
 layout_mode = 0
-offset_left = 10.0
-offset_top = 10.0
-offset_right = 110.0
-offset_bottom = 36.0
+offset_left = 14.0
+offset_top = 17.0
+offset_right = 114.0
+offset_bottom = 43.0
+theme_override_colors/font_shadow_color = Color(0.244776, 0.244776, 0.244776, 1)
+theme_override_colors/font_outline_color = Color(0.848039, 0.433703, 0.39009, 1)
+theme_override_constants/outline_size = 5
+theme_override_font_sizes/font_size = 25
 text = "Small House"

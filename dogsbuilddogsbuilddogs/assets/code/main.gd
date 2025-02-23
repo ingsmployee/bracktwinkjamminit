@@ -3,8 +3,8 @@ extends Node2D
 var desired_mouse_position: Vector2 = Vector2(0,0)
 var original_camera_position: Vector2 = Vector2(0,0)
 ## note that increasing min zoom will decrease how much you can zoom out
-const MIN_ZOOM: float = 0.1
-const MAX_ZOOM: float = 5
+const MIN_ZOOM: float = 0.2
+const MAX_ZOOM: float = 0.7
 ## amount of zoom to add or remove when using the scroll wheel
 const ZOOM_AMOUNT: float = 0.5
 
@@ -72,8 +72,6 @@ func _process(delta: float) -> void:
 	if (placement):
 		var mouse_position: Vector2 = get_global_mouse_position()
 		var grid_position: Vector2i = $Tilemaps/WhiteOverlay.local_to_map(mouse_position)
-		$Tilemaps/WhiteOverlay.clear()
-		$Tilemaps/WhiteOverlay.set_cell(grid_position, 0, Vector2i(0,0))
 		var local_position: Vector2 = $Tilemaps/WhiteOverlay.map_to_local(grid_position)
 		placement.global_position = local_position
 		placement.get_node("Sprite2D").global_position = (placement.get_node("Sprite2D").global_position).lerp(local_position, 0.2)
@@ -100,7 +98,7 @@ func place_held_building() -> void:
 	placement.global_position = gridify(get_global_mouse_position())
 	# sprite position will be handled by placement.place()
 	
-	print("placement placed at %s from %s" % [placement.global_position, get_global_mouse_position()])
+	#print("placement placed at %s from %s" % [placement.global_position, get_global_mouse_position()])
 	
 	$Tilemaps/WhiteOverlay.clear()
 	placement.get_node("AnimationPlayer").queue("on_placed")

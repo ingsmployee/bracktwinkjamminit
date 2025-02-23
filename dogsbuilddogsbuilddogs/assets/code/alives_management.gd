@@ -27,15 +27,16 @@ func instantiate_random_from_building(home_building: Node2D) -> Node2D:
 	add_child(newborn)
 	newborn.home_building = home_building
 	newborn.target_building = home_building
-	newborn.position = home_building.position
+	newborn.position = home_building.get_node("DoggyDoor").global_position
 	# note that all newborns are considered "resting" to start with
 	newborn.hide()
-	newborn.energy = 50
+	newborn.energy = 90
 	return newborn
 
 func send_random_ready_alive() -> void:
 	var index: int = random.randi_range(0, max(0, ready_alives.size()-1))
 	var alive = ready_alives[index]
+	
 	ready_alives.remove_at(index)
 	
 	index = random.randi_range(0, max(0, ready_buildings.size()-1))
