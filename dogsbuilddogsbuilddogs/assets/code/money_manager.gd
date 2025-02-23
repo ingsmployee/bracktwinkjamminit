@@ -10,7 +10,22 @@ func add_resource(resource_name: String, amount: float):
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	pass
+	spawn_building("Resource Extractor", Vector2i(0,0))
+	spawn_building("Tennis Ball House", Vector2i(-1, -3))
+
+func spawn_building(building_name:String, location: Vector2i) -> Node2D:
+	var building = GameResources.building_scenes[building_name].instantiate()
+	add_child(building)
+	building.position = $"../Tilemaps/Grass".map_to_local($"../Tilemaps/Grass".local_to_map(Vector2(0,0)))
+	building.get_node("AnimationPlayer").queue("on_placed")
+	building.main_node = $".."
+	building.get_node("Area2DBuilding").mouse_entered.connect($".."._mouse_entered.bind(building))
+	building.get_node("Area2DBuilding").mouse_exited.connect($".."._mouse_exited.bind(building))
+	building.rebake_navmap.connect($%NavigationRegion2D.bake_new_navmap)
+	building.tree_exited.connect($%NavigationRegion2D.bake_new_navmap)
+	building.make_self_available.connect($%AlivesManager.make_building_available.bind(building))
+	building.place()
+	return building
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:

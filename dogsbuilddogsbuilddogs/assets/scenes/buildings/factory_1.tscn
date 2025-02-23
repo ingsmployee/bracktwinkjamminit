@@ -14,7 +14,7 @@ size = Vector2(306.278, 223.446)
 stats = ExtResource("2_vtjf5")
 
 [node name="Sprite2DProxBonus" parent="highlight areas" index="0"]
-scale = Vector2(-14.6284, -14.6284)
+scale = Vector2(-10.5687, -10.5687)
 
 [node name="Sprite2D" parent="." index="1"]
 y_sort_enabled = true
@@ -24,13 +24,11 @@ offset = Vector2(-29, -397)
 [node name="CollisionShape2D" parent="Area2DBuilding" index="0"]
 position = Vector2(-3.5, 0.999939)
 rotation = 0.785398
-scale = Vector2(1, 1)
 shape = SubResource("RectangleShape2D_wu8r0")
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="Area2DBuilding" index="1"]
 position = Vector2(-460.214, 262.786)
 rotation = 0.785398
-scale = Vector2(1, 1)
 shape = SubResource("RectangleShape2D_tfvar")
 
 [node name="DoggyDoor" parent="." index="7"]

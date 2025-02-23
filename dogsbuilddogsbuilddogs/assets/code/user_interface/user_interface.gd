@@ -20,6 +20,7 @@ var shop_entry_scene: PackedScene = preload("res://assets/scenes/ui_elements/sho
 var shop_icon_placeholder: Texture2D = preload("res://assets/art/programmer_art/programmer_building_icon_placeholder.png")
 
 var bottom_bar_resting_x: Dictionary
+var can_skip_dialog: bool = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -31,6 +32,10 @@ func _ready() -> void:
 	$%SafeCategory.add_child(panel.duplicate())
 	$%FactoryCategory.add_child(panel)
 	populate_shop()
+	queue_dt_into_dialog("introduction_1")
+	queue_dt_into_dialog("introduction_2")
+	queue_dt_into_dialog("introduction_3")
+	play_main_dialog()
 	
 	for button:BaseButton in find_children("*", "BaseButton", true):
 		button.pressed.connect(play_button_noise)
@@ -43,10 +48,10 @@ func _process(delta: float) -> void:
 func _input(event: InputEvent):
 	if event.is_action_pressed("escape"):
 		go_down_a_level()
-	if event.is_action_pressed("build_a"):
-		queue_dt_into_dialog("introduction")
-	if event.is_action_pressed("build_b"):
+	if event.is_action_pressed("shift"):
 		play_main_dialog()
+	if event.is_action_pressed("toggle_hide_tutorial"):
+		$%TutorialLabel.visible = not $%TutorialLabel.visible
 
 ## each index of this is a page's worth of text
 var main_dialog_queue: PackedStringArray
@@ -61,10 +66,11 @@ func queue_dt_into_dialog(input: String):
 	# accessing the DialogText then taking its contents
 	var dialog: PackedStringArray = GameResources.dialog[input].dialog
 	for index: int in range(0, dialog.size()/2):
-		print((index * 2), " ",dialog[index * 2], " " , (index * 2) + 1, dialog[(index * 2) + 1])
+		#print((index * 2), " ",dialog[index * 2], " " , (index * 2) + 1, dialog[(index * 2) + 1])
 		queue_line_into_dialog(dialog[index * 2], dialog[(index * 2) + 1])
 
 func play_main_dialog() -> bool:
+	retract_bottom_bar()
 	if main_dialog_queue.size() == 0:
 		$%DialogBoxAnimationPlayer.queue("hide_dialog_box")
 		return false
@@ -106,20 +112,23 @@ func queue_line_into_dialog(animal_image: String, text: String, dialog_box: Rich
 	#print("Max length: %s Max height: %s" % [max_length, max_height])
 	
 	var height_count: int = 0 # in pixels
+	var lines_count: int = 0
 	var length_count: int = 0
-	var phrase_height: int = dialog_box.get_theme_font("font").get_string_size("qwertyuiopasdfghjkl;zxcvbnm .,", HORIZONTAL_ALIGNMENT_LEFT, -1, dialog_box.get_theme_font_size("normal_font_size")).y # look man it works
+	var phrase_height: int = dialog_box.get_theme_font("font").get_string_size("qwertyuiopasdfghjkl;zxcvbnm .,", HORIZONTAL_ALIGNMENT_LEFT, -1, 150).y # look man it works
 	var resulting_pages: Array[String] = [""]
 	var page_index: int = 0
 	
 	for word in words:
 		# long line incoming 
-		var phrase_length = dialog_box.get_theme_font("font").get_string_size(word + " ", HORIZONTAL_ALIGNMENT_LEFT, -1, dialog_box.get_theme_font_size("normal_font_size")).x
+		var phrase_length = dialog_box.get_theme_font("font").get_string_size(word + " ", HORIZONTAL_ALIGNMENT_LEFT, -1, 150).x
 		if phrase_length + length_count > max_length:
 			length_count = 0
 			resulting_pages[page_index] += "\n"
+			lines_count += 1
 			#print(height_count, "h + ", phrase_height, " vs ", max_height)
-			if height_count + phrase_height > max_height:
+			if height_count + phrase_height > max_height or lines_count == 3:
 				height_count = 0
+				lines_count = 0
 				page_index += 1
 				resulting_pages.append("")
 			else:
@@ -130,7 +139,6 @@ func queue_line_into_dialog(animal_image: String, text: String, dialog_box: Rich
 	
 	for i in resulting_pages:
 		main_image_queue.append(animal_image)
-	print(resulting_pages)
 	main_dialog_queue.append_array(resulting_pages)
 
 ## starts the next page
@@ -143,19 +151,14 @@ func advance_dialog(dialog_box: RichTextLabel = $%MainDialogBox):
 	if current_dialog_image != main_image_queue[0]:
 		$%DialogImage.texture = GameResources.alives_dialog_images[main_image_queue[0]]
 	current_dialog_image = main_image_queue[0]
-	print(main_dialog_queue, " started")
-	print(main_image_queue, " started")
 
 ## helper method for turn_into_dialog
 func type_next_main_char(dialog_box: RichTextLabel) -> void:
-	print(main_dialog_queue[0], dialog_box.text)
 	dialog_box.add_text(main_dialog_queue[0][0])
 	main_dialog_queue[0] = main_dialog_queue[0].substr(1)
 	if main_dialog_queue[0].length() == 0:
 		main_dialog_queue.remove_at(0)
 		main_image_queue.remove_at(0)
-		print(main_dialog_queue, " finished")
-		print(main_image_queue, " finished")
 		main_dialog_ready = true
 
 func go_down_a_level() -> void:
@@ -300,26 +303,23 @@ func retract_bottom_bar() -> void:
 		SoundEffects.play("woosh", "UI Sounds")
 	else:
 		return
-	match selected_tab:
-		"fun":
-			if wharha:
-				wharha.kill()
-			wharha = get_tree().create_tween()
-			get_tree().create_tween().tween_property($%FunCategory/Label, "position", Vector2(-16, 168), 0.2)
-			wharha.tween_property($%FunCategory, "position", Vector2(bottom_bar_resting_x["fun"], 0), 0.2).set_trans(Tween.TRANS_CIRC)
-		# other cases here
-		"safe":
-			if wharhaa:
-				wharhaa.kill()
-			wharhaa = get_tree().create_tween()
-			get_tree().create_tween().tween_property($%SafeCategory/Label, "position", Vector2(-16, 168), 0.2)
-			wharhaa.tween_property($%SafeCategory, "position", Vector2(bottom_bar_resting_x["safe"], 0), 0.2).set_trans(Tween.TRANS_CIRC)
-		"factory":
-			if wharhaharah:
-				wharhaharah.kill()
-			wharhaharah = get_tree().create_tween()
-			get_tree().create_tween().tween_property($%FactoryCategory/Label, "position", Vector2(-16, 168), 0.2)
-			wharhaharah.tween_property($%FactoryCategory, "position", Vector2(bottom_bar_resting_x["factory"], 0), 0.2).set_trans(Tween.TRANS_CIRC)
+	if wharha:
+		wharha.kill()
+		
+	# used to be a match, but i can't afford to patch all of the "tab stays open" bugs sooo
+	wharha = get_tree().create_tween()
+	get_tree().create_tween().tween_property($%FunCategory/Label, "position", Vector2(-16, 168), 0.2)
+	wharha.tween_property($%FunCategory, "position", Vector2(bottom_bar_resting_x["fun"], 0), 0.2).set_trans(Tween.TRANS_CIRC)
+	if wharhaa:
+		wharhaa.kill()
+	wharhaa = get_tree().create_tween()
+	get_tree().create_tween().tween_property($%SafeCategory/Label, "position", Vector2(-16, 168), 0.2)
+	wharhaa.tween_property($%SafeCategory, "position", Vector2(bottom_bar_resting_x["safe"], 0), 0.2).set_trans(Tween.TRANS_CIRC)
+	if wharhaharah:
+		wharhaharah.kill()
+	wharhaharah = get_tree().create_tween()
+	get_tree().create_tween().tween_property($%FactoryCategory/Label, "position", Vector2(-16, 168), 0.2)
+	wharhaharah.tween_property($%FactoryCategory, "position", Vector2(bottom_bar_resting_x["factory"], 0), 0.2).set_trans(Tween.TRANS_CIRC)
 	selected_tab = ""
 
 func _on_main_screen_gui_input(event: InputEvent) -> void:
@@ -349,3 +349,7 @@ func play_button_noise() -> void:
 
 func _on_pause_settings_button_pressed() -> void:
 	$%SettingsContainer.fade_in()
+
+
+func _on_pause_exit_button_pressed() -> void:
+	get_tree().quit()

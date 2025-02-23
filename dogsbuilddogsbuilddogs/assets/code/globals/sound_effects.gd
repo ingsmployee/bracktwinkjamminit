@@ -8,7 +8,8 @@ var sfx: Dictionary = {
 	"woosh": preload("res://assets/sounds/woosh.wav"),
 	"mumble_1": preload("res://assets/sounds/mumble_a.wav"),
 	"mumble_2": preload("res://assets/sounds/mumble_b.wav"),
-	"mumble_3": preload("res://assets/sounds/mumble_c.wav")
+	"mumble_3": preload("res://assets/sounds/mumble_c.wav"),
+	"meow": preload("res://assets/sounds/mrow.wav")
 }
 
 # {bus_name: String, [AudioStreamPlayer, AudioStreamPlaybackPolyphonic]}
@@ -36,7 +37,7 @@ func play(sound_name: String, bus_name: StringName) -> void:
 	players[bus_name][1].play_stream(sfx[sound_name])
 
 func play_dialog_start(input: String):
-	if input == "bureaucat":
+	if input == "cat":
 		play("meow", "Ingame SFX")
 	else:
-		play("mumble_%s" % random.randi_range(0,3), "Ingame SFX")
+		play("mumble_%s" % random.randi_range(1,3), "Ingame SFX")

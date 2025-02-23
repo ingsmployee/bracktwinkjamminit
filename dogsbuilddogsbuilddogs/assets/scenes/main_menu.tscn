@@ -78,7 +78,7 @@ offset_right = 422.0
 offset_bottom = 97.0
 scale = Vector2(1.4, 1.4)
 theme_override_font_sizes/font_size = 100
-text = "Dogs Build Dogs"
+text = "Bark & Ruin"
 
 [node name="LoadingBar" type="ProgressBar" parent="MainMenu"]
 visible = false

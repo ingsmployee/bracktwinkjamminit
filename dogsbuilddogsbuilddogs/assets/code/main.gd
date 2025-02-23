@@ -9,7 +9,8 @@ const MAX_ZOOM: float = 0.7
 const ZOOM_AMOUNT: float = 0.5
 
 var placement: Node2D
-var is_placing: bool = false
+var trying_to_place: bool = false
+var attempted_placement_position: Vector2
 var hovered_building: Node2D
 var buildings_hovered_count: int = 0
 
@@ -22,7 +23,15 @@ var buildings_hovered_count: int = 0
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	pass
+
+func _unhandled_input(event: InputEvent) -> void:
+	# 2 hours before due date. i don't even know at this point.
 	
+	# maybe we should move "you can't build here!" detection to the buildings themselves?? idk lmfao
+	if event is InputEventMouseButton && event.pressed == true && placement != null:
+		# note that there are separate layers for proximity benefit areas and building collision boxes
+		trying_to_place = true
+		attempted_placement_position = gridify(get_global_mouse_position())
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
@@ -30,18 +39,11 @@ func _process(delta: float) -> void:
 	# after not using godot for months.
 	# prepare your PPE as i have since then not altered any of it
 	## scuffed. Input.get_blah blah blah only measures it every 0.1s 
-	if Input.is_action_pressed("camera_pan"):
-		$Camera2D.position -= (Input.get_last_mouse_velocity() * 1 / $Camera2D.zoom) * delta
+	#if Input.is_action_pressed("pan_up"):
+		#$Camera2D.get_target_position()
 	
-	#print(get_global_mouse_position())
+	$Camera2D.global_position += Vector2(Input.get_axis("pan_left", "pan_right"), Input.get_axis("pan_up", "pan_down")) * delta * 1000 / $Camera2D.zoom
 	
-	# previous attempt to fix pan. my brain's not working
-	"""
-	if Input.is_action_just_pressed("camera_pan"):
-		desired_mouse_position = get_global_mouse_position()
-		original_camera_position = $Camera2D.position
-	if Input.is_action_pressed("camera_pan"):
-		$Camera2D.position = get_global_mouse_position() - desired_mouse_position"""
 	
 	# AAAAHHHHHH
 	if Input.is_action_just_pressed("mouse_wheel_down"):
@@ -58,15 +60,8 @@ func _process(delta: float) -> void:
 			clamp($Camera2D.zoom.y * (1+ZOOM_AMOUNT), MIN_ZOOM, MAX_ZOOM)),
 			0.1).set_trans(Tween.TRANS_EXPO).set_ease(Tween.EASE_OUT)
 	
-	# maybe we should move "you can't build here!" detection to the buildings themselves?? idk lmfao
-	if Input.is_action_just_pressed("mouse_primary") && placement != null:
-		# note that there are separate layers for proximity benefit areas and building collision boxes
-		if !placement.get_node("Area2DBuilding").get_overlapping_areas():
-			place_held_building()
-		else:
-			var player: AnimationPlayer = placement.get_node("AnimationPlayer")
-			if !player.get_queue().has("flash_red_warning"):
-				player.queue("flash_red_warning")
+	
+	
 	
 	
 	if (placement):
@@ -76,11 +71,27 @@ func _process(delta: float) -> void:
 		placement.global_position = local_position
 		placement.get_node("Sprite2D").global_position = (placement.get_node("Sprite2D").global_position).lerp(local_position, 0.2)
 
+func _physics_process(delta: float) -> void:
+	if trying_to_place:
+		placement.global_position = attempted_placement_position
+		#print(placement.get_node("Area2DBuilding").get_overlapping_bodies() , placement.get_node("Area2DBuilding").get_overlapping_areas())
+		
+		if !(placement.get_node("Area2DBuilding").get_overlapping_bodies() or placement.get_node("Area2DBuilding").get_overlapping_areas()):
+			trying_to_place = false
+			place_held_building()
+		else:
+			trying_to_place = false
+			var player: AnimationPlayer = placement.get_node("AnimationPlayer")
+			if !player.get_queue().has("flash_red_warning"):
+				player.queue("flash_red_warning")
+
 ## give it a local position, it will spit out a position centered in that tilemap cell
 func gridify(pos: Vector2) -> Vector2:
 	return $Tilemaps/WhiteOverlay.map_to_local($Tilemaps/WhiteOverlay.local_to_map(pos))
 
 func hold_make_building(building_scene: PackedScene) -> void:
+	if placement:
+		placement.remove()
 	placement = building_scene.instantiate()
 	$Buildings.add_child(placement)
 	placement.get_node("Area2DBuilding").mouse_entered.connect(_mouse_entered.bind(placement))
@@ -95,7 +106,7 @@ func hold_make_building(building_scene: PackedScene) -> void:
 
 # it's in the name
 func place_held_building() -> void:
-	placement.global_position = gridify(get_global_mouse_position())
+	placement.global_position = attempted_placement_position
 	# sprite position will be handled by placement.place()
 	
 	#print("placement placed at %s from %s" % [placement.global_position, get_global_mouse_position()])

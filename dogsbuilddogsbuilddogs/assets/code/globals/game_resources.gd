@@ -14,17 +14,23 @@ var buildings: Array[BuildingStats] = [
 var building_scenes: Dictionary
 
 var alives: Array[PackedScene] = [
-	preload("res://assets/scenes/alive/assistant.tscn")
+	preload("res://assets/scenes/alive/assistant.tscn"),
+	preload("res://assets/scenes/alive/galaxydestroyer.tscn"),
+	preload("res://assets/scenes/alive/trainer.tscn")
 ]
 
 ## [name: String, image: Texture2D]
 var alives_dialog_images: Dictionary = {
 	"assistant": preload("res://assets/art/dogs/assistant.png"),
+	"cat": preload("res://assets/art/dogs/bureaucat.png"),
+	"ceo": preload("res://assets/art/dogs/suit.png")
 }
 
 ## [name: String, dialog_entry: DialogText]
 var dialog: Dictionary = {
-	"introduction": preload("res://assets/misc/dialog_text/intro.tres")
+	"introduction_1": preload("res://assets/misc/dialog_text/intro.tres"),
+	"introduction_2": preload("res://assets/misc/dialog_text/intro_part_2.tres"),
+	"introduction_3": preload("res://assets/misc/dialog_text/intro_part_3.tres")
 }
 
 func _ready() -> void:
@@ -35,7 +41,7 @@ func _ready() -> void:
 	# print(building_scenes)
 	for resource in resource_types:
 		_resources[resource] = 0
-	_resources["money"] = 100
+	_resources["money"] = 400
 
 func get_resource(resource_name: String) -> float:
 	return _resources[resource_name]

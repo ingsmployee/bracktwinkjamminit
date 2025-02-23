@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://b5uwrovca4uft"]
+
+[ext_resource type="PackedScene" uid="uid://d4h3e06rcqw3r" path="res://assets/scenes/alive/dog_template.tscn" id="1_xihue"]
+[ext_resource type="Texture2D" uid="uid://d21432l5j2o76" path="res://assets/art/dogs/galaxydestroyer.png" id="2_3o3b1"]
+
+[node name="Alive" instance=ExtResource("1_xihue")]
+
+[node name="Sprite2D" parent="." index="0"]
+texture = ExtResource("2_3o3b1")
+offset = Vector2(0, -150)

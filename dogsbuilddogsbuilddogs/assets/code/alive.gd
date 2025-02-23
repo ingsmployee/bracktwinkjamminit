@@ -10,6 +10,7 @@ var velocity: float = 0 # single number because it will only move along the path
 var energy: float = 100
 var resting: bool = true
 var idle: bool = true
+var speed_boost: float = 0
 
 ## this is not the maximum wandering distance. it is how far the animal can wander in one cycle.
 # also while it is a circle it doesn't really have equal weights. this is because square
@@ -47,7 +48,8 @@ func _physics_process(delta: float) -> void:
 			var move_vector: Vector2 = displacement.normalized() * current_move_speed * min(displacement.length() * 10, 1)
 			
 			$Sprite2D.flip_h = move_vector.x > 0
-			global_position += move_vector * delta
+			speed_boost = move_toward(speed_boost, 0, 0.1 * delta)
+			global_position += move_vector * delta * (1 + speed_boost)
 	
 
 func remove() -> void:
@@ -66,7 +68,7 @@ func make_self_ready() -> void:
 var oops_building_deleted: bool = true
 func finished_last_task() -> void:
 	if !oops_building_deleted && target_building && target_building.stats.request_animals:
-		get_tree().create_tween().tween_callback(target_building.emit_signal.bind("make_self_available")).set_delay(target_building.stats.interact_time)
+		get_tree().create_tween().tween_callback(target_building.emit_signal.bind("make_self_available")).set_delay(target_building.stats.interact_time / (1 + 0.5 * target_building.prox_bonus_amount[1]))
 	else:
 		oops_building_deleted = false
 	target_building = null
@@ -94,11 +96,13 @@ func go_to_building(building: Node2D) -> void:
 	if wander_wait_tween:
 		wander_wait_tween.kill()
 	target_building = building
+	building.tree_exiting.connect(oops_building_was_deleted)
 	$NavigationAgent2D.target_position = building.get_node("DoggyDoor").global_position
 
+var in_building: bool
 func enter_building(building: Node2D) -> void:
+	in_building = true
 	building.animal_interact(self)
-	building.tree_exiting.connect(oops_building_was_deleted)
 	$AnimationPlayer.play("enter_building")
 	
 	if target_building == home_building: # if we're going home, we leave when we're rested
@@ -107,7 +111,7 @@ func enter_building(building: Node2D) -> void:
 	
 	# if we're going somewhere else, stay in there for however long it takes and modify energy
 	var tween = get_tree().create_tween()
-	tween.tween_callback(leave_building).set_delay(target_building.stats.interact_time)
+	tween.tween_callback(leave_building).set_delay(target_building.stats.interact_time / (1 + speed_boost))
 	var energy_change: float = target_building.stats.interact_energy_change
 	if energy_change < 0:
 		energy += energy_change * ((1 / ((target_building.prox_bonus_amount[0]/3) + 0.5)) - 0.2)
@@ -119,6 +123,7 @@ func enter_building(building: Node2D) -> void:
 			energy = 0.3 * energy
 
 func leave_building() -> void:
+	in_building = false
 	if target_building && !oops_building_deleted:
 		target_building.tree_exiting.disconnect(oops_building_was_deleted)
 	$AnimationPlayer.play("exit_building")

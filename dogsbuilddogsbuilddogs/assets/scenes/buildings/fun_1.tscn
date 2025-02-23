@@ -11,7 +11,7 @@ size = Vector2(265, 265)
 stats = ExtResource("2_80qds")
 
 [node name="Sprite2DProxBonus" parent="highlight areas" index="0"]
-scale = Vector2(14.6045, 14.6045)
+scale = Vector2(4.32146, 4.32146)
 
 [node name="Sprite2D" parent="." index="1"]
 texture = ExtResource("2_0huqd")

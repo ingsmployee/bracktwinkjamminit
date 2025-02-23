@@ -34,6 +34,7 @@ signal make_self_available
 func _ready() -> void:
 	if $NavigationBarrier.get_child_count() == 0:
 		for child in $Area2DBuilding.get_children():
+			print(child)
 			$NavigationBarrier.add_child(child.duplicate())
 
 func _on_area_2d_building_input_event(viewport: Node, event: InputEvent, shape_idx: int) -> void:
@@ -84,9 +85,10 @@ func animal_interact(animal: Node2D):
 		0:
 			pass
 		1:
-			pass
+			animal.speed_boost += 0.5
+			animal.energy += 5
 		2:
-			produce(1)
+			produce(5 * prox_bonus_amount[1])
 
 func produce(amount: float) -> void:
 	GameResources.add_resource_dict(stats.production_result)
@@ -106,10 +108,11 @@ func set_selected(input: bool) -> void:
 		$Sprite2D.z_index = 3
 		
 		if stats.building_type == 2:
-			progress_bar = ui.get_new_element("progress_bar")
-			$LocalUI.add_child(progress_bar)
-			progress_bar.global_position = global_position - 0.5 * (progress_bar.scale * progress_bar.size) +  100 * Vector2.UP
-			progress_bar.get_node("Label").text = "Fun: %3.01f Safety: %3.01f Industry: %3.01f" % prox_bonus_amount
+			pass
+			#progress_bar = ui.get_new_element("progress_bar")
+			#$LocalUI.add_child(progress_bar)
+			#progress_bar.global_position = global_position - 0.5 * (progress_bar.scale * progress_bar.size) +  100 * Vector2.UP
+			#progress_bar.get_node("Label").text = "Fun: %3.01f Safety: %3.01f Industry: %3.01f" % prox_bonus_amount
 	else:
 		$Sprite2D.z_index = 1
 		var tween = get_tree().create_tween()
@@ -143,7 +146,11 @@ func place() -> void:
 	update_modifiers()
 	
 
+var on_death_row: bool = false
 func remove() -> void:
+	if on_death_row:
+		return
+	on_death_row = true
 	GameResources.add_resource("money", stats.cost["money"] * 0.7) # return 70% of money back
 	for animal in housed_dogs:
 		animal.remove()
@@ -151,9 +158,8 @@ func remove() -> void:
 	
 	var tween = get_tree().create_tween()
 	tween.tween_property($Sprite2D, "scale", $Sprite2D.scale * 0.2, 0.5).set_ease(Tween.EASE_OUT_IN).set_trans(Tween.TRANS_EXPO)
-	$AnimationPlayer.play("on_destroy")
-	$NavigationBarrier.process_mode = Node.PROCESS_MODE_DISABLED #removes it as well
 	$NavigationBarrier.queue_free()
+	$AnimationPlayer.play("on_destroy")
 	get_parent().building_type_amounts[stats.building_type] -= 1
 	if placed:
 		for building in buildings_touched:

@@ -1,0 +1,7 @@
+[gd_resource type="Resource" script_class="DialogText" load_steps=2 format=3 uid="uid://b6hu71ewmwja"]
+
+[ext_resource type="Script" path="res://assets/code/custom_resources/dialog_text.gd" id="1_aqh7v"]
+
+[resource]
+script = ExtResource("1_aqh7v")
+dialog = ["assistant", "Good!!", "assistant", "Go build city!", "assistant", "I am here when you need help!"]
