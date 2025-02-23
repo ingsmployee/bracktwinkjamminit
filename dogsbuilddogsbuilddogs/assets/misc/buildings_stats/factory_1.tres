@@ -8,7 +8,7 @@ building_scene = "res://assets/scenes/buildings/factory_1.tscn"
 building_name = "Resource Extractor"
 building_type = 2
 prox_bonus_addition = 1.0
-risk = 2.0
+risk = 1.0
 housing_space = 0
 cost = {
 "lava": 0,

@@ -76,8 +76,7 @@ func _process(delta: float) -> void:
 		$Tilemaps/WhiteOverlay.set_cell(grid_position, 0, Vector2i(0,0))
 		var local_position: Vector2 = $Tilemaps/WhiteOverlay.map_to_local(grid_position)
 		placement.global_position = local_position
-		#placement.get_node("Sprite2D").global_position = local_position + placement.sprite_offset
-		placement.get_node("Sprite2D").global_position = (placement.get_node("Sprite2D").global_position).lerp(local_position + placement.sprite_offset, 0.2)
+		placement.get_node("Sprite2D").global_position = (placement.get_node("Sprite2D").global_position).lerp(local_position, 0.2)
 
 ## give it a local position, it will spit out a position centered in that tilemap cell
 func gridify(pos: Vector2) -> Vector2:

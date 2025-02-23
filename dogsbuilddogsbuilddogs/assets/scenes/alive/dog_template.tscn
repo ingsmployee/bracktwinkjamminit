@@ -5,10 +5,12 @@
 
 [node name="Alive" type="Node2D"]
 z_index = 1
+z_as_relative = false
 y_sort_enabled = true
 script = ExtResource("1_qt7vq")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+y_sort_enabled = true
 texture_filter = 1
 scale = Vector2(1.5, 1.5)
 texture = ExtResource("1_ic882")

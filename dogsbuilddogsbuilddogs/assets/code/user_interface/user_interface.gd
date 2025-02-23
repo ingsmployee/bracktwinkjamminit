@@ -19,8 +19,14 @@ var dialog_tween: Tween
 var shop_entry_scene: PackedScene = preload("res://assets/scenes/ui_elements/shop_entry.tscn")
 var shop_icon_placeholder: Texture2D = preload("res://assets/art/programmer_art/programmer_building_icon_placeholder.png")
 
+var bottom_bar_resting_x: Dictionary
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	bottom_bar_resting_x["fun"] = $%FunCategory.position.x
+	bottom_bar_resting_x["safe"] = $%SafeCategory.position.x
+	bottom_bar_resting_x["factory"] = $%FactoryCategory.position.x
+	
 	var panel = $%FunCategory/Panel.duplicate()
 	$%SafeCategory.add_child(panel.duplicate())
 	$%FactoryCategory.add_child(panel)
@@ -35,10 +41,17 @@ func _process(delta: float) -> void:
 	$%MoneyCounter.text = "x %s" % GameResources.get_resource("money")
 
 func _input(event: InputEvent):
-	if event.is_action_pressed("build_a"):
-		GameResources.add_resource("money", 50)
+	if event.is_action_pressed("escape"):
+		go_down_a_level()
 
-func populate_shop():
+func go_down_a_level() -> void:
+	if $%SettingsContainer.visible:
+		$%SettingsContainer.fade_out()
+		return
+	
+	_on_pause_button_pressed()
+
+func populate_shop() -> void:
 	for building_stats in GameResources.buildings:
 		print("Name: %s, Category: %s, Cost: %s" % [building_stats.building_name, building_stats.building_type, building_stats.cost["money"]])
 		var shop_entry: TextureButton = shop_entry_scene.instantiate()
@@ -64,6 +77,7 @@ func populate_shop():
 func shop_button_clicked(stats: BuildingStats):
 	if GameResources.get_resource("money") < stats.cost["money"]:
 		# happens when you can't afford the thing
+		## NEED AN ANIMATION HERE OR A SOUND
 		print("no money")
 		return
 	
@@ -200,8 +214,10 @@ func _on_fun_button_pressed() -> void:
 	selected_tab = "fun"
 	if fun_category_tween:
 		fun_category_tween.kill()
+	if wharha:
+		wharha.kill()
 	fun_category_tween = get_tree().create_tween()
-	fun_category_tween.tween_property($%FunCategory, "position", Vector2(0, -410), 0.4).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_EXPO)
+	fun_category_tween.tween_property($%FunCategory, "position", Vector2(bottom_bar_resting_x["fun"], -410), 0.4).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_EXPO)
 
 var safe_category_tween: Tween
 func _on_safe_icon_mouse_entered() -> void:
@@ -225,8 +241,10 @@ func _on_safe_button_pressed() -> void:
 	selected_tab = "safe"
 	if safe_category_tween:
 		safe_category_tween.kill()
+	if wharhaa:
+		wharhaa.kill()
 	safe_category_tween = get_tree().create_tween()
-	safe_category_tween.tween_property($%SafeCategory, "position", Vector2(291, -410), 0.4).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_EXPO)
+	safe_category_tween.tween_property($%SafeCategory, "position", Vector2(bottom_bar_resting_x["safe"], -410), 0.4).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_EXPO)
 
 var industry_category_tween: Tween
 func _on_factory_icon_mouse_entered() -> void:
@@ -250,30 +268,39 @@ func _on_factory_button_pressed() -> void:
 	selected_tab = "factory"
 	if industry_category_tween:
 		industry_category_tween.kill()
+	if wharhaharah:
+		wharhaharah.kill()
 	industry_category_tween = get_tree().create_tween()
-	industry_category_tween.tween_property($%FactoryCategory, "position", Vector2(653, -410), 0.4).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_EXPO)
+	industry_category_tween.tween_property($%FactoryCategory, "position", Vector2(bottom_bar_resting_x["factory"], -410), 0.4).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_EXPO)
 
+var wharha: Tween
+var wharhaa: Tween
+var wharhaharah: Tween
 func retract_bottom_bar() -> void:
+	if selected_tab != "":
+		SoundEffects.play("woosh", "UI Sounds")
+	else:
+		return
 	match selected_tab:
 		"fun":
-			if fun_category_tween:
-				fun_category_tween.kill()
-			fun_category_tween = get_tree().create_tween()
+			if wharha:
+				wharha.kill()
+			wharha = get_tree().create_tween()
 			get_tree().create_tween().tween_property($%FunCategory/Label, "position", Vector2(-16, 168), 0.2)
-			fun_category_tween.tween_property($%FunCategory, "position", Vector2(0, 0), 0.2).set_trans(Tween.TRANS_CIRC)
+			wharha.tween_property($%FunCategory, "position", Vector2(bottom_bar_resting_x["fun"], 0), 0.2).set_trans(Tween.TRANS_CIRC)
 		# other cases here
 		"safe":
-			if safe_category_tween:
-				safe_category_tween.kill()
-			safe_category_tween = get_tree().create_tween()
+			if wharhaa:
+				wharhaa.kill()
+			wharhaa = get_tree().create_tween()
 			get_tree().create_tween().tween_property($%SafeCategory/Label, "position", Vector2(-16, 168), 0.2)
-			safe_category_tween.tween_property($%SafeCategory, "position", Vector2(291, 0), 0.2).set_trans(Tween.TRANS_CIRC)
+			wharhaa.tween_property($%SafeCategory, "position", Vector2(bottom_bar_resting_x["safe"], 0), 0.2).set_trans(Tween.TRANS_CIRC)
 		"factory":
-			if industry_category_tween:
-				industry_category_tween.kill()
-			industry_category_tween = get_tree().create_tween()
+			if wharhaharah:
+				wharhaharah.kill()
+			wharhaharah = get_tree().create_tween()
 			get_tree().create_tween().tween_property($%FactoryCategory/Label, "position", Vector2(-16, 168), 0.2)
-			industry_category_tween.tween_property($%FactoryCategory, "position", Vector2(653, 0), 0.2).set_trans(Tween.TRANS_CIRC)
+			wharhaharah.tween_property($%FactoryCategory, "position", Vector2(bottom_bar_resting_x["factory"], 0), 0.2).set_trans(Tween.TRANS_CIRC)
 	selected_tab = ""
 
 func _on_main_screen_gui_input(event: InputEvent) -> void:
@@ -292,9 +319,9 @@ func _on_pause_button_pressed() -> void:
 	
 	if paused:
 		pause_tween.tween_callback($%PauseMenuColorRect.show)
-		pause_tween.tween_property($%PauseMenuColorRect, "modulate", Color(1,1,1,1), 0.5).set_ease(Tween.EASE_OUT)
+		pause_tween.tween_property($%PauseMenuColorRect, "modulate", Color(1,1,1,1), 0.3).set_ease(Tween.EASE_OUT)
 	else:
-		pause_tween.tween_property($%PauseMenuColorRect, "modulate", Color(1,1,1,0), 0.5).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_CUBIC)
+		pause_tween.tween_property($%PauseMenuColorRect, "modulate", Color(1,1,1,0), 0.3).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_CUBIC)
 		pause_tween.tween_callback($%PauseMenuColorRect.hide)
 
 func play_button_noise() -> void:

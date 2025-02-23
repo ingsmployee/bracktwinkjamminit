@@ -6,10 +6,15 @@ var _resources: Dictionary
 
 var buildings: Array[BuildingStats] = [
 	preload("res://assets/misc/buildings_stats/factory_1.tres"),
+	preload("res://assets/misc/buildings_stats/tennis_ball_house.tres")
 ]
 
 ## [name, PackedScene]
 var building_scenes: Dictionary
+
+var alives: Array[PackedScene] = [
+	preload("res://assets/scenes/alive/assistant.tscn")
+]
 
 func _ready() -> void:
 	# we have less than 12 hours
@@ -19,7 +24,7 @@ func _ready() -> void:
 	print(building_scenes)
 	for resource in resource_types:
 		_resources[resource] = 0
-		
+	_resources["money"] = 100
 
 func get_resource(resource_name: String) -> float:
 	return _resources[resource_name]

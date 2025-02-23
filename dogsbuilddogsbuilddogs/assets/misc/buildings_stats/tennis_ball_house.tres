@@ -4,31 +4,27 @@
 
 [resource]
 script = ExtResource("2_mf3dk")
+building_scene = "res://assets/scenes/buildings/fun_1.tscn"
 building_name = "Tennis Ball House"
 building_type = 0
 prox_bonus_addition = 1.0
-risk = 1.0
+risk = 0.0
 housing_space = 3
 cost = {
-"energy": 0,
 "lava": 0,
-"money": 10,
-"wood": 0
+"money": 10
 }
 cat_appeasement = 1
+interact_energy_change = 0.0
 fun_power = 1.0
 anti_disaster_power = 1.0
 production_result = {
-"energy": 0,
 "lava": 0,
-"money": 1,
-"wood": 0
+"money": 1
 }
 production_cost = {
-"energy": 0,
 "lava": 0,
-"money": 0,
-"wood": 0
+"money": 0
 }
 baseline_production_multiplier = 1.0
 production_time = 10.0

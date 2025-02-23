@@ -16,7 +16,7 @@ const ACCELERATION: float = 5
 func _process(delta:float) -> void:
 	if resting:
 		energy = max(0, energy)
-		energy += delta * 0.5
+		energy += delta * 100
 		if energy >= 100:
 			energy = 100
 			resting = false

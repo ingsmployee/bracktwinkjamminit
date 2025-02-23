@@ -7,9 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://dor6ypco6no67" path="res://assets/art/user_interface/load.png" id="4_r13kh"]
 [ext_resource type="Texture2D" uid="uid://ciudhw3mreg35" path="res://assets/art/user_interface/settings.png" id="5_n53ti"]
 [ext_resource type="Texture2D" uid="uid://bd7kxbrlbd0wq" path="res://assets/art/user_interface/exit.png" id="6_nmd6o"]
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_qhewu"]
-radius = 316.31
+[ext_resource type="PackedScene" uid="uid://byw5pheavpks0" path="res://assets/scenes/ui_elements/settings.tscn" id="8_pcoxi"]
 
 [node name="CanvasLayer" type="CanvasLayer"]
 
@@ -124,28 +122,11 @@ grow_horizontal = 2
 grow_vertical = 2
 text = "Loading..."
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="SettingsContainer" parent="MainMenu" instance=ExtResource("8_pcoxi")]
 visible = false
-position = Vector2(996, 407)
-shape = SubResource("CircleShape2D_qhewu")
-
-[node name="Label2" type="Label" parent="CollisionShape2D"]
-offset_left = -297.0
-offset_top = -61.0
-offset_right = 327.0
-offset_bottom = 36.0
-scale = Vector2(0.944846, 0.944846)
-theme_override_font_sizes/font_size = 50
-text = "MAIN MENU DRAWING"
-
-[node name="Label3" type="Label" parent="CollisionShape2D"]
-offset_left = -1034.0
-offset_top = -61.0
-offset_right = -387.0
-offset_bottom = 36.0
-scale = Vector2(0.944846, 0.944846)
-theme_override_font_sizes/font_size = 50
-text = "PATTERNED BACKGROUND"
+layout_mode = 1
+offset_top = -206.5
+offset_bottom = 206.5
 
 [connection signal="button_down" from="MainMenu/PlayGame" to="MainMenu" method="_on_button_down"]
 [connection signal="button_up" from="MainMenu/PlayGame" to="MainMenu" method="_on_button_up"]

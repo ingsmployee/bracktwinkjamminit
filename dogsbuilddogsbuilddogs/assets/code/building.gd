@@ -23,8 +23,6 @@ var production_progress: float = 0
 @onready var production_multiplier: float = stats.baseline_production_multiplier
 @onready var speed_multiplier: float = stats.baseline_speed_multiplier
 
-@onready var sprite_offset: Vector2 = $Sprite2D.position
-
 var placed: bool = false
 
 var housed_dogs: Array[Node2D]
@@ -123,11 +121,10 @@ func set_selected(input: bool) -> void:
 func place() -> void:
 	GameResources.subtract_resource_dict(stats.cost)
 	$Sprite2D.top_level = false
-	$Sprite2D.position = sprite_offset
-	print(position, $Sprite2D.position)
+	$Sprite2D.position = Vector2(0,0)
 	$Sprite2D.y_sort_enabled = true
 	$Sprite2D.self_modulate = Color(1,1,1,1)
-	$Sprite2D.z_index = 1
+	$Sprite2D.z_index = 2
 	prox_bonus_amount = [0,0,0]
 	get_parent().building_type_amounts[stats.building_type] += 1
 	placed = true

@@ -1,8 +1,6 @@
 extends Node2D
 
-var alives: Array[PackedScene] = [
-	preload("res://assets/scenes/alive/dog_template.tscn")
-]
+var alives: Array[PackedScene] = GameResources.alives
 
 var random := RandomNumberGenerator.new()
 
@@ -25,9 +23,10 @@ func add_ready_alive(alive: Node2D) -> void:
 	ready_alives.append(alive)
 
 func instantiate_random_from_building(home_building: Node2D) -> Node2D:
-	var newborn = alives[random.randi_range(0,alives.size())].instantiate()
+	var newborn = alives[random.randi_range(0,alives.size()-1)].instantiate()
 	add_child(newborn)
 	newborn.home_building = home_building
+	newborn.target_building = home_building
 	newborn.position = home_building.position
 	# note that all newborns are considered "resting" to start with
 	newborn.hide()

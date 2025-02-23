@@ -2,7 +2,8 @@ extends Node
 
 ## this is where you wanna add new sounds
 var sfx: Dictionary = {
-	"button_pressed": preload("res://assets/sounds/Pop sound effect.mp3")
+	"button_pressed": preload("res://assets/sounds/click.wav"),
+	"woosh": preload("res://assets/sounds/woosh.wav")
 }
 
 # {bus_name: String, [AudioStreamPlayer, AudioStreamPlaybackPolyphonic]}

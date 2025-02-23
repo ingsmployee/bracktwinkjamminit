@@ -5,10 +5,10 @@
 [ext_resource type="Texture2D" uid="uid://cysxbgftpvk2u" path="res://assets/art/buildings/factory.png" id="3_1rtlv"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_wu8r0"]
-size = Vector2(844.993, 837.922)
+size = Vector2(700, 700)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tfvar"]
-size = Vector2(439.214, 276.479)
+size = Vector2(306.278, 223.446)
 
 [node name="Building" instance=ExtResource("1_p7y0c")]
 stats = ExtResource("2_vtjf5")
@@ -18,8 +18,8 @@ scale = Vector2(-14.6284, -14.6284)
 
 [node name="Sprite2D" parent="." index="1"]
 y_sort_enabled = true
-position = Vector2(-29, -397)
 texture = ExtResource("3_1rtlv")
+offset = Vector2(-29, -397)
 
 [node name="CollisionShape2D" parent="Area2DBuilding" index="0"]
 position = Vector2(-3.5, 0.999939)
@@ -28,7 +28,7 @@ scale = Vector2(1, 1)
 shape = SubResource("RectangleShape2D_wu8r0")
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="Area2DBuilding" index="1"]
-position = Vector2(-525.964, 234.536)
+position = Vector2(-460.214, 262.786)
 rotation = 0.785398
 scale = Vector2(1, 1)
 shape = SubResource("RectangleShape2D_tfvar")

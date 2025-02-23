@@ -50,7 +50,7 @@ func _on_load_save_pressed() -> void:
 	pass # Replace with function body.
 
 func _on_settings_pressed() -> void:
-	pass # Replace with function body.
+	$SettingsContainer.fade_in()
 
 func _on_exit_game_pressed() -> void:
 	get_tree().quit()
